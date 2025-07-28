@@ -1,0 +1,175 @@
+<role>
+Sei un **Creative Frontend Developer** specializzato in landing pages in stile Apple con animazioni avanzate e user experience premium.
+</role>
+
+<objective>
+Crea una landing page moderna che mostra il webinar di MoorentPM direttamente nella pagina. Gli utenti guardano il contenuto di valore e possono iscriversi alla newsletter o contattarci direttamente.
+</objective>
+
+<company_info>
+**MoorentPM** - Property Management Premium nel Triveneto
+- Specializzati in affitti brevi di lusso  
+- Target: Proprietari immobili HNWI (30-65 anni)
+- Posizionamento: Premium, professionale, innovativo
+- Territorio: Veneto, Trentino, Friuli (Triveneto)
+</company_info>
+
+<webinar_content>
+**Webinar:** "Trasforma il Tuo Immobile in un Asset Redditizio"
+**Formato:** Video completo disponibile direttamente nella pagina
+**Valore:** Strategie concrete per massimizzare rendimenti affitti brevi
+**Durata:** ~60 minuti di contenuto premium
+</webinar_content>
+
+<design_direction>
+<style_inspiration>
+**Apple-like Design:**
+- Spazi bianchi generosi
+- Tipografia pulita e moderna
+- Animazioni fluide al scroll
+- Micro-interazioni al mouse hover
+- Elementi che "reagiscono" al cursore
+- Transizioni smooth e di classe
+- Focus sul contenuto video
+</style_inspiration>
+
+<color_palette>
+```css
+/* Palette Premium */
+--primary: #232323 (nero elegante)
+--secondary: #aca5a5 (grigio sofisticato)  
+--accent: #f3dfd9 (rosa cipria premium)
+--background: #ffffff (bianco puro)
+```
+</color_palette>
+
+<animation_requirements>
+- Elementi che si animano al scroll
+- Hover effects sofisticati
+- Parallax subtile
+- Video player elegante e responsive
+- Form animations fluide
+- Pulsanti con micro-interazioni premium
+</animation_requirements>
+</design_direction>
+
+<content_structure>
+<hero_section>
+- Headline che introduce il valore del webinar
+- Sottotitolo che spiega cosa impareranno
+- Introduzione al video sottostante
+</hero_section>
+
+<video_section>
+**Sezione Principale - Webinar Video:**
+- Player video elegante, grande e ben visibile
+- Controlli custom se possibile
+- Video del webinar completo embedabable
+- Descrizione del contenuto mostrato
+</video_section>
+
+<newsletter_section>
+**Iscrizione Newsletter (Soft Lead Gen):**
+- Titolo: "Ricevi strategie esclusive via email"
+- Sottotitolo sul valore della newsletter
+- Form minimal: solo EMAIL
+- CTA: "Iscriviti alla Newsletter"
+- Messaggio: contenuti esclusivi, insights di mercato, case study
+</newsletter_section>
+
+<contact_section>
+**Contatti Diretti:**
+- "Vuoi parlare direttamente con noi?"
+- Pulsanti per contatto immediato
+- Approccio consultivo, non commerciale
+</contact_section>
+</content_structure>
+
+<interaction_design>
+<newsletter_form>
+```html
+<!-- Concept del form -->
+<form class="newsletter-form">
+    <input type="email" placeholder="La tua email" required>
+    <button type="submit">Iscriviti</button>
+</form>
+```
+- Validazione elegante in real-time
+- Conferma visiva dopo iscrizione
+- Stile minimal e premium
+</newsletter_form>
+
+<contact_buttons>
+**WhatsApp Button:**
+- Link: https://wa.me/393534830386
+- Messaggio: "Ciao! Ho visto il vostro webinar e vorrei maggiori informazioni sui vostri servizi"
+- Stile: Verde WhatsApp elegante
+
+**Call Button:**  
+- Link: tel:+393534830386
+- Testo: "Chiamaci Direttamente"
+- Stile: Blu premium
+
+**Email Button:**
+- Link: mailto:hello@moorentpm.it
+- Testo: "Scrivici una Email"
+- Stile: Rosa cipria aziendale
+</contact_buttons>
+</interaction_design>
+
+<technical_specs>
+<platform>
+**Per Replit:**
+- HTML/CSS/JavaScript vanilla
+- Video responsive (YouTube embed o simile)
+- Form handling con validazione
+- Animazioni CSS/JS smooth
+- Mobile-first responsive
+</platform>
+
+<creative_freedom>
+**Libertà Creativa Totale Per:**
+- Layout e organizzazione sezioni
+- Implementazione animazioni specifiche
+- Stile del video player
+- Micro-interazioni custom
+- Elementi grafici/visual
+- Sequenza e flow della pagina
+</creative_freedom>
+</technical_specs>
+
+<user_journey>
+1. **Arrivo:** Utente atterra sulla pagina
+2. **Engagement:** Guarda il webinar (contenuto di valore)
+3. **Soft Conversion:** Si iscrive alla newsletter
+4. **Hard Conversion:** Contatta direttamente (se interessato)
+</user_journey>
+
+<success_metrics>
+**Obiettivo Primario:** Email raccolte per newsletter
+**Obiettivo Secondario:** Contatti diretti qualificati  
+**User Experience:** Percepire valore e professionalità
+</success_metrics>
+</optimized_prompt>
+
+<improvements_applied>
+<structural>
+- Focus corretto: webinar come contenuto, non come evento futuro
+- Obiettivi chiari: newsletter + contatti diretti
+- Eliminazione della "registrazione webinar"
+- Struttura semplificata per massima chiarezza
+</structural>
+
+<content>
+- Webinar come centro del valore offerto
+- Newsletter come soft lead generation
+- Contatti diretti come hard conversion
+- Approccio consultivo vs vendita aggressiva
+</content>
+
+<advanced_techniques>
+- User journey lineare e naturale
+- Conversioni multiple (soft + hard)
+- Focus su contenuto di valore prima della richiesta
+- Interazioni premium senza complessità eccessive
+</advanced_techniques>
