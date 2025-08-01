@@ -389,7 +389,6 @@ export default function Home() {
                   alt="MoorentPM Logo" 
                   className="h-12 w-auto"
                 />
-                <span className="text-2xl font-semibold">MoorentPM</span>
               </div>
               <p className="text-gray-300 mb-6 max-w-md leading-relaxed">
                 Property Management Premium nel Triveneto. Trasformiamo immobili di lusso in asset redditizi attraverso strategie innovative e gestione professionale.
