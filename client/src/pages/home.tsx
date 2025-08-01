@@ -118,7 +118,7 @@ export default function Home() {
                 className="h-12 w-auto"
               />
             </div>
-            <div className="flex items-center space-x-4 md:space-x-8">
+            <div className="hidden sm:flex items-center space-x-4 md:space-x-8">
               <a href="#webinar" className="text-secondary hover:text-primary transition-colors text-sm md:text-base">
                 Webinar
               </a>
