@@ -80,7 +80,7 @@ export default function Home() {
               <img 
                 src="https://i.imgur.com/aazwI7x.png" 
                 alt="MoorentPM Logo" 
-                className="h-8 w-auto"
+                className="h-12 w-auto"
               />
             </div>
             <div className="flex items-center space-x-4 md:space-x-8">
@@ -387,7 +387,7 @@ export default function Home() {
                 <img 
                   src="https://i.imgur.com/aazwI7x.png" 
                   alt="MoorentPM Logo" 
-                  className="h-10 w-auto"
+                  className="h-12 w-auto"
                 />
                 <span className="text-2xl font-semibold">MoorentPM</span>
               </div>
