@@ -107,13 +107,37 @@ export default function Home() {
   // Chiudi il menu mobile quando si clicca fuori
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
-      if (isMobileMenuOpen && !(event.target as Element).closest('nav')) {
+      const target = event.target as Element;
+      const nav = target.closest('nav');
+      const menuButton = target.closest('button[aria-label="Toggle menu"]');
+      
+      if (isMobileMenuOpen && !nav && !menuButton) {
         setIsMobileMenuOpen(false);
       }
     };
 
-    document.addEventListener('click', handleClickOutside);
-    return () => document.removeEventListener('click', handleClickOutside);
+    if (isMobileMenuOpen) {
+      // Aggiungi un piccolo delay per evitare la chiusura immediata
+      setTimeout(() => {
+        document.addEventListener('click', handleClickOutside);
+      }, 100);
+    }
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, [isMobileMenuOpen]);
+
+  // Chiudi il menu con il tasto Escape
+  useEffect(() => {
+    const handleEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape' && isMobileMenuOpen) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('keydown', handleEscape);
+    return () => document.removeEventListener('keydown', handleEscape);
   }, [isMobileMenuOpen]);
 
   return (
