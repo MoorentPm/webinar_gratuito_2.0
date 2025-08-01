@@ -1,7 +1,7 @@
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { Mail, Phone, MessageCircle, Play, Crown, Users, MapPin, Check, ChartLine, Building, ArrowDown, ArrowRight, Inbox, CheckCircle, LoaderPinwheel, ExternalLink } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
@@ -14,6 +14,7 @@ import { insertNewsletterSchema, type InsertNewsletterSubscription } from "@shar
 export default function Home() {
   const { toast } = useToast();
   const observerRef = useRef<IntersectionObserver | null>(null);
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
 
   const form = useForm<InsertNewsletterSubscription>({
     resolver: zodResolver(insertNewsletterSchema),
@@ -70,10 +71,43 @@ export default function Home() {
     };
   }, []);
 
+  useEffect(() => {
+    // YouTube API setup per controllare lo stato del video
+    const tag = document.createElement('script');
+    tag.src = 'https://www.youtube.com/iframe_api';
+    const firstScriptTag = document.getElementsByTagName('script')[0];
+    firstScriptTag.parentNode?.insertBefore(tag, firstScriptTag);
+
+    // Global callback quando l'API è pronta
+    (window as any).onYouTubeIframeAPIReady = () => {
+      new (window as any).YT.Player('youtube-player', {
+        events: {
+          onStateChange: (event: any) => {
+            // YT.PlayerState.PLAYING = 1
+            if (event.data === 1) {
+              setIsVideoPlaying(true);
+            } else {
+              setIsVideoPlaying(false);
+            }
+          }
+        }
+      });
+    };
+
+    return () => {
+      // Cleanup
+      if ((window as any).onYouTubeIframeAPIReady) {
+        delete (window as any).onYouTubeIframeAPIReady;
+      }
+    };
+  }, []);
+
   return (
     <div className="font-sans bg-background text-foreground antialiased overflow-x-hidden">
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-50 glass-effect border-b border-gray-100">
+      <nav className={`fixed left-0 right-0 z-50 glass-effect border-b border-gray-100 transition-all duration-500 ${
+        isVideoPlaying ? '-top-16 opacity-50' : 'top-0 opacity-100'
+      }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center">
@@ -158,16 +192,19 @@ export default function Home() {
           <div className="relative hover-lift">
             <div className="video-container">
               <iframe
-                src="https://www.youtube.com/embed/dQw4w9WgXcQ?modestbranding=1&rel=0&showinfo=0"
+                src="https://www.youtube.com/embed/dQw4w9WgXcQ?modestbranding=1&rel=0&showinfo=0&enablejsapi=1"
                 title="MoorentPM Webinar - Trasforma il Tuo Immobile in un Asset Redditizio"
                 frameBorder="0"
                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                 allowFullScreen
                 className="rounded-2xl shadow-2xl"
+                id="youtube-player"
               />
             </div>
 
-            <div className="absolute -bottom-8 left-0 right-0 mx-4">
+            <div className={`absolute -bottom-8 left-0 right-0 mx-4 transition-all duration-500 ${
+              isVideoPlaying ? 'opacity-0 translate-y-4 pointer-events-none' : 'opacity-100 translate-y-0'
+            }`}>
               <div className="glass-effect rounded-2xl p-6 border border-gray-100">
                 <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
                   <div className="flex items-center space-x-4">

@@ -92,6 +92,12 @@
     backdrop-filter: blur(20px);
     background: rgba(255, 255, 255, 0.95);
   }
+
+  /* Navigation hide animation */
+  .nav-hidden {
+    transform: translateY(-100%);
+    opacity: 0.3;
+  }
   
   .video-container {
     position: relative;
