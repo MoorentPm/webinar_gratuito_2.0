@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import { useEffect, useRef } from "react";
-import { Mail, Phone, MessageCircle, Play, Crown, Users, MapPin, Check, ChartLine, Building, ArrowDown, ArrowRight, Inbox, CheckCircle, LoaderPinwheel } from "lucide-react";
+import { Mail, Phone, MessageCircle, Play, Crown, Users, MapPin, Check, ChartLine, Building, ArrowDown, ArrowRight, Inbox, CheckCircle, LoaderPinwheel, ExternalLink } from "lucide-react";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -77,19 +77,21 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center space-x-2">
-              <div className="w-8 h-8 bg-primary rounded-lg flex items-center justify-center">
-                <span className="text-white font-bold text-sm">M</span>
-              </div>
+              <img 
+                src="https://i.imgur.com/aazwI7x.png" 
+                alt="MoorentPM Logo" 
+                className="h-8 w-auto"
+              />
               <span className="font-semibold text-lg">MoorentPM</span>
             </div>
-            <div className="hidden md:flex items-center space-x-8">
-              <a href="#webinar" className="text-secondary hover:text-primary transition-colors">
+            <div className="flex items-center space-x-4 md:space-x-8">
+              <a href="#webinar" className="text-secondary hover:text-primary transition-colors text-sm md:text-base">
                 Webinar
               </a>
-              <a href="#newsletter" className="text-secondary hover:text-primary transition-colors">
+              <a href="#newsletter" className="text-secondary hover:text-primary transition-colors text-sm md:text-base">
                 Newsletter
               </a>
-              <a href="#contatti" className="text-secondary hover:text-primary transition-colors">
+              <a href="#contatti" className="text-secondary hover:text-primary transition-colors text-sm md:text-base">
                 Contatti
               </a>
             </div>
@@ -109,12 +111,12 @@ export default function Home() {
 
         <div className="relative z-10 max-w-4xl mx-auto text-center">
           <div className="space-y-8 animate-fade-in">
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-light leading-tight">
+            <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light leading-tight">
               Trasforma il Tuo Immobile in un{" "}
               <span className="block font-semibold text-primary">Asset Redditizio</span>
             </h1>
 
-            <p className="text-xl sm:text-2xl text-secondary font-light max-w-3xl mx-auto leading-relaxed">
+            <p className="text-lg sm:text-xl md:text-2xl text-secondary font-light max-w-3xl mx-auto leading-relaxed px-4">
               Scopri le strategie premium per massimizzare i rendimenti degli affitti brevi nel Triveneto.{" "}
               <span className="text-primary font-medium">60 minuti di contenuto esclusivo</span> per proprietari immobiliari di alto valore.
             </p>
@@ -252,7 +254,7 @@ export default function Home() {
               <h2 className="text-3xl sm:text-4xl font-light mb-6">
                 Ricevi Strategie <span className="font-semibold">Esclusive</span> via Email
               </h2>
-              <p className="text-xl text-secondary font-light max-w-2xl mx-auto leading-relaxed">
+              <p className="text-lg sm:text-xl text-secondary font-light max-w-2xl mx-auto leading-relaxed px-4">
                 Insights di mercato, case study premium e strategie avanzate per proprietari immobiliari che vogliono massimizzare i loro investimenti nel Triveneto.
               </p>
             </div>
@@ -333,7 +335,7 @@ export default function Home() {
             </p>
           </div>
 
-          <div className="grid sm:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-4xl mx-auto">
             <a
               href="https://wa.me/393534830386?text=Ciao!%20Ho%20visto%20il%20vostro%20webinar%20e%20vorrei%20maggiori%20informazioni%20sui%20vostri%20servizi"
               target="_blank"
@@ -361,15 +363,17 @@ export default function Home() {
             </a>
 
             <a
-              href="mailto:hello@moorentpm.it?subject=Richiesta%20informazioni%20webinar&body=Ciao,%0D%0A%0D%0AHo%20visto%20il%20vostro%20webinar%20e%20vorrei%20maggiori%20informazioni%20sui%20vostri%20servizi%20di%20property%20management."
+              href="https://linktr.ee/moorentpm"
+              target="_blank"
+              rel="noopener noreferrer"
               className="group bg-white rounded-2xl p-8 shadow-lg hover-lift border border-gray-100 transition-all duration-300 hover:border-pink-200"
             >
               <div className="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-pink-300 transition-colors duration-300">
-                <Mail className="w-8 h-8 text-pink-400 group-hover:text-white transition-colors duration-300" />
+                <ExternalLink className="w-8 h-8 text-pink-400 group-hover:text-white transition-colors duration-300" />
               </div>
-              <h3 className="text-xl font-semibold mb-3">Scrivici una Email</h3>
-              <p className="text-secondary mb-4">Inviaci una email dettagliata e ti risponderemo entro 24 ore</p>
-              <span className="text-pink-400 font-medium group-hover:text-pink-500 transition-colors">Scrivi ora →</span>
+              <h3 className="text-xl font-semibold mb-3">Link Tree</h3>
+              <p className="text-secondary mb-4">Accedi a tutti i nostri canali social e di contatto in un unico posto</p>
+              <span className="text-pink-400 font-medium group-hover:text-pink-500 transition-colors">Visita ora →</span>
             </a>
           </div>
         </div>
@@ -378,12 +382,14 @@ export default function Home() {
       {/* Footer */}
       <footer className="bg-primary text-white py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
-          <div className="grid md:grid-cols-4 gap-8 mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
             <div className="md:col-span-2">
               <div className="flex items-center space-x-3 mb-6">
-                <div className="w-10 h-10 bg-accent rounded-lg flex items-center justify-center">
-                  <span className="text-primary font-bold">M</span>
-                </div>
+                <img 
+                  src="https://i.imgur.com/aazwI7x.png" 
+                  alt="MoorentPM Logo" 
+                  className="h-10 w-auto"
+                />
                 <span className="text-2xl font-semibold">MoorentPM</span>
               </div>
               <p className="text-gray-300 mb-6 max-w-md leading-relaxed">
