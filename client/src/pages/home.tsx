@@ -3,6 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import { useEffect, useRef, useState } from "react";
 import { Mail, Phone, MessageCircle, Play, Crown, Users, MapPin, Check, ChartLine, Building, ArrowDown, ArrowRight, Inbox, CheckCircle, LoaderPinwheel, ExternalLink } from "lucide-react";
+import { SiWhatsapp } from "react-icons/si";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
@@ -379,7 +380,7 @@ export default function Home() {
               className="group bg-white rounded-2xl p-8 shadow-lg hover-lift border border-gray-100 transition-all duration-300 hover:border-green-200"
             >
               <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-green-500 transition-colors duration-300">
-                <MessageCircle className="w-8 h-8 text-green-600 group-hover:text-white transition-colors duration-300" />
+                <SiWhatsapp className="w-8 h-8 text-green-600 group-hover:text-white transition-colors duration-300" />
               </div>
               <h3 className="text-xl font-semibold mb-3">WhatsApp</h3>
               <p className="text-secondary mb-4">Contattaci direttamente su WhatsApp per una risposta immediata</p>
