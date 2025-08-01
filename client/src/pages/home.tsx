@@ -76,13 +76,12 @@ export default function Home() {
       <nav className="fixed top-0 left-0 right-0 z-50 glass-effect border-b border-gray-100">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
-            <div className="flex items-center space-x-2">
+            <div className="flex items-center">
               <img 
                 src="https://i.imgur.com/aazwI7x.png" 
                 alt="MoorentPM Logo" 
                 className="h-8 w-auto"
               />
-              <span className="font-semibold text-lg">MoorentPM</span>
             </div>
             <div className="flex items-center space-x-4 md:space-x-8">
               <a href="#webinar" className="text-secondary hover:text-primary transition-colors text-sm md:text-base">
