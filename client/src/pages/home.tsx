@@ -2,7 +2,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import { useEffect, useRef, useState } from "react";
-import { Mail, Phone, MessageCircle, Play, Crown, Users, MapPin, Check, ChartLine, Building, ArrowDown, ArrowRight, Inbox, CheckCircle, LoaderPinwheel, ExternalLink } from "lucide-react";
+import { Mail, Phone, MessageCircle, Play, Crown, Users, MapPin, Check, ChartLine, Building, ArrowDown, ArrowRight, Inbox, CheckCircle, LoaderPinwheel, ExternalLink, Menu, X } from "lucide-react";
 import { SiWhatsapp } from "react-icons/si";
 
 import { Button } from "@/components/ui/button";
@@ -16,6 +16,7 @@ export default function Home() {
   const { toast } = useToast();
   const observerRef = useRef<IntersectionObserver | null>(null);
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const form = useForm<InsertNewsletterSubscription>({
     resolver: zodResolver(insertNewsletterSchema),
@@ -103,6 +104,18 @@ export default function Home() {
     };
   }, []);
 
+  // Chiudi il menu mobile quando si clicca fuori
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (isMobileMenuOpen && !(event.target as Element).closest('nav')) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+    return () => document.removeEventListener('click', handleClickOutside);
+  }, [isMobileMenuOpen]);
+
   return (
     <div className="font-sans bg-background text-foreground antialiased overflow-x-hidden">
       {/* Navigation */}
@@ -118,6 +131,7 @@ export default function Home() {
                 className="h-12 w-auto"
               />
             </div>
+            {/* Desktop Navigation */}
             <div className="hidden sm:flex items-center space-x-4 md:space-x-8">
               <a href="#webinar" className="text-secondary hover:text-primary transition-colors text-sm md:text-base">
                 Webinar
@@ -129,8 +143,46 @@ export default function Home() {
                 Contatti
               </a>
             </div>
+
+            {/* Mobile Menu Button */}
+            <button
+              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              className="sm:hidden p-2 text-secondary hover:text-primary transition-colors"
+              aria-label="Toggle menu"
+            >
+              {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
+            </button>
           </div>
         </div>
+
+        {/* Mobile Menu Overlay */}
+        {isMobileMenuOpen && (
+          <div className="sm:hidden absolute top-16 left-0 right-0 glass-effect border-b border-gray-100 z-40">
+            <div className="px-4 py-6 space-y-4">
+              <a 
+                href="#webinar" 
+                className="block text-secondary hover:text-primary transition-colors text-lg font-medium"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Webinar
+              </a>
+              <a 
+                href="#newsletter" 
+                className="block text-secondary hover:text-primary transition-colors text-lg font-medium"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Newsletter
+              </a>
+              <a 
+                href="#contatti" 
+                className="block text-secondary hover:text-primary transition-colors text-lg font-medium"
+                onClick={() => setIsMobileMenuOpen(false)}
+              >
+                Contatti
+              </a>
+            </div>
+          </div>
+        )}
       </nav>
 
       {/* Hero Section */}
