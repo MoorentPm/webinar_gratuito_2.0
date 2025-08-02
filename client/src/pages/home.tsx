@@ -11,7 +11,7 @@ import { Form, FormControl, FormField, FormItem, FormMessage } from "@/component
 import { useToast } from "@/hooks/use-toast";
 import { apiRequest } from "@/lib/queryClient";
 import { insertNewsletterSchema, type InsertNewsletterSubscription } from "@shared/schema";
-import WavesBackground from "@/components/WavesBackground"; // Importa il componente delle onde
+import WavesBackground from "@/components/WavesBackground";
 
 export default function Home() {
   const { toast } = useToast();
@@ -135,7 +135,7 @@ export default function Home() {
   }, [isMobileMenuOpen]);
 
   return (
-    <div className="font-sans text-foreground antialiased overflow-x-hidden">
+    <div className="bg-background font-sans text-foreground antialiased overflow-x-hidden">
       {/* Navigation */}
       <nav className={`fixed left-0 right-0 z-50 glass-effect border-b border-gray-100 transition-all duration-500 ${
         isVideoPlaying ? '-top-16 opacity-50' : 'top-0 opacity-100'
@@ -267,27 +267,29 @@ export default function Home() {
                     id="youtube-player"
                   />
                 </div>
-                <div className={`absolute -bottom-2 sm:-bottom-8 left-0 right-0 mx-2 sm:mx-4 transition-all duration-500 ${
+                {/* MODIFICA: Spostato più in basso e reso più piccolo su mobile */}
+                <div className={`absolute -bottom-12 sm:-bottom-8 left-0 right-0 mx-4 transition-all duration-500 ${
                   isVideoPlaying ? 'opacity-0 translate-y-4 pointer-events-none' : 'opacity-100 translate-y-0'
                 }`}>
-                  <div className="glass-effect rounded-xl sm:rounded-2xl p-3 sm:p-6 border border-gray-100">
-                    <div className="flex flex-col gap-2 sm:gap-4">
-                      <div className="flex items-center space-x-3 sm:space-x-4">
-                        <div className="w-10 h-10 sm:w-12 sm:h-12 bg-accent rounded-full flex items-center justify-center">
-                          <Play className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
+                  <div className="glass-effect rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-gray-100">
+                    <div className="flex flex-col gap-2">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-10 h-10 bg-accent rounded-full flex items-center justify-center flex-shrink-0">
+                          <Play className="w-5 h-5 text-primary" />
                         </div>
                         <div className="flex-1">
-                          <h3 className="font-semibold text-base sm:text-lg text-primary">Webinar Premium</h3>
-                          <p className="text-secondary text-xs sm:text-base">Durata: 60 minuti • Contenuto esclusivo</p>
+                          <h3 className="font-semibold text-base text-primary">Webinar Premium</h3>
+                          <p className="text-secondary text-sm">Durata: 60 minuti • Contenuto esclusivo</p>
                         </div>
                       </div>
-                      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-6 text-xs sm:text-sm text-secondary pl-13 sm:pl-0">
+                      {/* MODIFICA: Nascosto su mobile (schermi più piccoli di sm) */}
+                      <div className="hidden sm:flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-6 text-xs sm:text-sm text-secondary pl-13 sm:pl-0 pt-2">
                         <div className="flex items-center space-x-2">
-                          <Users className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
+                          <Users className="w-4 h-4 flex-shrink-0" />
                           <span>Proprietari HNWI</span>
                         </div>
                         <div className="flex items-center space-x-2">
-                          <MapPin className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
+                          <MapPin className="w-4 h-4 flex-shrink-0" />
                           <span>Triveneto</span>
                         </div>
                       </div>
