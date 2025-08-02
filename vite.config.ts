@@ -4,9 +4,7 @@ import path from "path";
 import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
 
 export default defineConfig({
-  // Aggiungi questa riga qui
-  base: '/webinar_gratuito/',
-
+  base: '/webinar_gratuito_2.0/', // <-- MODIFICA CHIAVE
   plugins: [
     react(),
     runtimeErrorOverlay(),
