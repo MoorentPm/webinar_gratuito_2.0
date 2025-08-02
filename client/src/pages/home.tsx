@@ -135,7 +135,7 @@ export default function Home() {
   }, [isMobileMenuOpen]);
 
   return (
-    <div className="bg-background font-sans text-foreground antialiased overflow-x-hidden">
+    <div className="font-sans text-foreground antialiased overflow-x-hidden">
       {/* Navigation */}
       <nav className={`fixed left-0 right-0 z-50 glass-effect border-b border-gray-100 transition-all duration-500 ${
         isVideoPlaying ? '-top-16 opacity-50' : 'top-0 opacity-100'
@@ -241,7 +241,7 @@ export default function Home() {
       </section>
 
       {/* Contenitore per il resto della pagina (CON ONDE) */}
-      <div className="relative">
+      <div className="relative hero-dark-bg text-white">
         <WavesBackground />
         <div className="relative z-10">
           {/* Video Section */}
@@ -251,7 +251,7 @@ export default function Home() {
                 <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light mb-6">
                   Il Tuo Immobile, Il Tuo <span className="font-semibold">Successo</span>
                 </h2>
-                <p className="text-xl text-secondary font-light max-w-3xl mx-auto">
+                <p className="text-xl text-gray-300 font-light max-w-3xl mx-auto">
                   Un webinar completo che ti guiderà attraverso le strategie più efficaci per trasformare la tua proprietà in una fonte di reddito costante e redditizia.
                 </p>
               </div>
@@ -277,7 +277,7 @@ export default function Home() {
                           <Play className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
                         </div>
                         <div className="flex-1">
-                          <h3 className="font-semibold text-base sm:text-lg">Webinar Premium</h3>
+                          <h3 className="font-semibold text-base sm:text-lg text-primary">Webinar Premium</h3>
                           <p className="text-secondary text-xs sm:text-base">Durata: 60 minuti • Contenuto esclusivo</p>
                         </div>
                       </div>
@@ -311,7 +311,7 @@ export default function Home() {
                     />
                   </div>
                   <h3 className="text-xl font-semibold mb-3">Strategie Innovative</h3>
-                  <p className="text-secondary leading-relaxed">
+                  <p className="text-gray-300 leading-relaxed">
                     Metodologie avanzate per ottimizzare ogni aspetto della gestione immobiliare
                   </p>
                 </div>
@@ -324,7 +324,7 @@ export default function Home() {
                     />
                   </div>
                   <h3 className="text-xl font-semibold mb-3">Consulenza Premium</h3>
-                  <p className="text-secondary leading-relaxed">
+                  <p className="text-gray-300 leading-relaxed">
                     Approccio personalizzato per massimizzare il ROI delle tue proprietà di lusso
                   </p>
                 </div>
@@ -337,7 +337,7 @@ export default function Home() {
                     />
                   </div>
                   <h3 className="text-xl font-semibold mb-3">Risultati Misurabili</h3>
-                  <p className="text-secondary leading-relaxed">
+                  <p className="text-gray-300 leading-relaxed">
                     Monitoraggio costante delle performance e ottimizzazione continua dei rendimenti
                   </p>
                 </div>
@@ -348,12 +348,12 @@ export default function Home() {
           {/* Newsletter Section */}
           <section id="newsletter" className="py-20 px-4 sm:px-6 lg:px-8 scroll-reveal">
             <div className="max-w-4xl mx-auto">
-              <div className="premium-gradient rounded-3xl p-8 sm:p-12 lg:p-16 text-center">
+              <div className="premium-gradient-dark rounded-3xl p-8 sm:p-12 lg:p-16 text-center">
                 <div className="mb-8">
                   <h2 className="text-3xl sm:text-4xl font-light mb-6">
                     Ricevi Strategie <span className="font-semibold">Esclusive</span> via Email
                   </h2>
-                  <p className="text-lg sm:text-xl text-secondary font-light max-w-2xl mx-auto leading-relaxed px-4">
+                  <p className="text-lg sm:text-xl text-gray-300 font-light max-w-2xl mx-auto leading-relaxed px-4">
                     Insights di mercato, case study premium e strategie avanzate per proprietari immobiliari che vogliono massimizzare i loro investimenti nel Triveneto.
                   </p>
                 </div>
@@ -369,7 +369,7 @@ export default function Home() {
                               <Input
                                 placeholder="La tua email"
                                 {...field}
-                                className="w-full px-6 py-4 bg-white rounded-full text-lg font-medium placeholder:text-secondary border-2 border-transparent focus:border-accent focus:ring-4 focus:ring-accent/10 transition-all"
+                                className="w-full px-6 py-4 bg-white rounded-full text-lg font-medium placeholder:text-secondary border-2 border-transparent focus:border-accent focus:ring-4 focus:ring-accent/10 transition-all text-black"
                               />
                               <div className="absolute inset-y-0 right-0 flex items-center pr-6">
                                 <Inbox className="w-5 h-5 text-secondary" />
@@ -399,17 +399,17 @@ export default function Home() {
                     </Button>
                   </form>
                 </Form>
-                <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4 text-sm text-secondary">
+                <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4 text-sm text-gray-300">
                   <div className="flex items-center space-x-2">
                     <CheckCircle className="w-4 h-4 text-accent" />
                     <span>Contenuti esclusivi</span>
                   </div>
-                  <div className="hidden sm:block w-px h-4 bg-secondary opacity-30"></div>
+                  <div className="hidden sm:block w-px h-4 bg-gray-300 opacity-30"></div>
                   <div className="flex items-center space-x-2">
                     <ChartLine className="w-4 h-4 text-accent" />
                     <span>Insights di mercato</span>
                   </div>
-                  <div className="hidden sm:block w-px h-4 bg-secondary opacity-30"></div>
+                  <div className="hidden sm:block w-px h-4 bg-gray-300 opacity-30"></div>
                   <div className="flex items-center space-x-2">
                     <Building className="w-4 h-4 text-accent" />
                     <span>Case study premium</span>
@@ -426,7 +426,7 @@ export default function Home() {
                 <h2 className="text-3xl sm:text-4xl font-light mb-6">
                   Vuoi Parlare <span className="font-semibold">Direttamente</span> con Noi?
                 </h2>
-                <p className="text-xl text-secondary font-light max-w-3xl mx-auto leading-relaxed">
+                <p className="text-xl text-gray-300 font-light max-w-3xl mx-auto leading-relaxed">
                   Il nostro team di esperti è pronto ad ascoltarti e a fornirti una consulenza personalizzata per trasformare il tuo immobile in un investimento di successo.
                 </p>
               </div>
@@ -435,7 +435,7 @@ export default function Home() {
                   href="https://wa.me/393534830386?text=Ciao!%20Ho%20visto%20il%20vostro%20webinar%20e%20vorrei%20maggiori%20informazioni%20sui%20vostri%20servizi"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group bg-white rounded-2xl p-8 shadow-lg hover-lift border border-gray-100 transition-all duration-300 hover:border-green-200"
+                  className="group bg-white rounded-2xl p-8 shadow-lg hover-lift border border-gray-100 transition-all duration-300 hover:border-green-200 text-primary"
                 >
                   <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-green-500 transition-colors duration-300">
                     <SiWhatsapp className="w-8 h-8 text-green-600 group-hover:text-white transition-colors duration-300" />
@@ -446,7 +446,7 @@ export default function Home() {
                 </a>
                 <a
                   href="tel:+393534830386"
-                  className="group bg-white rounded-2xl p-8 shadow-lg hover-lift border border-gray-100 transition-all duration-300 hover:border-blue-200"
+                  className="group bg-white rounded-2xl p-8 shadow-lg hover-lift border border-gray-100 transition-all duration-300 hover:border-blue-200 text-primary"
                 >
                   <div className="w-16 h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-blue-500 transition-colors duration-300">
                     <Phone className="w-8 h-8 text-blue-600 group-hover:text-white transition-colors duration-300" />
@@ -459,7 +459,7 @@ export default function Home() {
                   href="https://linktr.ee/moorentpm"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="group bg-white rounded-2xl p-8 shadow-lg hover-lift border border-gray-100 transition-all duration-300 hover:border-pink-200"
+                  className="group bg-white rounded-2xl p-8 shadow-lg hover-lift border border-gray-100 transition-all duration-300 hover:border-pink-200 text-primary"
                 >
                   <div className="w-16 h-16 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-6 group-hover:bg-pink-300 transition-colors duration-300">
                     <ExternalLink className="w-8 h-8 text-pink-400 group-hover:text-white transition-colors duration-300" />
