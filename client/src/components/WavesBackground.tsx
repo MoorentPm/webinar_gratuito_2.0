@@ -12,10 +12,10 @@ const WavesBackground: React.FC = () => {
 
     const resizeCanvas = () => {
       canvas.width = window.innerWidth;
+      // Assicura che il canvas sia alto quanto il suo contenitore per coprire tutto lo scroll
       canvas.height = canvas.parentElement?.scrollHeight || window.innerHeight;
     };
     
-    // Aggiungiamo un observer per ridimensionare il canvas se il contenuto della pagina cambia
     const resizeObserver = new ResizeObserver(resizeCanvas);
     if(canvas.parentElement) {
       resizeObserver.observe(canvas.parentElement);
@@ -24,8 +24,8 @@ const WavesBackground: React.FC = () => {
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
-    // MODIFICA: Colore delle linee molto più chiaro
-    const lineColor = '#E5E7EB'; // Grigio chiaro
+    // MODIFICA: Colore delle linee più scuro per essere visibile su sfondo bianco
+    const lineColor = '#D1D5DB'; // Un grigio chiaro ma visibile (Tailwind gray-300)
 
     class WaveLine {
       y: number;
@@ -41,18 +41,15 @@ const WavesBackground: React.FC = () => {
 
       constructor(options: Partial<WaveLine>) {
         this.y = options.y || Math.random() * canvas.height;
-        // MODIFICA: Ampiezza ridotta per onde più piatte
-        this.amplitude = options.amplitude || (10 + Math.random() * 40);
-        this.wavelength = options.wavelength || (200 + Math.random() * 400);
+        this.amplitude = options.amplitude || (30 + Math.random() * 80);
+        this.wavelength = options.wavelength || (100 + Math.random() * 300);
         this.frequency = Math.PI * 2 / this.wavelength;
         this.phase = options.phase || Math.random() * Math.PI * 2;
-        // MODIFICA: Linee più sottili
-        this.lineWidth = options.lineWidth || (0.2 + Math.random() * 0.3);
-        this.speed = options.speed || (0.001 + Math.random() * 0.004);
-        // MODIFICA: Opacità più bassa per un effetto più leggero
-        this.opacity = options.opacity || (0.4 + Math.random() * 0.5);
+        this.lineWidth = options.lineWidth || (0.2 + Math.random() * 0.6);
+        this.speed = options.speed || (0.002 + Math.random() * 0.008);
+        this.opacity = options.opacity || (0.2 + Math.random() * 0.4); // Leggermente più visibili
         this.segments = [];
-        this.segmentLength = 5;
+        this.segmentLength = 2;
 
         for (let x = 0; x < canvas.width + this.segmentLength; x += this.segmentLength) {
           this.segments.push({
@@ -84,12 +81,42 @@ const WavesBackground: React.FC = () => {
       }
     }
 
-    // MODIFICA: Meno onde per un effetto più pulito
+    // MODIFICA: Ripristinata la logica originale con 3 gruppi di onde
     const waveGroups: WaveLine[] = [];
-    const numWaves = 25; 
-    for (let i = 0; i < numWaves; i++) {
+    // Primo gruppo
+    for (let i = 0; i < 15; i++) {
         waveGroups.push(new WaveLine({
-            y: (canvas.height / numWaves) * i,
+            y: canvas.height * 0.3 + i * 10,
+            amplitude: 40 + i * 2,
+            wavelength: 1200 + i * 10,
+            phase: i * 0.2,
+            lineWidth: 0.4,
+            speed: 0.002,
+            opacity: 0.3
+        }));
+    }
+    // Secondo gruppo
+    for (let i = 0; i < 20; i++) {
+        waveGroups.push(new WaveLine({
+            y: canvas.height * 0.5 + i * 8,
+            amplitude: 35 - i * 0.5,
+            wavelength: 800 + i * 50,
+            phase: i * 0.1 + Math.PI,
+            lineWidth: 0.5,
+            speed: 0.003,
+            opacity: 0.4
+        }));
+    }
+    // Terzo gruppo
+    for (let i = 0; i < 15; i++) {
+        waveGroups.push(new WaveLine({
+            y: canvas.height * 0.7 + i * 12,
+            amplitude: 30 + i * 1.5,
+            wavelength: 1000 - i * 20,
+            phase: i * 0.15 + Math.PI / 2,
+            lineWidth: 0.4,
+            speed: 0.0015,
+            opacity: 0.35
         }));
     }
 
