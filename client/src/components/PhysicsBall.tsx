@@ -3,9 +3,9 @@ import Matter from 'matter-js';
 
 const PhysicsBall: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const matterInstance = useRef<any>(null);
 
   useEffect(() => {
-    // Controlla se Matter.js è stato caricato
     if (typeof Matter === 'undefined') {
       console.error('Matter.js not loaded');
       return;
@@ -16,56 +16,59 @@ const PhysicsBall: React.FC = () => {
     const canvas = canvasRef.current;
     if (!canvas) return;
 
-    // Crea il motore fisico
     const engine = Engine.create();
     const world = engine.world;
-    world.gravity.y = 1.2; // Aumenta un po' la gravità
+    world.gravity.y = 1.2;
 
-    // Crea il renderer che disegnerà sul canvas
     const render = Render.create({
       canvas: canvas,
       engine: engine,
       options: {
         width: window.innerWidth,
-        height: window.innerHeight,
-        wireframes: false, // Mostra le forme piene
-        background: 'transparent' // Sfondo trasparente
+        height: document.body.scrollHeight, // Altezza dell'intera pagina
+        wireframes: false,
+        background: 'transparent'
       }
     });
 
-    // Crea la pallina
-    const ball = Bodies.circle(window.innerWidth / 2, -50, 15, {
-      restitution: 0.7, // Elasticità (rimbalzo)
+    const ball = Bodies.circle(window.innerWidth / 2, 40, 15, {
+      restitution: 0.7,
       friction: 0.1,
       density: 0.05,
       render: {
-        fillStyle: '#F3DFD9' // Colore rosa/beige
+        fillStyle: '#F3DFD9'
       }
     });
-    World.add(world, ball);
 
-    // Array per contenere gli ostacoli fisici
+    // Aggiunge un pavimento in fondo alla pagina
+    const ground = Bodies.rectangle(
+        window.innerWidth / 2, 
+        document.body.scrollHeight + 30, 
+        window.innerWidth, 
+        60, 
+        { isStatic: true, render: { visible: false } }
+    );
+
+    World.add(world, [ball, ground]);
+
     const obstacles: Matter.Body[] = [];
 
-    // Funzione per creare gli ostacoli basandosi sugli elementi HTML
     const createObstacles = () => {
-      // Rimuove i vecchi ostacoli
       World.remove(world, obstacles);
       obstacles.length = 0;
 
-      // Seleziona tutti gli elementi che devono essere "solidi"
       const elements = document.querySelectorAll('[data-obstacle]');
       
       elements.forEach(elem => {
         const rect = elem.getBoundingClientRect();
         const body = Bodies.rectangle(
           rect.left + rect.width / 2,
-          rect.top + rect.height / 2,
+          rect.top + window.scrollY + rect.height / 2, // Posizione relativa al documento
           rect.width,
           rect.height,
           { 
-            isStatic: true, // Li rende immobili
-            render: { visible: false } // Non li disegna, vediamo solo gli elementi HTML
+            isStatic: true,
+            render: { visible: false }
           }
         );
         obstacles.push(body);
@@ -74,52 +77,48 @@ const PhysicsBall: React.FC = () => {
       World.add(world, obstacles);
     };
 
-    // Gestione dello scroll
-    let lastScrollY = window.scrollY;
-    const handleScroll = () => {
-      const scrollY = window.scrollY;
-      const scrollDelta = scrollY - lastScrollY;
-      
-      // Sposta la "visuale" del mondo fisico insieme allo scroll
-      Body.translate(ball, { x: 0, y: -scrollDelta });
-      obstacles.forEach(obstacle => {
-        Body.translate(obstacle, { x: 0, y: -scrollDelta });
-      });
-
-      lastScrollY = scrollY;
+    // Funzione per aggiornare la visuale del renderer
+    const updateRenderView = () => {
+        Render.lookAt(render, {
+            min: { x: 0, y: window.scrollY },
+            max: { x: window.innerWidth, y: window.scrollY + window.innerHeight }
+        });
     };
 
-    // Aggiorna le dimensioni e le posizioni al resize della finestra
     const handleResize = () => {
-      render.options.width = window.innerWidth;
-      render.options.height = window.innerHeight;
-      Render.setPixelRatio(render, window.devicePixelRatio);
-      Render.setSize(render, window.innerWidth, window.innerHeight);
+      render.canvas.width = window.innerWidth;
+      render.canvas.height = document.body.scrollHeight;
       createObstacles();
+      updateRenderView();
+    };
+    
+    // Ritarda l'inizializzazione per assicurarsi che il DOM sia pronto
+    const init = () => {
+        createObstacles();
+        updateRenderView();
     };
 
-    // Inizializzazione
-    createObstacles();
-    window.addEventListener('scroll', handleScroll);
-    window.addEventListener('resize', handleResize);
+    // Esegui l'init dopo un breve ritardo
+    const initTimeout = setTimeout(init, 100);
 
-    // Avvia il rendering e il motore fisico
+    window.addEventListener('resize', handleResize);
+    window.addEventListener('scroll', updateRenderView);
+
     Render.run(render);
     const runner = Runner.create();
     Runner.run(runner, engine);
 
-    // Pulisce tutto quando il componente viene smontato
+    matterInstance.current = { render, runner, engine, world };
+
     return () => {
+      clearTimeout(initTimeout);
       Render.stop(render);
       Runner.stop(runner);
       World.clear(world, false);
       Engine.clear(engine);
       render.canvas.remove();
-      (render.canvas as any) = null;
-      (render.context as any) = null;
-      (render as any).textures = {};
-      window.removeEventListener('scroll', handleScroll);
       window.removeEventListener('resize', handleResize);
+      window.removeEventListener('scroll', updateRenderView);
     };
   }, []);
 
