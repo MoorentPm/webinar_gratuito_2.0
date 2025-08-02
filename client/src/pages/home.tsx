@@ -230,7 +230,6 @@ export default function Home() {
                 <div className={`absolute -bottom-12 sm:-bottom-8 left-0 right-0 mx-4 transition-all duration-500 ${
                   isVideoPlaying ? 'opacity-0 translate-y-4 pointer-events-none' : 'opacity-100 translate-y-0'
                 }`}>
-                  {/* MODIFICA: Ripristinato lo stile chiaro per questo banner */}
                   <div className="video-banner-glass rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-gray-100">
                     <div className="flex flex-col gap-2">
                       <div className="flex items-center space-x-3">
@@ -426,19 +425,22 @@ export default function Home() {
                   className="h-12 w-auto"
                 />
               </div>
+              {/* MODIFICA: Inserita la nuova frase poetica */}
               <p className="text-gray-300 mb-6 max-w-md leading-relaxed">
-                Property Management Premium nel Triveneto. Trasformiamo immobili di lusso in asset redditizi attraverso strategie innovative e gestione professionale.
+                Ogni immobile ha una storia da raccontare, un potenziale inespresso che attende di essere svelato. Noi siamo i custodi di queste storie, gli architetti che trasformano spazi in esperienze memorabili e investimenti in successi tangibili.
               </p>
             </div>
+
             <div>
               <h4 className="font-semibold mb-4">Servizi</h4>
+              {/* MODIFICA: Aggiornata la lista dei servizi */}
               <ul className="space-y-2 text-gray-300">
-                <li>Affitti Brevi</li>
-                <li>Gestione Premium</li>
-                <li>Consulenza</li>
-                <li>Ottimizzazione ROI</li>
+                <li>Gestione Online</li>
+                <li>Gestione Completa</li>
+                <li>Subaffitto</li>
               </ul>
             </div>
+
             <div>
               <h4 className="font-semibold mb-4">Contatti</h4>
               <ul className="space-y-2 text-gray-300">
