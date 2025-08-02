@@ -64,6 +64,7 @@ const WavesBackground: React.FC = () => {
       }
 
       draw() {
+        if (!ctx) return;
         ctx.beginPath();
         ctx.strokeStyle = lineColor;
         ctx.lineWidth = this.lineWidth;
@@ -119,6 +120,7 @@ const WavesBackground: React.FC = () => {
     // Funzione di animazione
     let animationFrameId: number;
     const animate = () => {
+      if (!ctx || !canvas) return;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
       waveGroups.forEach(wave => {
         wave.update();
