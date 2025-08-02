@@ -5,7 +5,6 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Home from "@/pages/home";
 import NotFound from "@/pages/not-found";
-import PhysicsBall from "@/components/PhysicsBall"; // Importa il nuovo componente
 
 function AppRoutes() {
   return (
@@ -20,7 +19,6 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <PhysicsBall /> {/* Aggiungi il componente della pallina */}
         <Toaster />
         <Router base="/webinar_gratuito_2.0">
           <AppRoutes />
