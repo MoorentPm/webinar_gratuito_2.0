@@ -1,55 +1,15 @@
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useMutation } from "@tanstack/react-query";
 import { useEffect, useRef, useState } from "react";
 import { Mail, Phone, MessageCircle, Play, Crown, Users, MapPin, Check, ChartLine, Building, ArrowDown, ArrowRight, Inbox, CheckCircle, LoaderPinwheel, ExternalLink, Menu, X } from "lucide-react";
 import { SiWhatsapp } from "react-icons/si";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
-import { useToast } from "@/hooks/use-toast";
-import { apiRequest } from "@/lib/queryClient";
-import { insertNewsletterSchema, type InsertNewsletterSubscription } from "@shared/schema";
 import WavesBackground from "@/components/WavesBackground";
 
 export default function Home() {
-  const { toast } = useToast();
   const observerRef = useRef<IntersectionObserver | null>(null);
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-
-  const form = useForm<InsertNewsletterSubscription>({
-    resolver: zodResolver(insertNewsletterSchema),
-    defaultValues: {
-      email: "",
-    },
-  });
-
-  const newsletterMutation = useMutation({
-    mutationFn: async (data: InsertNewsletterSubscription) => {
-      const response = await apiRequest("POST", "/api/newsletter/subscribe", data);
-      return response.json();
-    },
-    onSuccess: () => {
-      toast({
-        title: "Iscrizione completata!",
-        description: "Riceverai presto i nostri contenuti esclusivi.",
-      });
-      form.reset();
-    },
-    onError: (error: any) => {
-      toast({
-        title: "Errore nell'iscrizione",
-        description: error.message || "Si è verificato un errore. Riprova più tardi.",
-        variant: "destructive",
-      });
-    },
-  });
-
-  const handleNewsletterSubmit = (data: InsertNewsletterSubscription) => {
-    newsletterMutation.mutate(data);
-  };
 
   useEffect(() => {
     observerRef.current = new IntersectionObserver(
@@ -267,7 +227,6 @@ export default function Home() {
                     id="youtube-player"
                   />
                 </div>
-                {/* MODIFICA: Spostato più in basso e reso più piccolo su mobile */}
                 <div className={`absolute -bottom-12 sm:-bottom-8 left-0 right-0 mx-4 transition-all duration-500 ${
                   isVideoPlaying ? 'opacity-0 translate-y-4 pointer-events-none' : 'opacity-100 translate-y-0'
                 }`}>
@@ -282,7 +241,6 @@ export default function Home() {
                           <p className="text-secondary text-sm">Durata: 60 minuti • Contenuto esclusivo</p>
                         </div>
                       </div>
-                      {/* MODIFICA: Nascosto su mobile (schermi più piccoli di sm) */}
                       <div className="hidden sm:flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-6 text-xs sm:text-sm text-secondary pl-13 sm:pl-0 pt-2">
                         <div className="flex items-center space-x-2">
                           <Users className="w-4 h-4 flex-shrink-0" />
@@ -359,48 +317,28 @@ export default function Home() {
                     Insights di mercato, case study premium e strategie avanzate per proprietari immobiliari che vogliono massimizzare i loro investimenti nel Triveneto.
                   </p>
                 </div>
-                <Form {...form}>
-                  <form onSubmit={form.handleSubmit(handleNewsletterSubmit)} className="max-w-md mx-auto space-y-6">
-                    <FormField
-                      control={form.control}
-                      name="email"
-                      render={({ field }) => (
-                        <FormItem>
-                          <FormControl>
-                            <div className="relative">
-                              <Input
-                                placeholder="La tua email"
-                                {...field}
-                                className="w-full px-6 py-4 bg-white rounded-full text-lg font-medium placeholder:text-secondary border-2 border-transparent focus:border-accent focus:ring-4 focus:ring-accent/10 transition-all text-black"
-                              />
-                              <div className="absolute inset-y-0 right-0 flex items-center pr-6">
-                                <Inbox className="w-5 h-5 text-secondary" />
-                              </div>
-                            </div>
-                          </FormControl>
-                          <FormMessage />
-                        </FormItem>
-                      )}
-                    />
+                {/* Simplified form */}
+                <form className="max-w-md mx-auto space-y-6">
+                    <div className="relative">
+                        <Input
+                        placeholder="La tua email"
+                        className="w-full px-6 py-4 bg-white rounded-full text-lg font-medium placeholder:text-secondary border-2 border-transparent focus:border-accent focus:ring-4 focus:ring-accent/10 transition-all text-black"
+                        />
+                        <div className="absolute inset-y-0 right-0 flex items-center pr-6">
+                        <Inbox className="w-5 h-5 text-secondary" />
+                        </div>
+                    </div>
                     <Button
-                      type="submit"
-                      disabled={newsletterMutation.isPending}
-                      className="btn-primary w-full px-8 py-4 text-white font-semibold rounded-full text-lg"
+                        type="submit"
+                        className="btn-primary w-full px-8 py-4 text-white font-semibold rounded-full text-lg"
                     >
-                      {newsletterMutation.isPending ? (
                         <span className="flex items-center justify-center space-x-2">
-                          <LoaderPinwheel className="w-4 h-4 animate-spin" />
-                          <span>Iscrizione in corso...</span>
+                        <span>Iscriviti alla Newsletter</span>
+                        <ArrowRight className="w-4 h-4" />
                         </span>
-                      ) : (
-                        <span className="flex items-center justify-center space-x-2">
-                          <span>Iscriviti alla Newsletter</span>
-                          <ArrowRight className="w-4 h-4" />
-                        </span>
-                      )}
                     </Button>
-                  </form>
-                </Form>
+                </form>
+
                 <div className="mt-8 flex flex-col sm:flex-row items-center justify-center gap-4 text-sm text-gray-300">
                   <div className="flex items-center space-x-2">
                     <CheckCircle className="w-4 h-4 text-accent" />
