@@ -141,8 +141,8 @@ export default function Home() {
   }, [isMobileMenuOpen]);
 
   return (
-    // MODIFICA CHIAVE: Rimosso "bg-background", aggiunto "relative z-10"
-    <div className="relative z-10 font-sans text-foreground antialiased overflow-x-hidden">
+    // MODIFICA CHIAVE: Ho rimosso "bg-background" da qui per rendere lo sfondo trasparente
+    <div className="font-sans text-foreground antialiased overflow-x-hidden">
       {/* Navigation */}
       <nav className={`fixed left-0 right-0 z-50 glass-effect border-b border-gray-100 transition-all duration-500 ${
         isVideoPlaying ? '-top-16 opacity-50' : 'top-0 opacity-100'
@@ -212,7 +212,8 @@ export default function Home() {
 
       {/* Hero Section */}
       <section className="relative min-h-screen flex items-center justify-center pt-16 px-4 sm:px-6 lg:px-8">
-        <div className="absolute inset-0 z-0">
+        {/* MODIFICA: Aggiunto z-index per posizionare l'immagine DIETRO al testo ma SOPRA le onde */}
+        <div className="absolute inset-0 z-0"> 
           <img
             src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2075&h=1384"
             alt="Luxury real estate property with modern architecture"

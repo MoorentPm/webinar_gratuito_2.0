@@ -176,7 +176,7 @@
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: -1; /* Mette il canvas dietro a tutto */
-  pointer-events: none; /* Rende il canvas non cliccabile */
-  background-color: #1a1616; /* Colore di sfondo scuro */
+  z-index: -1; 
+  pointer-events: none;
+  background-color: #ffffff; /* Sfondo bianco come da design originale */
 }
