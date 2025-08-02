@@ -59,7 +59,7 @@
   }
 
   body {
-    @apply font-sans antialiased; /* Rimosso bg-background e text-foreground */
+    @apply font-sans antialiased;
   }
   
   html {
@@ -88,10 +88,15 @@
     box-shadow: 0 20px 40px rgba(35, 35, 35, 0.1);
   }
   
-  /* MODIFICA: Effetto vetro scuro per la navbar */
   .glass-effect {
     backdrop-filter: blur(16px);
     background: rgba(26, 22, 22, 0.65);
+  }
+
+  /* MODIFICA: Nuova classe per il banner chiaro sotto il video */
+  .video-banner-glass {
+    backdrop-filter: blur(20px);
+    background: rgba(255, 255, 255, 0.95);
   }
 
   .nav-hidden {

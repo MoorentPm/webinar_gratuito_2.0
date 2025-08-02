@@ -97,7 +97,6 @@ export default function Home() {
   return (
     <div className="bg-background font-sans text-foreground antialiased overflow-x-hidden">
       {/* Navigation */}
-      {/* MODIFICA: Cambiato il colore del bordo per adattarsi allo sfondo scuro */}
       <nav className={`fixed left-0 right-0 z-50 glass-effect border-b border-white/10 transition-all duration-500 ${
         isVideoPlaying ? '-top-16 opacity-50' : 'top-0 opacity-100'
       }`}>
@@ -110,8 +109,6 @@ export default function Home() {
                 className="h-12 w-auto"
               />
             </div>
-            {/* Desktop Navigation */}
-            {/* MODIFICA: Cambiato il colore del testo dei link in chiaro */}
             <div className="hidden sm:flex items-center space-x-4 md:space-x-8">
               <a href="#webinar" className="text-gray-300 hover:text-white transition-colors text-sm md:text-base">
                 Webinar
@@ -123,9 +120,6 @@ export default function Home() {
                 Contatti
               </a>
             </div>
-
-            {/* Mobile Menu Button */}
-            {/* MODIFICA: Cambiato il colore dell'icona del menu in chiaro */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
               className="sm:hidden p-2 text-gray-300 hover:text-white transition-colors"
@@ -136,11 +130,9 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Mobile Menu Overlay */}
         {isMobileMenuOpen && (
           <div className="sm:hidden absolute top-16 left-0 right-0 glass-effect border-b border-white/10 z-40">
             <div className="px-4 py-6 space-y-4">
-              {/* MODIFICA: Cambiato il colore del testo dei link mobili in chiaro */}
               <a 
                 href="#webinar" 
                 className="block text-gray-300 hover:text-white transition-colors text-lg font-medium"
@@ -238,7 +230,8 @@ export default function Home() {
                 <div className={`absolute -bottom-12 sm:-bottom-8 left-0 right-0 mx-4 transition-all duration-500 ${
                   isVideoPlaying ? 'opacity-0 translate-y-4 pointer-events-none' : 'opacity-100 translate-y-0'
                 }`}>
-                  <div className="glass-effect rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-gray-100">
+                  {/* MODIFICA: Ripristinato lo stile chiaro per questo banner */}
+                  <div className="video-banner-glass rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-gray-100">
                     <div className="flex flex-col gap-2">
                       <div className="flex items-center space-x-3">
                         <div className="w-10 h-10 bg-accent rounded-full flex items-center justify-center flex-shrink-0">
