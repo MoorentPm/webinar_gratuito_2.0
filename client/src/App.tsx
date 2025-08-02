@@ -5,6 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Home from "@/pages/home";
 import NotFound from "@/pages/not-found";
+import WavesBackground from "@/components/WavesBackground"; // Importa il nuovo componente
 
 // Ho rinominato la tua funzione originale "Router" in "AppRoutes"
 // per evitare un conflitto di nomi con il componente Router di wouter.
@@ -23,6 +24,7 @@ function App() {
     // e il Router che avvolge solo le rotte.
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
+        <WavesBackground /> {/* Aggiungi il componente qui */}
         <Toaster />
         <Router base="/webinar_gratuito_2.0">
           <AppRoutes />
