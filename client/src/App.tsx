@@ -5,10 +5,8 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Home from "@/pages/home";
 import NotFound from "@/pages/not-found";
-import WavesBackground from "@/components/WavesBackground"; // Importa il nuovo componente
+import WavesBackground from "@/components/WavesBackground";
 
-// Ho rinominato la tua funzione originale "Router" in "AppRoutes"
-// per evitare un conflitto di nomi con il componente Router di wouter.
 function AppRoutes() {
   return (
     <Switch>
@@ -20,15 +18,19 @@ function AppRoutes() {
 
 function App() {
   return (
-    // La struttura corretta è avere i "Provider" all'esterno
-    // e il Router che avvolge solo le rotte.
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        <WavesBackground /> {/* Aggiungi il componente qui */}
-        <Toaster />
-        <Router base="/webinar_gratuito_2.0">
-          <AppRoutes />
-        </Router>
+        {/* L'animazione rimane fuori, come sfondo per tutto */}
+        <WavesBackground />
+        
+        {/* Questo div diventa il contenitore principale della tua app */}
+        <div className="relative z-10 text-foreground">
+          <Toaster />
+          <Router base="/webinar_gratuito_2.0">
+            <AppRoutes />
+          </Router>
+        </div>
+
       </TooltipProvider>
     </QueryClientProvider>
   );

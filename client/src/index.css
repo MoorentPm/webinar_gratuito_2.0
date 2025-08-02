@@ -58,15 +58,16 @@
     @apply border-border;
   }
 
-  /* MODIFICA CHIAVE: Rendi trasparenti gli sfondi per vedere il canvas */
-  body, #root {
-    @apply bg-transparent;
-  }
-
   body {
-    @apply font-sans antialiased text-foreground;
+    /* Rimuoviamo il colore di sfondo da qui per evitare conflitti */
+    @apply font-sans antialiased;
   }
   
+  html, body, #root {
+    /* Ci assicuriamo che tutto occupi il 100% dell'altezza */
+    height: 100%;
+  }
+
   html {
     scroll-behavior: smooth;
   }
