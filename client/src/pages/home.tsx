@@ -97,7 +97,8 @@ export default function Home() {
   return (
     <div className="bg-background font-sans text-foreground antialiased overflow-x-hidden">
       {/* Navigation */}
-      <nav className={`fixed left-0 right-0 z-50 glass-effect border-b border-gray-100 transition-all duration-500 ${
+      {/* MODIFICA: Cambiato il colore del bordo per adattarsi allo sfondo scuro */}
+      <nav className={`fixed left-0 right-0 z-50 glass-effect border-b border-white/10 transition-all duration-500 ${
         isVideoPlaying ? '-top-16 opacity-50' : 'top-0 opacity-100'
       }`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -109,20 +110,25 @@ export default function Home() {
                 className="h-12 w-auto"
               />
             </div>
+            {/* Desktop Navigation */}
+            {/* MODIFICA: Cambiato il colore del testo dei link in chiaro */}
             <div className="hidden sm:flex items-center space-x-4 md:space-x-8">
-              <a href="#webinar" className="text-secondary hover:text-primary transition-colors text-sm md:text-base">
+              <a href="#webinar" className="text-gray-300 hover:text-white transition-colors text-sm md:text-base">
                 Webinar
               </a>
-              <a href="#newsletter" className="text-secondary hover:text-primary transition-colors text-sm md:text-base">
+              <a href="#newsletter" className="text-gray-300 hover:text-white transition-colors text-sm md:text-base">
                 Newsletter
               </a>
-              <a href="#contatti" className="text-secondary hover:text-primary transition-colors text-sm md:text-base">
+              <a href="#contatti" className="text-gray-300 hover:text-white transition-colors text-sm md:text-base">
                 Contatti
               </a>
             </div>
+
+            {/* Mobile Menu Button */}
+            {/* MODIFICA: Cambiato il colore dell'icona del menu in chiaro */}
             <button
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="sm:hidden p-2 text-secondary hover:text-primary transition-colors"
+              className="sm:hidden p-2 text-gray-300 hover:text-white transition-colors"
               aria-label="Toggle menu"
             >
               {isMobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
@@ -130,26 +136,28 @@ export default function Home() {
           </div>
         </div>
 
+        {/* Mobile Menu Overlay */}
         {isMobileMenuOpen && (
-          <div className="sm:hidden absolute top-16 left-0 right-0 glass-effect border-b border-gray-100 z-40">
+          <div className="sm:hidden absolute top-16 left-0 right-0 glass-effect border-b border-white/10 z-40">
             <div className="px-4 py-6 space-y-4">
+              {/* MODIFICA: Cambiato il colore del testo dei link mobili in chiaro */}
               <a 
                 href="#webinar" 
-                className="block text-secondary hover:text-primary transition-colors text-lg font-medium"
+                className="block text-gray-300 hover:text-white transition-colors text-lg font-medium"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Webinar
               </a>
               <a 
                 href="#newsletter" 
-                className="block text-secondary hover:text-primary transition-colors text-lg font-medium"
+                className="block text-gray-300 hover:text-white transition-colors text-lg font-medium"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Newsletter
               </a>
               <a 
                 href="#contatti" 
-                className="block text-secondary hover:text-primary transition-colors text-lg font-medium"
+                className="block text-gray-300 hover:text-white transition-colors text-lg font-medium"
                 onClick={() => setIsMobileMenuOpen(false)}
               >
                 Contatti
@@ -317,7 +325,6 @@ export default function Home() {
                     Insights di mercato, case study premium e strategie avanzate per proprietari immobiliari che vogliono massimizzare i loro investimenti nel Triveneto.
                   </p>
                 </div>
-                {/* Simplified form */}
                 <form className="max-w-md mx-auto space-y-6">
                     <div className="relative">
                         <Input
