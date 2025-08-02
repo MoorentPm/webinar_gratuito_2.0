@@ -93,7 +93,6 @@
     background: rgba(26, 22, 22, 0.65);
   }
 
-  /* MODIFICA: Nuova classe per il banner chiaro sotto il video */
   .video-banner-glass {
     backdrop-filter: blur(20px);
     background: rgba(255, 255, 255, 0.95);
@@ -182,4 +181,15 @@
   height: 100%;
   z-index: 0; 
   pointer-events: none;
+}
+
+/* Stili per il canvas della fisica */
+#physics-canvas {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none; /* Rende il canvas non cliccabile */
+  z-index: 9999; /* Lo mette sopra a tutto */
 }

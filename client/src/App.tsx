@@ -5,7 +5,7 @@ import { Toaster } from "@/components/ui/toaster";
 import { TooltipProvider } from "@/components/ui/tooltip";
 import Home from "@/pages/home";
 import NotFound from "@/pages/not-found";
-import WavesBackground from "@/components/WavesBackground";
+import PhysicsBall from "@/components/PhysicsBall"; // Importa il nuovo componente
 
 function AppRoutes() {
   return (
@@ -20,15 +20,11 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        {/* L'animazione rimane qui, come sfondo per tutto */}
-        <WavesBackground />
-        
-        {/* Il Toaster e il Router sono gli unici altri elementi a questo livello */}
+        <PhysicsBall /> {/* Aggiungi il componente della pallina */}
         <Toaster />
         <Router base="/webinar_gratuito_2.0">
           <AppRoutes />
         </Router>
-
       </TooltipProvider>
     </QueryClientProvider>
   );
