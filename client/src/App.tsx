@@ -20,16 +20,14 @@ function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <TooltipProvider>
-        {/* L'animazione rimane fuori, come sfondo per tutto */}
+        {/* L'animazione rimane qui, come sfondo per tutto */}
         <WavesBackground />
         
-        {/* Questo div diventa il contenitore principale della tua app */}
-        <div className="relative z-10 text-foreground">
-          <Toaster />
-          <Router base="/webinar_gratuito_2.0">
-            <AppRoutes />
-          </Router>
-        </div>
+        {/* Il Toaster e il Router sono gli unici altri elementi a questo livello */}
+        <Toaster />
+        <Router base="/webinar_gratuito_2.0">
+          <AppRoutes />
+        </Router>
 
       </TooltipProvider>
     </QueryClientProvider>

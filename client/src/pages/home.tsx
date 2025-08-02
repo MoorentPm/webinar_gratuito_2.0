@@ -141,7 +141,8 @@ export default function Home() {
   }, [isMobileMenuOpen]);
 
   return (
-    <div className="font-sans bg-background text-foreground antialiased overflow-x-hidden">
+    // MODIFICA CHIAVE: Rimosso "bg-background", aggiunto "relative z-10"
+    <div className="relative z-10 font-sans text-foreground antialiased overflow-x-hidden">
       {/* Navigation */}
       <nav className={`fixed left-0 right-0 z-50 glass-effect border-b border-gray-100 transition-all duration-500 ${
         isVideoPlaying ? '-top-16 opacity-50' : 'top-0 opacity-100'
