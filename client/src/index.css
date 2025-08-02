@@ -59,15 +59,9 @@
   }
 
   body {
-    /* Rimuoviamo il colore di sfondo da qui per evitare conflitti */
-    @apply font-sans antialiased;
+    @apply font-sans antialiased bg-background;
   }
   
-  html, body, #root {
-    /* Ci assicuriamo che tutto occupi il 100% dell'altezza */
-    height: 100%;
-  }
-
   html {
     scroll-behavior: smooth;
   }
@@ -99,7 +93,6 @@
     background: rgba(255, 255, 255, 0.95);
   }
 
-  /* Navigation hide animation */
   .nav-hidden {
     transform: translateY(-100%);
     opacity: 0.3;
@@ -109,7 +102,7 @@
     position: relative;
     width: 100%;
     height: 0;
-    padding-bottom: 56.25%; /* 16:9 aspect ratio */
+    padding-bottom: 56.25%;
   }
   
   .video-container iframe {
@@ -137,7 +130,6 @@
     box-shadow: 0 10px 25px rgba(35, 35, 35, 0.3);
   }
   
-  /* Mobile optimizations */
   @media (max-width: 768px) {
     .hover-lift:hover {
       transform: none;
@@ -149,15 +141,14 @@
     }
     
     .video-container {
-      padding-bottom: 60%; /* Slightly taller aspect ratio for mobile */
+      padding-bottom: 60%;
     }
     
     .scroll-reveal {
-      transform: translateY(20px); /* Reduced translate for mobile */
+      transform: translateY(20px);
     }
   }
   
-  /* Touch-friendly tap targets */
   @media (hover: none) and (pointer: coarse) {
     .hover-lift:active {
       transform: scale(0.98);
@@ -167,16 +158,20 @@
       transform: scale(0.98);
     }
   }
+
+  /* MODIFICA: Classe per lo sfondo scuro della Hero Section */
+  .hero-dark-bg {
+    background-color: #1a1616;
+  }
 }
 
-/* Stili per l'animazione delle onde in background */
+/* MODIFICA: Stili per posizionare le onde correttamente */
 #wavesBg {
-  position: fixed;
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: -1; 
+  z-index: 0; 
   pointer-events: none;
-  background-color: #ffffff; /* Sfondo bianco come da design originale */
 }

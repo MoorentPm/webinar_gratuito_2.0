@@ -10,20 +10,24 @@ const WavesBackground: React.FC = () => {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    // Funzione per ridimensionare il canvas
     const resizeCanvas = () => {
       canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      canvas.height = canvas.parentElement?.scrollHeight || window.innerHeight;
     };
+    
+    // Aggiungiamo un observer per ridimensionare il canvas se il contenuto della pagina cambia
+    const resizeObserver = new ResizeObserver(resizeCanvas);
+    if(canvas.parentElement) {
+      resizeObserver.observe(canvas.parentElement);
+    }
+
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
-    // Colore delle linee
-    const lineColor = '#d6c4bf';
+    // MODIFICA: Colore delle linee molto più chiaro
+    const lineColor = '#E5E7EB'; // Grigio chiaro
 
-    // Classe per creare le linee ondulate
     class WaveLine {
-      x: number;
       y: number;
       amplitude: number;
       wavelength: number;
@@ -36,17 +40,19 @@ const WavesBackground: React.FC = () => {
       segmentLength: number;
 
       constructor(options: Partial<WaveLine>) {
-        this.x = 0;
         this.y = options.y || Math.random() * canvas.height;
-        this.amplitude = options.amplitude || (30 + Math.random() * 80);
-        this.wavelength = options.wavelength || (100 + Math.random() * 300);
+        // MODIFICA: Ampiezza ridotta per onde più piatte
+        this.amplitude = options.amplitude || (10 + Math.random() * 40);
+        this.wavelength = options.wavelength || (200 + Math.random() * 400);
         this.frequency = Math.PI * 2 / this.wavelength;
         this.phase = options.phase || Math.random() * Math.PI * 2;
-        this.lineWidth = options.lineWidth || (0.2 + Math.random() * 0.6);
-        this.speed = options.speed || (0.002 + Math.random() * 0.008);
-        this.opacity = options.opacity || (0.1 + Math.random() * 0.3);
+        // MODIFICA: Linee più sottili
+        this.lineWidth = options.lineWidth || (0.2 + Math.random() * 0.3);
+        this.speed = options.speed || (0.001 + Math.random() * 0.004);
+        // MODIFICA: Opacità più bassa per un effetto più leggero
+        this.opacity = options.opacity || (0.4 + Math.random() * 0.5);
         this.segments = [];
-        this.segmentLength = 2;
+        this.segmentLength = 5;
 
         for (let x = 0; x < canvas.width + this.segmentLength; x += this.segmentLength) {
           this.segments.push({
@@ -78,46 +84,15 @@ const WavesBackground: React.FC = () => {
       }
     }
 
-    // Crea i gruppi di onde
+    // MODIFICA: Meno onde per un effetto più pulito
     const waveGroups: WaveLine[] = [];
-    // Gruppo 1
-    for (let i = 0; i < 15; i++) {
+    const numWaves = 25; 
+    for (let i = 0; i < numWaves; i++) {
         waveGroups.push(new WaveLine({
-            y: canvas.height * 0.3 + i * 10,
-            amplitude: 40 + i * 2,
-            wavelength: 1200 + i * 10,
-            phase: i * 0.2,
-            lineWidth: 0.4,
-            speed: 0.002,
-            opacity: 0.15
-        }));
-    }
-    // Gruppo 2
-    for (let i = 0; i < 20; i++) {
-        waveGroups.push(new WaveLine({
-            y: canvas.height * 0.5 + i * 8,
-            amplitude: 35 - i * 0.5,
-            wavelength: 800 + i * 50,
-            phase: i * 0.1 + Math.PI,
-            lineWidth: 0.5,
-            speed: 0.003,
-            opacity: 0.25
-        }));
-    }
-    // Gruppo 3
-    for (let i = 0; i < 15; i++) {
-        waveGroups.push(new WaveLine({
-            y: canvas.height * 0.7 + i * 12,
-            amplitude: 30 + i * 1.5,
-            wavelength: 1000 - i * 20,
-            phase: i * 0.15 + Math.PI / 2,
-            lineWidth: 0.4,
-            speed: 0.0015,
-            opacity: 0.2
+            y: (canvas.height / numWaves) * i,
         }));
     }
 
-    // Funzione di animazione
     let animationFrameId: number;
     const animate = () => {
       if (!ctx || !canvas) return;
@@ -130,12 +105,12 @@ const WavesBackground: React.FC = () => {
     };
     animate();
 
-    // Pulisce l'animazione e l'event listener quando il componente viene smontato
     return () => {
       window.removeEventListener('resize', resizeCanvas);
+      resizeObserver.disconnect();
       cancelAnimationFrame(animationFrameId);
     };
-  }, []); // L'array vuoto assicura che l'effetto venga eseguito solo una volta
+  }, []);
 
   return <canvas id="wavesBg" ref={canvasRef} />;
 };
