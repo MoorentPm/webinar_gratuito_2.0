@@ -109,6 +109,53 @@
     transform: translateY(-5px);
   }
   
+  /* Mobile touch optimizations */
+  @media (max-width: 768px) {
+    .hover-lift:hover {
+      transform: none;
+    }
+    
+    .hover-lift:active {
+      transform: scale(0.95);
+      transition: transform 0.1s ease;
+    }
+    
+    /* Better touch targets */
+    .touch-manipulation {
+      touch-action: manipulation;
+      -webkit-tap-highlight-color: transparent;
+    }
+    
+    /* Prevent zoom on input focus */
+    input[type="text"], 
+    input[type="email"], 
+    input[type="tel"],
+    textarea, 
+    select {
+      font-size: 16px !important;
+    }
+    
+    /* Mobile-friendly spacing */
+    .mobile-padding {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+    
+    /* Better mobile video controls */
+    video {
+      width: 100%;
+      height: auto;
+      max-width: 100%;
+    }
+    
+    .video-container {
+      margin-left: -1rem;
+      margin-right: -1rem;
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+  }
+  
   .scroll-reveal {
     opacity: 0;
     transform: translateY(50px);
