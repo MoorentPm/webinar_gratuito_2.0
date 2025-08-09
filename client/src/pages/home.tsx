@@ -12,10 +12,10 @@ import {
   CheckCircle, 
   ExternalLink, 
   Menu, 
-  X, 
-  FileText, 
-  Calculator, 
-  MessageSquare, 
+  X,
+  FileText,
+  Calculator,
+  MessageSquare,
   Download,
   ChartLine,
   Building
@@ -28,7 +28,6 @@ import WavesBackground from "@/components/WavesBackground";
 
 export default function Home() {
   const observerRef = useRef<IntersectionObserver | null>(null);
-  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
@@ -54,25 +53,6 @@ export default function Home() {
       observerRef.current?.disconnect();
     };
   }, []);
-
-  useEffect(() => {
-    const videoElement = videoRef.current;
-    if (!videoElement) return;
-
-    const handlePlay = () => setIsVideoPlaying(true);
-    const handlePauseOrEnd = () => setIsVideoPlaying(false);
-
-    videoElement.addEventListener('play', handlePlay);
-    videoElement.addEventListener('pause', handlePauseOrEnd);
-    videoElement.addEventListener('ended', handlePauseOrEnd);
-
-    return () => {
-      videoElement.removeEventListener('play', handlePlay);
-      videoElement.removeEventListener('pause', handlePauseOrEnd);
-      videoElement.removeEventListener('ended', handlePauseOrEnd);
-    };
-  }, []);
-
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -230,7 +210,6 @@ export default function Home() {
                 <div className="video-container">
                   <video
                     ref={videoRef}
-                    id="main-video"
                     controls
                     poster="https://placehold.co/1280x720/1a1616/d6c4bf?text=Webinar+Premium"
                     className="rounded-2xl shadow-2xl"
@@ -239,9 +218,7 @@ export default function Home() {
                     Il tuo browser non supporta il tag video.
                   </video>
                 </div>
-                <div className={`absolute -bottom-12 sm:-bottom-8 left-0 right-0 mx-4 transition-all duration-500 ${
-                  isVideoPlaying ? 'opacity-0 translate-y-4 pointer-events-none' : 'opacity-100 translate-y-0'
-                }`}>
+                <div className="absolute -bottom-12 sm:-bottom-8 left-0 right-0 mx-4">
                   <div className="video-banner-glass rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-gray-100">
                     <div className="flex flex-col gap-2">
                       <div className="flex items-center space-x-3">
