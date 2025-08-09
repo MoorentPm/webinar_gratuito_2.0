@@ -10,11 +10,12 @@ import { Router } from "wouter";
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-      {/* MODIFICA: Aggiunto il prop 'base' al componente Router.
-        Questo dice a wouter di usare il percorso di base definito nella configurazione di Vite 
-        (nel tuo caso '/webinar_gratuito_2.0/'). 
-        'import.meta.env.BASE_URL' è una variabile speciale di Vite che contiene 
-        automaticamente il valore corretto.
+      {/* MODIFICA FINALE E CRUCIALE:
+        Aggiungiamo il componente <Router> di wouter e gli passiamo la prop 'base'.
+        'import.meta.env.BASE_URL' è una variabile speciale fornita da Vite che 
+        contiene il valore '/webinar_gratuito_2.0/' che abbiamo impostato nel file vite.config.ts.
+        Questo dice all'applicazione come interpretare gli URL sulla pagina pubblicata,
+        risolvendo il problema della schermata bianca.
       */}
       <Router base={import.meta.env.BASE_URL}>
         <App />
