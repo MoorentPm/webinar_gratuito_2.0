@@ -8,7 +8,6 @@ import WavesBackground from "@/components/WavesBackground";
 
 export default function Home() {
   const observerRef = useRef<IntersectionObserver | null>(null);
-  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   useEffect(() => {
@@ -31,33 +30,6 @@ export default function Home() {
 
     return () => {
       observerRef.current?.disconnect();
-    };
-  }, []);
-
-  useEffect(() => {
-    const tag = document.createElement('script');
-    tag.src = 'https://www.youtube.com/iframe_api';
-    const firstScriptTag = document.getElementsByTagName('script')[0];
-    firstScriptTag.parentNode?.insertBefore(tag, firstScriptTag);
-
-    (window as any).onYouTubeIframeAPIReady = () => {
-      new (window as any).YT.Player('youtube-player', {
-        events: {
-          onStateChange: (event: any) => {
-            if (event.data === 1) {
-              setIsVideoPlaying(true);
-            } else {
-              setIsVideoPlaying(false);
-            }
-          }
-        }
-      });
-    };
-
-    return () => {
-      if ((window as any).onYouTubeIframeAPIReady) {
-        delete (window as any).onYouTubeIframeAPIReady;
-      }
     };
   }, []);
 
@@ -97,9 +69,7 @@ export default function Home() {
   return (
     <div className="bg-background font-sans text-foreground antialiased overflow-x-hidden">
       {/* Navigation */}
-      <nav data-obstacle className={`fixed left-0 right-0 z-50 glass-effect border-b border-white/10 transition-all duration-500 ${
-        isVideoPlaying ? '-top-16 opacity-50' : 'top-0 opacity-100'
-      }`}>
+      <nav className={`fixed left-0 right-0 z-50 glass-effect border-b border-white/10 transition-all duration-500 top-0 opacity-100`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center">
@@ -215,51 +185,24 @@ export default function Home() {
                   Un webinar completo che ti guiderà attraverso le strategie più efficaci per trasformare la tua proprietà in una fonte di reddito costante e redditizia.
                 </p>
               </div>
-              <div data-obstacle className="relative hover-lift">
+              <div className="relative hover-lift">
                 <div className="video-container">
-                  <iframe
-                    src="https://www.youtube.com/embed/dQw4w9WgXcQ?modestbranding=1&rel=0&showinfo=0&enablejsapi=1"
-                    title="MoorentPM Webinar - Trasforma il Tuo Immobile in un Asset Redditizio"
-                    frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
+                  {/* MODIFICA: Sostituito iframe con tag video */}
+                  <video
+                    controls
+                    poster="https://placehold.co/1280x720/1a1616/d6c4bf?text=Webinar+Premium"
                     className="rounded-2xl shadow-2xl"
-                    id="youtube-player"
-                  />
-                </div>
-                <div className={`absolute -bottom-12 sm:-bottom-8 left-0 right-0 mx-4 transition-all duration-500 ${
-                  isVideoPlaying ? 'opacity-0 translate-y-4 pointer-events-none' : 'opacity-100 translate-y-0'
-                }`}>
-                  <div data-obstacle className="video-banner-glass rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-gray-100">
-                    <div className="flex flex-col gap-2">
-                      <div className="flex items-center space-x-3">
-                        <div className="w-10 h-10 bg-accent rounded-full flex items-center justify-center flex-shrink-0">
-                          <Play className="w-5 h-5 text-primary" />
-                        </div>
-                        <div className="flex-1">
-                          <h3 className="font-semibold text-base text-primary">Webinar Premium</h3>
-                          <p className="text-secondary text-sm">Durata: 60 minuti • Contenuto esclusivo</p>
-                        </div>
-                      </div>
-                      <div className="hidden sm:flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-6 text-xs sm:text-sm text-secondary pl-13 sm:pl-0 pt-2">
-                        <div className="flex items-center space-x-2">
-                          <Users className="w-4 h-4 flex-shrink-0" />
-                          <span>Proprietari HNWI</span>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                          <MapPin className="w-4 h-4 flex-shrink-0" />
-                          <span>Triveneto</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                  >
+                    <source src="/videos/webinar.mp4" type="video/mp4" />
+                    Il tuo browser non supporta il tag video.
+                  </video>
                 </div>
               </div>
             </div>
           </section>
 
           {/* Value Highlights */}
-          <section data-obstacle className="py-20 px-4 sm:px-6 lg:px-8 scroll-reveal">
+          <section className="py-20 px-4 sm:px-6 lg:px-8 scroll-reveal">
             <div className="max-w-6xl mx-auto">
               <div className="grid md:grid-cols-3 gap-8">
                 <div className="text-center hover-lift">
@@ -307,7 +250,7 @@ export default function Home() {
 
           {/* Newsletter Section */}
           <section id="newsletter" className="py-20 px-4 sm:px-6 lg:px-8 scroll-reveal">
-            <div data-obstacle className="max-w-4xl mx-auto">
+            <div className="max-w-4xl mx-auto">
               <div className="premium-gradient-dark rounded-3xl p-8 sm:p-12 lg:p-16 text-center">
                 <div className="mb-8">
                   <h2 className="text-3xl sm:text-4xl font-light mb-6">
@@ -360,7 +303,7 @@ export default function Home() {
 
           {/* Contact Section */}
           <section id="contatti" className="py-20 px-4 sm:px-6 lg:px-8 scroll-reveal">
-            <div data-obstacle className="max-w-4xl mx-auto text-center">
+            <div className="max-w-4xl mx-auto text-center">
               <div className="mb-16">
                 <h2 className="text-3xl sm:text-4xl font-light mb-6">
                   Vuoi Parlare <span className="font-semibold">Direttamente</span> con Noi?
@@ -414,7 +357,7 @@ export default function Home() {
       </div>
 
       {/* Footer */}
-      <footer data-obstacle className="bg-primary text-white py-16 px-4 sm:px-6 lg:px-8">
+      <footer className="bg-primary text-white py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
             <div className="md:col-span-2">
@@ -429,7 +372,6 @@ export default function Home() {
                 Ogni immobile ha una storia da raccontare, un potenziale inespresso che attende di essere svelato. Noi siamo i custodi di queste storie, gli architetti che trasformano spazi in esperienze memorabili e investimenti in successi tangibili.
               </p>
             </div>
-
             <div>
               <h4 className="font-semibold mb-4">Servizi</h4>
               <ul className="space-y-2 text-gray-300">
@@ -438,7 +380,6 @@ export default function Home() {
                 <li>Subaffitto</li>
               </ul>
             </div>
-
             <div>
               <h4 className="font-semibold mb-4">Contatti</h4>
               <ul className="space-y-2 text-gray-300">
