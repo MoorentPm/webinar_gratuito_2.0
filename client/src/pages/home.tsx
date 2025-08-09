@@ -10,6 +10,7 @@ export default function Home() {
   const observerRef = useRef<IntersectionObserver | null>(null);
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     observerRef.current = new IntersectionObserver(
@@ -35,7 +36,7 @@ export default function Home() {
   }, []);
 
   useEffect(() => {
-    const videoElement = document.getElementById('main-video') as HTMLVideoElement;
+    const videoElement = videoRef.current;
     if (!videoElement) return;
 
     const handlePlay = () => setIsVideoPlaying(true);
@@ -208,6 +209,7 @@ export default function Home() {
               <div className="relative hover-lift">
                 <div className="video-container">
                   <video
+                    ref={videoRef}
                     id="main-video"
                     controls
                     poster="https://placehold.co/1280x720/1a1616/d6c4bf?text=Webinar+Premium"
@@ -248,7 +250,7 @@ export default function Home() {
             </div>
           </section>
 
-          {/* MODIFICA: Sezione Risorse Gratuite */}
+          {/* Risorse Gratuite Section */}
           <section className="py-20 px-4 sm:px-6 lg:px-8 scroll-reveal">
             <div className="max-w-6xl mx-auto">
               <div className="text-center mb-16">
@@ -260,7 +262,6 @@ export default function Home() {
                   </p>
               </div>
               <div className="grid md:grid-cols-3 gap-8">
-                {/* Card 1: Guida Burocratica */}
                 <div className="text-center hover-lift p-8 rounded-2xl flex flex-col items-center" style={{ backgroundColor: 'rgba(255, 255, 255, 0.05)', backdropFilter: 'blur(10px)' }}>
                   <div className="w-16 h-16 bg-accent rounded-full flex items-center justify-center mb-6">
                     <FileText className="w-8 h-8 text-primary" />
@@ -270,7 +271,7 @@ export default function Home() {
                     Un PDF completo con tutti i passaggi e gli adempimenti per avviare la tua attività.
                   </p>
                   <a
-                    href="/downloads/guida-burocratica.pdf" // ASSICURATI CHE IL NOME DEL FILE SIA CORRETTO
+                    href="/downloads/guida-burocratica.pdf"
                     download
                     className="inline-flex items-center justify-center mt-auto px-6 py-3 bg-white text-black font-semibold rounded-full hover:bg-gray-200 transition-colors duration-300"
                   >
@@ -279,7 +280,6 @@ export default function Home() {
                   </a>
                 </div>
 
-                {/* Card 2: Calcolatore Prezzi */}
                 <div className="text-center hover-lift p-8 rounded-2xl flex flex-col items-center" style={{ backgroundColor: 'rgba(255, 255, 255, 0.05)', backdropFilter: 'blur(10px)' }}>
                   <div className="w-16 h-16 bg-accent rounded-full flex items-center justify-center mb-6">
                     <Calculator className="w-8 h-8 text-primary" />
@@ -289,7 +289,7 @@ export default function Home() {
                     Accedi al nostro strumento online per definire il prezzo di partenza ideale per il tuo annuncio.
                   </p>
                   <a
-                    href="https://moorentpm.github.io/calcolatore-prezzi-airbnb/" // INSERISCI QUI IL LINK CORRETTO
+                    href="https://www.airbnb.it/host/homes"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center justify-center mt-auto px-6 py-3 bg-white text-black font-semibold rounded-full hover:bg-gray-200 transition-colors duration-300"
@@ -299,7 +299,6 @@ export default function Home() {
                   </a>
                 </div>
 
-                {/* Card 3: Messaggi Preimpostati */}
                 <div className="text-center hover-lift p-8 rounded-2xl flex flex-col items-center" style={{ backgroundColor: 'rgba(255, 255, 255, 0.05)', backdropFilter: 'blur(10px)' }}>
                   <div className="w-16 h-16 bg-accent rounded-full flex items-center justify-center mb-6">
                     <MessageSquare className="w-8 h-8 text-primary" />
@@ -309,7 +308,7 @@ export default function Home() {
                     Un PDF con i messaggi preimpostati per una comunicazione impeccabile con i tuoi ospiti.
                   </p>
                   <a
-                    href="/downloads/messaggi-preimpostati.pdf" // ASSICURATI CHE IL NOME DEL FILE SIA CORRETTO
+                    href="/downloads/messaggi-preimpostati.pdf"
                     download
                     className="inline-flex items-center justify-center mt-auto px-6 py-3 bg-white text-black font-semibold rounded-full hover:bg-gray-200 transition-colors duration-300"
                   >
