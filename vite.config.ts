@@ -14,7 +14,9 @@ export default defineConfig({
   },
   root: path.resolve(import.meta.dirname, "client"),
   build: {
-    outDir: path.resolve(import.meta.dirname, "dist/public"),
+    // MODIFICA: Semplificato il percorso di output. 
+    // Ora i file andranno direttamente in 'dist' invece che in 'dist/public'.
+    outDir: path.resolve(import.meta.dirname, "dist"),
     emptyOutDir: true,
   },
   server: {

@@ -1,10 +1,36 @@
 import { useEffect, useRef, useState } from "react";
-import { Mail, Phone, Play, Crown, Users, MapPin, ArrowDown, ArrowRight, Inbox, CheckCircle, LoaderPinwheel, ExternalLink, Menu, X, FileText, Calculator, MessageSquare, Download } from "lucide-react";
+import { 
+  Mail, 
+  Phone, 
+  Play, 
+  Crown, 
+  Users, 
+  MapPin, 
+  ArrowDown, 
+  ArrowRight, 
+  Inbox, 
+  CheckCircle, 
+  ExternalLink, 
+  Menu, 
+  X, 
+  FileText, 
+  Calculator, 
+  MessageSquare, 
+  Download,
+  // MODIFICA: Aggiunte le icone mancanti
+  ChartLine,
+  Building
+} from "lucide-react";
 import { SiWhatsapp } from "react-icons/si";
 
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import WavesBackground from "@/components/WavesBackground";
+
+// MODIFICA: Importa i PDF come URL. Vite li sostituirà con i percorsi corretti.
+import guidaBurocraticaUrl from '/downloads/guida-burocratica.pdf?url';
+import messaggiPreimpostatiUrl from '/downloads/messaggi-preimpostati.pdf?url';
+
 
 export default function Home() {
   const observerRef = useRef<IntersectionObserver | null>(null);
@@ -271,7 +297,8 @@ export default function Home() {
                     Un PDF completo con tutti i passaggi e gli adempimenti per avviare la tua attività.
                   </p>
                   <a
-                    href="/downloads/guida-burocratica.pdf"
+                    // MODIFICA: Usa la variabile importata per l'URL del PDF
+                    href={guidaBurocraticaUrl}
                     download
                     className="inline-flex items-center justify-center mt-auto px-6 py-3 bg-white text-black font-semibold rounded-full hover:bg-gray-200 transition-colors duration-300"
                   >
@@ -308,7 +335,8 @@ export default function Home() {
                     Un PDF con i messaggi preimpostati per una comunicazione impeccabile con i tuoi ospiti.
                   </p>
                   <a
-                    href="/downloads/messaggi-preimpostati.pdf"
+                    // MODIFICA: Usa la variabile importata per l'URL del PDF
+                    href={messaggiPreimpostatiUrl}
                     download
                     className="inline-flex items-center justify-center mt-auto px-6 py-3 bg-white text-black font-semibold rounded-full hover:bg-gray-200 transition-colors duration-300"
                   >
