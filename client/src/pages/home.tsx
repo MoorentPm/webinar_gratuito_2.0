@@ -270,10 +270,7 @@ export default function Home() {
             </div>
           </section>
 
-          {/* MODIFICA: L'INTERA SEZIONE "RISORSE GRATUITE" È STATA COMMENTATA PER TEST.
-          */}
           {/* Risorse Gratuite Section */}
-          {/*
           <section className="py-20 px-4 sm:px-6 lg:px-8 scroll-reveal">
             <div className="max-w-6xl mx-auto">
               <div className="text-center mb-16">
@@ -342,7 +339,6 @@ export default function Home() {
               </div>
             </div>
           </section>
-          */}
 
           {/* Newsletter Section */}
           <section id="newsletter" className="py-20 px-4 sm:px-6 lg:px-8 scroll-reveal">
