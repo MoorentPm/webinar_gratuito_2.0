@@ -17,7 +17,6 @@ import {
   Calculator, 
   MessageSquare, 
   Download,
-  // MODIFICA: Aggiunte le icone mancanti
   ChartLine,
   Building
 } from "lucide-react";
@@ -27,10 +26,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import WavesBackground from "@/components/WavesBackground";
 
-// MODIFICA: Importa i PDF come URL. Vite li sostituirà con i percorsi corretti.
-import guidaBurocraticaUrl from '/downloads/guida-burocratica.pdf?url';
-import messaggiPreimpostatiUrl from '/downloads/messaggi-preimpostati.pdf?url';
-
+// MODIFICA: Rimossi gli import dei PDF per evitare l'errore in build.
+// I link ora usano percorsi diretti.
 
 export default function Home() {
   const observerRef = useRef<IntersectionObserver | null>(null);
@@ -297,8 +294,8 @@ export default function Home() {
                     Un PDF completo con tutti i passaggi e gli adempimenti per avviare la tua attività.
                   </p>
                   <a
-                    // MODIFICA: Usa la variabile importata per l'URL del PDF
-                    href={guidaBurocraticaUrl}
+                    // MODIFICA: Ripristinato il link diretto.
+                    href="/downloads/guida-burocratica.pdf"
                     download
                     className="inline-flex items-center justify-center mt-auto px-6 py-3 bg-white text-black font-semibold rounded-full hover:bg-gray-200 transition-colors duration-300"
                   >
@@ -335,8 +332,8 @@ export default function Home() {
                     Un PDF con i messaggi preimpostati per una comunicazione impeccabile con i tuoi ospiti.
                   </p>
                   <a
-                    // MODIFICA: Usa la variabile importata per l'URL del PDF
-                    href={messaggiPreimpostatiUrl}
+                    // MODIFICA: Ripristinato il link diretto.
+                    href="/downloads/messaggi-preimpostati.pdf"
                     download
                     className="inline-flex items-center justify-center mt-auto px-6 py-3 bg-white text-black font-semibold rounded-full hover:bg-gray-200 transition-colors duration-300"
                   >
