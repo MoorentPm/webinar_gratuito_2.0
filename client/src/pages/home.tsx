@@ -26,9 +26,6 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import WavesBackground from "@/components/WavesBackground";
 
-// MODIFICA: Rimossi gli import dei PDF per evitare l'errore in build.
-// I link ora usano percorsi diretti.
-
 export default function Home() {
   const observerRef = useRef<IntersectionObserver | null>(null);
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
@@ -238,7 +235,8 @@ export default function Home() {
                     poster="https://placehold.co/1280x720/1a1616/d6c4bf?text=Webinar+Premium"
                     className="rounded-2xl shadow-2xl"
                   >
-                    <source src="/videos/webinar.mp4" type="video/mp4" />
+                    {/* MODIFICA: Il percorso ora è relativo */}
+                    <source src="videos/webinar.mp4" type="video/mp4" />
                     Il tuo browser non supporta il tag video.
                   </video>
                 </div>
@@ -294,8 +292,7 @@ export default function Home() {
                     Un PDF completo con tutti i passaggi e gli adempimenti per avviare la tua attività.
                   </p>
                   <a
-                    // MODIFICA: Ripristinato il link diretto.
-                    href="/downloads/guida-burocratica.pdf"
+                    href="downloads/guida-burocratica.pdf"
                     download
                     className="inline-flex items-center justify-center mt-auto px-6 py-3 bg-white text-black font-semibold rounded-full hover:bg-gray-200 transition-colors duration-300"
                   >
@@ -332,8 +329,7 @@ export default function Home() {
                     Un PDF con i messaggi preimpostati per una comunicazione impeccabile con i tuoi ospiti.
                   </p>
                   <a
-                    // MODIFICA: Ripristinato il link diretto.
-                    href="/downloads/messaggi-preimpostati.pdf"
+                    href="downloads/messaggi-preimpostati.pdf"
                     download
                     className="inline-flex items-center justify-center mt-auto px-6 py-3 bg-white text-black font-semibold rounded-full hover:bg-gray-200 transition-colors duration-300"
                   >

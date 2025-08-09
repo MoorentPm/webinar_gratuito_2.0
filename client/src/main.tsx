@@ -10,13 +10,8 @@ import { Router } from "wouter";
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-      {/* MODIFICA FINALE E CRUCIALE:
-        Aggiungiamo il componente <Router> di wouter e gli passiamo la prop 'base'.
-        'import.meta.env.BASE_URL' è una variabile speciale fornita da Vite che 
-        contiene il valore '/webinar_gratuito_2.0/' che abbiamo impostato nel file vite.config.ts.
-        Questo dice all'applicazione come interpretare gli URL sulla pagina pubblicata,
-        risolvendo il problema della schermata bianca.
-      */}
+      {/* MODIFICA: Questa configurazione del Router è essenziale per far funzionare
+          il sito su GitHub Pages in una sottocartella. */}
       <Router base={import.meta.env.BASE_URL}>
         <App />
       </Router>
