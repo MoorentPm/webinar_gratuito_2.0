@@ -235,7 +235,6 @@ export default function Home() {
                     poster="https://placehold.co/1280x720/1a1616/d6c4bf?text=Webinar+Premium"
                     className="rounded-2xl shadow-2xl"
                   >
-                    {/* MODIFICA: Corretto il percorso del video rendendolo relativo */}
                     <source src="videos/webinar.mp4" type="video/mp4" />
                     Il tuo browser non supporta il tag video.
                   </video>

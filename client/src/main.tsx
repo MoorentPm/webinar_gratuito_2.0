@@ -5,13 +5,14 @@ import "./index.css";
 import { QueryClientProvider } from "@tanstack/react-query";
 import { queryClient } from "./lib/queryClient.ts";
 import { Toaster } from "./components/ui/toaster.tsx";
-import { Router } from "wouter"; // MODIFICA: Importa il Router
+// MODIFICA: Importa il componente Router
+import { Router } from "wouter";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <QueryClientProvider client={queryClient}>
-      {/* MODIFICA: Aggiunto il Router con il percorso di base.
-          Questa è la correzione fondamentale per la pagina bianca. */}
+      {/* MODIFICA: Avvolge l'intera App nel Router e imposta il "base path".
+          Questa è la correzione essenziale per far funzionare il sito su GitHub Pages. */}
       <Router base={import.meta.env.BASE_URL}>
         <App />
       </Router>
