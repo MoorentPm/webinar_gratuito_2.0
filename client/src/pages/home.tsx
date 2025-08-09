@@ -8,7 +8,10 @@ import WavesBackground from "@/components/WavesBackground";
 
 export default function Home() {
   const observerRef = useRef<IntersectionObserver | null>(null);
+  // MODIFICA: Riattivato lo stato per controllare la riproduzione del video
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     observerRef.current = new IntersectionObserver(
@@ -32,6 +35,26 @@ export default function Home() {
       observerRef.current?.disconnect();
     };
   }, []);
+
+  // MODIFICA: Aggiunto useEffect per gestire gli eventi del player video HTML5
+  useEffect(() => {
+    const videoElement = videoRef.current;
+    if (!videoElement) return;
+
+    const handlePlay = () => setIsVideoPlaying(true);
+    const handlePauseOrEnd = () => setIsVideoPlaying(false);
+
+    videoElement.addEventListener('play', handlePlay);
+    videoElement.addEventListener('pause', handlePauseOrEnd);
+    videoElement.addEventListener('ended', handlePauseOrEnd);
+
+    return () => {
+      videoElement.removeEventListener('play', handlePlay);
+      videoElement.removeEventListener('pause', handlePauseOrEnd);
+      videoElement.removeEventListener('ended', handlePauseOrEnd);
+    };
+  }, []);
+
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -146,7 +169,7 @@ export default function Home() {
             </h1>
             <p className="text-lg sm:text-xl md:text-2xl text-gray-300 font-light max-w-3xl mx-auto leading-relaxed px-4">
               Scopri le strategie premium per massimizzare i rendimenti degli affitti brevi nel Triveneto.{" "}
-              <span className="text-white font-medium">60 minuti di contenuto esclusivo</span> per proprietari immobiliari di alto valore.
+              <span className="text-white font-medium">20 minuti di contenuto esclusivo</span> per proprietari immobiliari di alto valore.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4 pt-8">
               <div className="flex items-center space-x-3 text-gray-300">
@@ -187,8 +210,8 @@ export default function Home() {
               </div>
               <div className="relative hover-lift">
                 <div className="video-container">
-                  {/* MODIFICA: Sostituito iframe con tag video */}
                   <video
+                    ref={videoRef} // Aggiunto ref per controllare il video
                     controls
                     poster="https://placehold.co/1280x720/1a1616/d6c4bf?text=Webinar+Premium"
                     className="rounded-2xl shadow-2xl"
@@ -196,6 +219,34 @@ export default function Home() {
                     <source src="/videos/webinar.mp4" type="video/mp4" />
                     Il tuo browser non supporta il tag video.
                   </video>
+                </div>
+                {/* MODIFICA: Ripristinato il banner con la logica per nasconderlo */}
+                <div className={`absolute -bottom-12 sm:-bottom-8 left-0 right-0 mx-4 transition-all duration-500 ${
+                  isVideoPlaying ? 'opacity-0 translate-y-4 pointer-events-none' : 'opacity-100 translate-y-0'
+                }`}>
+                  <div className="video-banner-glass rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-gray-100">
+                    <div className="flex flex-col gap-2">
+                      <div className="flex items-center space-x-3">
+                        <div className="w-10 h-10 bg-accent rounded-full flex items-center justify-center flex-shrink-0">
+                          <Play className="w-5 h-5 text-primary" />
+                        </div>
+                        <div className="flex-1">
+                          <h3 className="font-semibold text-base text-primary">Webinar Premium</h3>
+                          <p className="text-secondary text-sm">Durata: 20 minuti • Contenuto esclusivo</p>
+                        </div>
+                      </div>
+                      <div className="hidden sm:flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-6 text-xs sm:text-sm text-secondary pl-13 sm:pl-0 pt-2">
+                        <div className="flex items-center space-x-2">
+                          <Users className="w-4 h-4 flex-shrink-0" />
+                          <span>Proprietari HNWI</span>
+                        </div>
+                        <div className="flex items-center space-x-2">
+                          <MapPin className="w-4 h-4 flex-shrink-0" />
+                          <span>Triveneto</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
