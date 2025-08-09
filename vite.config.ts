@@ -12,13 +12,13 @@ export default defineConfig({
       // Questo alias era già corretto
       "@": path.resolve(import.meta.dirname, "client", "src"),
       // MODIFICA: Aggiunto l'alias mancante per la cartella "shared".
-      // Questo risolverà l'errore di build.
-      "@shared": path.resolve(import.meta.dirname, "shared"),
+      // Questo risolverà l'errore di build che hai visto.
+      "@shared": path.resolve(import.meta.dirname, "..", "shared"),
     },
   },
   root: path.resolve(import.meta.dirname, "client"),
   build: {
-    outDir: path.resolve(import.meta.dirname, "dist"),
+    outDir: path.resolve(import.meta.dirname, "..", "dist"),
     emptyOutDir: true,
   },
   server: {
