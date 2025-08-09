@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { Mail, Phone, MessageCircle, Play, Crown, Users, MapPin, Check, ChartLine, Building, ArrowDown, ArrowRight, Inbox, CheckCircle, LoaderPinwheel, ExternalLink, Menu, X } from "lucide-react";
+import { Mail, Phone, Play, Crown, Users, MapPin, ArrowDown, ArrowRight, Inbox, CheckCircle, LoaderPinwheel, ExternalLink, Menu, X, FileText, Calculator, MessageSquare, Download } from "lucide-react";
 import { SiWhatsapp } from "react-icons/si";
 
 import { Button } from "@/components/ui/button";
@@ -8,10 +8,8 @@ import WavesBackground from "@/components/WavesBackground";
 
 export default function Home() {
   const observerRef = useRef<IntersectionObserver | null>(null);
-  // MODIFICA: Riattivato lo stato per controllare la riproduzione del video
   const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     observerRef.current = new IntersectionObserver(
@@ -36,9 +34,8 @@ export default function Home() {
     };
   }, []);
 
-  // MODIFICA: Aggiunto useEffect per gestire gli eventi del player video HTML5
   useEffect(() => {
-    const videoElement = videoRef.current;
+    const videoElement = document.getElementById('main-video') as HTMLVideoElement;
     if (!videoElement) return;
 
     const handlePlay = () => setIsVideoPlaying(true);
@@ -211,7 +208,7 @@ export default function Home() {
               <div className="relative hover-lift">
                 <div className="video-container">
                   <video
-                    ref={videoRef} // Aggiunto ref per controllare il video
+                    id="main-video"
                     controls
                     poster="https://placehold.co/1280x720/1a1616/d6c4bf?text=Webinar+Premium"
                     className="rounded-2xl shadow-2xl"
@@ -220,7 +217,6 @@ export default function Home() {
                     Il tuo browser non supporta il tag video.
                   </video>
                 </div>
-                {/* MODIFICA: Ripristinato il banner con la logica per nasconderlo */}
                 <div className={`absolute -bottom-12 sm:-bottom-8 left-0 right-0 mx-4 transition-all duration-500 ${
                   isVideoPlaying ? 'opacity-0 translate-y-4 pointer-events-none' : 'opacity-100 translate-y-0'
                 }`}>
@@ -252,48 +248,74 @@ export default function Home() {
             </div>
           </section>
 
-          {/* Value Highlights */}
+          {/* MODIFICA: Sezione Risorse Gratuite */}
           <section className="py-20 px-4 sm:px-6 lg:px-8 scroll-reveal">
             <div className="max-w-6xl mx-auto">
+              <div className="text-center mb-16">
+                  <h2 className="text-3xl sm:text-4xl lg:text-5xl font-light mb-6">
+                    Risorse <span className="font-semibold">Esclusive</span> per Te
+                  </h2>
+                  <p className="text-xl text-gray-300 font-light max-w-3xl mx-auto">
+                    Accedi a strumenti e guide professionali per ottimizzare da subito la gestione del tuo immobile.
+                  </p>
+              </div>
               <div className="grid md:grid-cols-3 gap-8">
-                <div className="text-center hover-lift">
-                  <div className="mb-6">
-                    <img
-                      src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600"
-                      alt="Modern property management consultation with professional team"
-                      className="w-full h-48 object-cover rounded-2xl shadow-lg"
-                    />
+                {/* Card 1: Guida Burocratica */}
+                <div className="text-center hover-lift p-8 rounded-2xl flex flex-col items-center" style={{ backgroundColor: 'rgba(255, 255, 255, 0.05)', backdropFilter: 'blur(10px)' }}>
+                  <div className="w-16 h-16 bg-accent rounded-full flex items-center justify-center mb-6">
+                    <FileText className="w-8 h-8 text-primary" />
                   </div>
-                  <h3 className="text-xl font-semibold mb-3">Strategie Innovative</h3>
-                  <p className="text-gray-300 leading-relaxed">
-                    Metodologie avanzate per ottimizzare ogni aspetto della gestione immobiliare
+                  <h3 className="text-xl font-semibold mb-3">Guida Burocratica</h3>
+                  <p className="text-gray-300 leading-relaxed flex-grow mb-6">
+                    Un PDF completo con tutti i passaggi e gli adempimenti per avviare la tua attività.
                   </p>
+                  <a
+                    href="/downloads/guida-burocratica.pdf" // ASSICURATI CHE IL NOME DEL FILE SIA CORRETTO
+                    download
+                    className="inline-flex items-center justify-center mt-auto px-6 py-3 bg-white text-black font-semibold rounded-full hover:bg-gray-200 transition-colors duration-300"
+                  >
+                    <Download className="w-4 h-4 mr-2" />
+                    Scarica Ora
+                  </a>
                 </div>
-                <div className="text-center hover-lift">
-                  <div className="mb-6">
-                    <img
-                      src="https://images.unsplash.com/photo-1521737604893-d14cc237f11d?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600"
-                      alt="Premium business consultation in luxury office setting"
-                      className="w-full h-48 object-cover rounded-2xl shadow-lg"
-                    />
+
+                {/* Card 2: Calcolatore Prezzi */}
+                <div className="text-center hover-lift p-8 rounded-2xl flex flex-col items-center" style={{ backgroundColor: 'rgba(255, 255, 255, 0.05)', backdropFilter: 'blur(10px)' }}>
+                  <div className="w-16 h-16 bg-accent rounded-full flex items-center justify-center mb-6">
+                    <Calculator className="w-8 h-8 text-primary" />
                   </div>
-                  <h3 className="text-xl font-semibold mb-3">Consulenza Premium</h3>
-                  <p className="text-gray-300 leading-relaxed">
-                    Approccio personalizzato per massimizzare il ROI delle tue proprietà di lusso
+                  <h3 className="text-xl font-semibold mb-3">Calcolatore Prezzi Airbnb</h3>
+                  <p className="text-gray-300 leading-relaxed flex-grow mb-6">
+                    Accedi al nostro strumento online per definire il prezzo di partenza ideale per il tuo annuncio.
                   </p>
+                  <a
+                    href="https://moorentpm.github.io/calcolatore-prezzi-airbnb/" // INSERISCI QUI IL LINK CORRETTO
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center justify-center mt-auto px-6 py-3 bg-white text-black font-semibold rounded-full hover:bg-gray-200 transition-colors duration-300"
+                  >
+                    <ExternalLink className="w-4 h-4 mr-2" />
+                    Accedi allo Strumento
+                  </a>
                 </div>
-                <div className="text-center hover-lift">
-                  <div className="mb-6">
-                    <img
-                      src="https://images.unsplash.com/photo-1560520653-9e0e4c89eb11?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=800&h=600"
-                      alt="Luxury real estate portfolio analysis with financial charts"
-                      className="w-full h-48 object-cover rounded-2xl shadow-lg"
-                    />
+
+                {/* Card 3: Messaggi Preimpostati */}
+                <div className="text-center hover-lift p-8 rounded-2xl flex flex-col items-center" style={{ backgroundColor: 'rgba(255, 255, 255, 0.05)', backdropFilter: 'blur(10px)' }}>
+                  <div className="w-16 h-16 bg-accent rounded-full flex items-center justify-center mb-6">
+                    <MessageSquare className="w-8 h-8 text-primary" />
                   </div>
-                  <h3 className="text-xl font-semibold mb-3">Risultati Misurabili</h3>
-                  <p className="text-gray-300 leading-relaxed">
-                    Monitoraggio costante delle performance e ottimizzazione continua dei rendimenti
+                  <h3 className="text-xl font-semibold mb-3">Messaggi per Ospiti</h3>
+                  <p className="text-gray-300 leading-relaxed flex-grow mb-6">
+                    Un PDF con i messaggi preimpostati per una comunicazione impeccabile con i tuoi ospiti.
                   </p>
+                  <a
+                    href="/downloads/messaggi-preimpostati.pdf" // ASSICURATI CHE IL NOME DEL FILE SIA CORRETTO
+                    download
+                    className="inline-flex items-center justify-center mt-auto px-6 py-3 bg-white text-black font-semibold rounded-full hover:bg-gray-200 transition-colors duration-300"
+                  >
+                    <Download className="w-4 h-4 mr-2" />
+                    Scarica Ora
+                  </a>
                 </div>
               </div>
             </div>
