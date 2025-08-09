@@ -235,7 +235,6 @@ export default function Home() {
                     poster="https://placehold.co/1280x720/1a1616/d6c4bf?text=Webinar+Premium"
                     className="rounded-2xl shadow-2xl"
                   >
-                    {/* MODIFICA: Il percorso ora è relativo */}
                     <source src="videos/webinar.mp4" type="video/mp4" />
                     Il tuo browser non supporta il tag video.
                   </video>
@@ -271,7 +270,10 @@ export default function Home() {
             </div>
           </section>
 
+          {/* MODIFICA: L'INTERA SEZIONE "RISORSE GRATUITE" È STATA COMMENTATA PER TEST.
+          */}
           {/* Risorse Gratuite Section */}
+          {/*
           <section className="py-20 px-4 sm:px-6 lg:px-8 scroll-reveal">
             <div className="max-w-6xl mx-auto">
               <div className="text-center mb-16">
@@ -340,6 +342,7 @@ export default function Home() {
               </div>
             </div>
           </section>
+          */}
 
           {/* Newsletter Section */}
           <section id="newsletter" className="py-20 px-4 sm:px-6 lg:px-8 scroll-reveal">
