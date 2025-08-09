@@ -43,36 +43,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
     }
   });
 
-  // Admin endpoints
-  app.get("/api/admin/stats", async (req, res) => {
-    try {
-      const stats = await storage.getStats();
-      res.json(stats);
-    } catch (error) {
-      console.error("Stats error:", error);
-      res.status(500).json({ message: "Failed to get stats" });
-    }
-  });
 
-  app.get("/api/admin/messages", async (req, res) => {
-    try {
-      const messages = await storage.getContactMessages();
-      res.json(messages);
-    } catch (error) {
-      console.error("Messages error:", error);
-      res.status(500).json({ message: "Failed to get messages" });
-    }
-  });
-
-  app.get("/api/admin/subscribers", async (req, res) => {
-    try {
-      const subscribers = await storage.getNewsletterSubscribers();
-      res.json(subscribers);
-    } catch (error) {
-      console.error("Subscribers error:", error);
-      res.status(500).json({ message: "Failed to get subscribers" });
-    }
-  });
 
   const httpServer = createServer(app);
   return httpServer;

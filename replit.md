@@ -1,6 +1,6 @@
 # Overview
 
-This is a webinar landing page application built with React and Express.js. The application is designed to capture leads for a premium real estate webinar focused on short-term rental strategies in the Triveneto region of Italy. It features a modern, responsive design with animated backgrounds, video integration, and comprehensive form handling for newsletter subscriptions and contact inquiries. The application includes an admin dashboard for managing leads and viewing analytics.
+This is a webinar landing page application built with React and Express.js. The application is designed to capture leads for a premium real estate webinar focused on short-term rental strategies in the Triveneto region of Italy. It features a modern, responsive design with animated backgrounds, video integration, and form handling for newsletter subscriptions and contact inquiries.
 
 # User Preferences
 
@@ -19,13 +19,12 @@ Preferred communication style: Simple, everyday language.
 
 ## Backend Architecture
 - **Express.js** server with TypeScript
-- **RESTful API** endpoints for newsletter subscriptions, contact forms, and admin operations
+- **RESTful API** endpoints for newsletter subscriptions and contact forms
 - **In-memory storage** implementation with interface for future database integration
-- **Session-based authentication** for admin access
 - **Development middleware** for request logging and error handling
 
 ## Component Structure
-- **Page-based routing** with Home, Admin Login, Admin Dashboard, and 404 pages
+- **Single page application** with Home page and 404 fallback
 - **Reusable UI components** from shadcn/ui library
 - **Form handling** with React Hook Form and Zod validation
 - **Toast notifications** for user feedback
@@ -35,7 +34,6 @@ Preferred communication style: Simple, everyday language.
 - **Type-safe interfaces** for NewsletterSubscriber and ContactMessage entities
 - **Zod schemas** for runtime validation of form inputs
 - **Storage abstraction layer** allowing easy migration from memory to database
-- **Demo data seeding** for development and testing purposes
 
 ## Development Tools
 - **ESBuild** for production server bundling
@@ -43,11 +41,7 @@ Preferred communication style: Simple, everyday language.
 - **Path aliases** for clean import statements
 - **Hot module replacement** in development via Vite
 
-## Authentication System
-- **Simple credential-based login** for admin access
-- **In-memory session management** for demonstration purposes
-- **Protected routes** with authentication checks
-- **Logout functionality** with session cleanup
+
 
 # External Dependencies
 
