@@ -25,11 +25,20 @@ import { SiWhatsapp } from "react-icons/si";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import WavesBackground from "@/components/WavesBackground";
-// --- MODIFICA: Rimosso l'import del logo locale ---
 
 export default function Home() {
   const observerRef = useRef<IntersectionObserver | null>(null);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  
+  // --- FUNZIONALITÀ BANNER: Stato per controllare la riproduzione del video ---
+  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
+
+  // --- Link del tuo video YouTube ---
+  const youtubeEmbedUrl = "https://www.youtube.com/embed/V7qJSDNYrq4";
+  
+  // Estrae l'ID del video dall'URL per l'anteprima
+  const videoId = youtubeEmbedUrl.split('/').pop()?.split('?')[0] || '';
+  const thumbnailUrl = `https://img.youtube.com/vi/${videoId}/maxresdefault.jpg`;
 
   useEffect(() => {
     document.body.classList.add('dark');
@@ -101,7 +110,6 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center">
-              {/* --- MODIFICA: Ripristinato link Imgur --- */}
               <img 
                 src="https://i.imgur.com/aazwI7x.png"
                 alt="MoorentPM Logo" 
@@ -225,15 +233,38 @@ export default function Home() {
                   Un webinar completo che ti guiderà attraverso le strategie più efficaci per trasformare la tua proprietà in una fonte di reddito costante e redditizia.
                 </p>
               </div>
-              <div className="w-full aspect-video rounded-xl sm:rounded-2xl shadow-2xl overflow-hidden hover-lift">
-                <iframe
-                  className="w-full h-full"
-                  src="https://www.youtube.com/embed/V7qJSDNYrq4?si=5Ln33zIy3vHGhrep"
-                  title="Webinar Premium MoorentPM"
-                  frameBorder="0"
-                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                  allowFullScreen
-                ></iframe>
+              
+              {/* --- SEZIONE VIDEO INTERATTIVA CON BANNER --- */}
+              <div className="w-full aspect-video rounded-xl sm:rounded-2xl shadow-2xl overflow-hidden hover-lift relative bg-black">
+                {!isVideoPlaying ? (
+                  <>
+                    <img 
+                      src={thumbnailUrl} 
+                      alt="Anteprima Webinar"
+                      className="w-full h-full object-cover"
+                      onError={(e) => (e.currentTarget.style.display = 'none')}
+                    />
+                    <div className="absolute inset-0 flex flex-col items-center justify-center text-center p-4 glass-effect-dark">
+                      <button
+                        onClick={() => setIsVideoPlaying(true)}
+                        aria-label="Play Webinar"
+                        className="group flex items-center justify-center w-20 h-20 bg-white/20 rounded-full backdrop-blur-sm border border-white/30 hover:bg-white/30 transition-all duration-300"
+                      >
+                        <Play className="w-10 h-10 text-white transform transition-transform duration-300 group-hover:scale-110 ml-2" />
+                      </button>
+                      <p className="text-lg text-white font-semibold mt-6">Guarda il Webinar Esclusivo</p>
+                    </div>
+                  </>
+                ) : (
+                  <iframe
+                    className="w-full h-full"
+                    src={`${youtubeEmbedUrl}?autoplay=1`}
+                    title="Webinar Premium MoorentPM"
+                    frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                  ></iframe>
+                )}
               </div>
             </div>
           </section>
@@ -430,7 +461,6 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div className="md:col-span-2">
               <div className="flex items-center space-x-3 mb-6">
-                {/* --- MODIFICA: Ripristinato link Imgur --- */}
                 <img 
                   src="https://i.imgur.com/aazwI7x.png"
                   alt="MoorentPM Logo" 
