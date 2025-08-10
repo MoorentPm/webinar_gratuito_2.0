@@ -21,7 +21,10 @@ const WavesBackground: React.FC = () => {
     const lineColor = '#d6c4bf';
     const backgroundColor = '#1a1616'; // Colore di sfondo scuro
 
+    // --- INIZIO CODICE CORRETTO ---
     class WaveLine {
+      private canvas: HTMLCanvasElement;
+      private ctx: CanvasRenderingContext2D;
       y: number;
       amplitude: number;
       wavelength: number;
@@ -33,30 +36,42 @@ const WavesBackground: React.FC = () => {
       segments: { x: number; y: number }[];
       segmentLength: number;
 
-      constructor(options: {
-        y?: number;
-        amplitude?: number;
-        wavelength?: number;
-        phase?: number;
-        lineWidth?: number;
-        speed?: number;
-        opacity?: number;
-      }) {
-        this.y = options.y || Math.random() * canvas.height;
-        this.amplitude = options.amplitude || (30 + Math.random() * 80);
-        this.wavelength = options.wavelength || (100 + Math.random() * 300);
-        this.frequency = Math.PI * 2 / this.wavelength;
+      constructor(
+        canvas: HTMLCanvasElement,
+        ctx: CanvasRenderingContext2D,
+        options: {
+          y?: number;
+          amplitude?: number;
+          wavelength?: number;
+          phase?: number;
+          lineWidth?: number;
+          speed?: number;
+          opacity?: number;
+        }
+      ) {
+        this.canvas = canvas;
+        this.ctx = ctx;
+        this.y = options.y || Math.random() * this.canvas.height;
+        this.amplitude = options.amplitude || 30 + Math.random() * 80;
+        this.wavelength = options.wavelength || 100 + Math.random() * 300;
+        this.frequency = (Math.PI * 2) / this.wavelength;
         this.phase = options.phase || Math.random() * Math.PI * 2;
-        this.lineWidth = options.lineWidth || (0.2 + Math.random() * 0.6);
-        this.speed = options.speed || (0.002 + Math.random() * 0.008);
-        this.opacity = options.opacity || (0.1 + Math.random() * 0.3);
+        this.lineWidth = options.lineWidth || 0.2 + Math.random() * 0.6;
+        this.speed = options.speed || 0.002 + Math.random() * 0.008;
+        this.opacity = options.opacity || 0.1 + Math.random() * 0.3;
         this.segments = [];
         this.segmentLength = 2;
 
-        for (let x = 0; x < canvas.width + this.segmentLength; x += this.segmentLength) {
+        for (
+          let x = 0;
+          x < this.canvas.width + this.segmentLength;
+          x += this.segmentLength
+        ) {
           this.segments.push({
             x: x,
-            y: this.y + Math.sin(this.frequency * x + this.phase) * this.amplitude
+            y:
+              this.y +
+              Math.sin(this.frequency * x + this.phase) * this.amplitude,
           });
         }
       }
@@ -64,82 +79,90 @@ const WavesBackground: React.FC = () => {
       update() {
         this.phase += this.speed;
         for (let i = 0; i < this.segments.length; i++) {
-          this.segments[i].y = this.y + Math.sin(this.frequency * this.segments[i].x + this.phase) * this.amplitude;
+          this.segments[i].y =
+            this.y +
+            Math.sin(this.frequency * this.segments[i].x + this.phase) *
+              this.amplitude;
         }
       }
 
       draw() {
-        if (!ctx) return;
-        ctx.beginPath();
-        ctx.strokeStyle = lineColor;
-        ctx.lineWidth = this.lineWidth;
-        ctx.globalAlpha = this.opacity;
-        ctx.moveTo(this.segments[0].x, this.segments[0].y);
+        this.ctx.beginPath();
+        this.ctx.strokeStyle = lineColor;
+        this.ctx.lineWidth = this.lineWidth;
+        this.ctx.globalAlpha = this.opacity;
+        this.ctx.moveTo(this.segments[0].x, this.segments[0].y);
         for (let i = 1; i < this.segments.length; i++) {
-          ctx.lineTo(this.segments[i].x, this.segments[i].y);
+          this.ctx.lineTo(this.segments[i].x, this.segments[i].y);
         }
-        ctx.stroke();
-        ctx.globalAlpha = 1;
+        this.ctx.stroke();
+        this.ctx.globalAlpha = 1;
       }
     }
 
     const waveGroups: WaveLine[] = [];
-    
+
     // Gruppo 1
     for (let i = 0; i < 15; i++) {
-        waveGroups.push(new WaveLine({
-            y: canvas.height * 0.3 + i * 10,
-            amplitude: 40 + i * 2,
-            wavelength: 1200 + i * 10,
-            phase: i * 0.2,
-            lineWidth: 0.4,
-            speed: 0.002,
-            opacity: 0.15
-        }));
+      waveGroups.push(
+        new WaveLine(canvas, ctx, { // Passa canvas e ctx
+          y: canvas.height * 0.3 + i * 10,
+          amplitude: 40 + i * 2,
+          wavelength: 1200 + i * 10,
+          phase: i * 0.2,
+          lineWidth: 0.4,
+          speed: 0.002,
+          opacity: 0.15,
+        })
+      );
     }
-    
+
     // Gruppo 2
     for (let i = 0; i < 20; i++) {
-        waveGroups.push(new WaveLine({
-            y: canvas.height * 0.5 + i * 8,
-            amplitude: 35 - i * 0.5,
-            wavelength: 800 + i * 50,
-            phase: i * 0.1 + Math.PI,
-            lineWidth: 0.5,
-            speed: 0.003,
-            opacity: 0.25
-        }));
+      waveGroups.push(
+        new WaveLine(canvas, ctx, { // Passa canvas e ctx
+          y: canvas.height * 0.5 + i * 8,
+          amplitude: 35 - i * 0.5,
+          wavelength: 800 + i * 50,
+          phase: i * 0.1 + Math.PI,
+          lineWidth: 0.5,
+          speed: 0.003,
+          opacity: 0.25,
+        })
+      );
     }
-    
+
     // Gruppo 3
     for (let i = 0; i < 15; i++) {
-        waveGroups.push(new WaveLine({
-            y: canvas.height * 0.7 + i * 12,
-            amplitude: 30 + i * 1.5,
-            wavelength: 1000 - i * 20,
-            phase: i * 0.15 + Math.PI / 2,
-            lineWidth: 0.4,
-            speed: 0.0015,
-            opacity: 0.2
-        }));
+      waveGroups.push(
+        new WaveLine(canvas, ctx, { // Passa canvas e ctx
+          y: canvas.height * 0.7 + i * 12,
+          amplitude: 30 + i * 1.5,
+          wavelength: 1000 - i * 20,
+          phase: i * 0.15 + Math.PI / 2,
+          lineWidth: 0.4,
+          speed: 0.0015,
+          opacity: 0.2,
+        })
+      );
     }
+    // --- FINE CODICE CORRETTO ---
 
     let animationFrameId: number;
     const animate = () => {
       if (!ctx || !canvas) return;
-      
-      // MODIFICA: Disegna il colore di sfondo prima di disegnare le onde
+
       ctx.fillStyle = backgroundColor;
       ctx.fillRect(0, 0, canvas.width, canvas.height);
-      
-      waveGroups.forEach(wave => {
+
+      waveGroups.forEach((wave) => {
         wave.update();
         wave.draw();
       });
-      
+
       animationFrameId = requestAnimationFrame(animate);
     };
-    
+
     animate();
 
     return () => {
@@ -148,12 +171,11 @@ const WavesBackground: React.FC = () => {
     };
   }, []);
 
-  // Stile per posizionare il canvas come sfondo fisso
   const canvasStyle: React.CSSProperties = {
     position: 'fixed',
     top: 0,
     left: 0,
-    zIndex: -1, // Messo dietro a tutto il resto
+    zIndex: -1,
     pointerEvents: 'none',
   };
 

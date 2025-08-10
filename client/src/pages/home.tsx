@@ -25,6 +25,7 @@ import { SiWhatsapp } from "react-icons/si";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import WavesBackground from "@/components/WavesBackground";
+// --- MODIFICA: Rimosso l'import del logo locale ---
 
 export default function Home() {
   const observerRef = useRef<IntersectionObserver | null>(null);
@@ -100,8 +101,9 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center">
+              {/* --- MODIFICA: Ripristinato link Imgur --- */}
               <img 
-                src="[https://i.imgur.com/aazwI7x.png](https://i.imgur.com/aazwI7x.png)" 
+                src="https://i.imgur.com/aazwI7x.png"
                 alt="MoorentPM Logo" 
                 className="h-12 w-auto"
                 data-testid="img-logo"
@@ -165,7 +167,7 @@ export default function Home() {
       <section className="relative min-h-screen flex items-center justify-center pt-16 px-4 sm:px-6 lg:px-8 hero-dark-bg" data-testid="section-hero">
         <div className="absolute inset-0 z-0">
           <img
-            src="[https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2075&h=1384](https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2075&h=1384)"
+            src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2075&h=1384"
             alt="Luxury real estate property with modern architecture"
             className="w-full h-full object-cover opacity-5"
             data-testid="img-hero-background"
@@ -276,7 +278,7 @@ export default function Home() {
                     Accedi al nostro strumento online per definire il prezzo di partenza ideale per il tuo annuncio.
                   </p>
                   <a
-                    href="[https://moorentpm.github.io/calcolatore-prezzi-airbnb/](https://moorentpm.github.io/calcolatore-prezzi-airbnb/)"
+                    href="https://moorentpm.github.io/calcolatore-prezzi-airbnb/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center justify-center mt-auto px-4 sm:px-6 py-2 sm:py-3 bg-white text-black font-semibold rounded-full hover:bg-gray-200 transition-colors duration-300 text-sm sm:text-base touch-manipulation"
@@ -377,7 +379,7 @@ export default function Home() {
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-6 max-w-4xl mx-auto">
                 <a
-                  href="[https://wa.me/393534830386?text=Ciao!%20Ho%20visto%20il%20vostro%20webinar%20e%20vorrei%20maggiori%20informazioni%20sui%20vostri%20servizi](https://wa.me/393534830386?text=Ciao!%20Ho%20visto%20il%20vostro%20webinar%20e%20vorrei%20maggiori%20informazioni%20sui%20vostri%20servizi)"
+                  href="https://wa.me/393534830386?text=Ciao!%20Ho%20visto%20il%20vostro%20webinar%20e%20vorrei%20maggiori%20informazioni%20sui%20vostri%20servizi"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group bg-white rounded-xl sm:rounded-2xl p-6 sm:p-8 shadow-lg hover-lift border border-gray-100 transition-all duration-300 hover:border-green-200 text-primary touch-manipulation min-h-[200px] sm:min-h-[240px] flex flex-col"
@@ -403,7 +405,7 @@ export default function Home() {
                   <span className="text-blue-600 font-medium group-hover:text-blue-700 transition-colors text-sm sm:text-base">Chiama ora →</span>
                 </a>
                 <a
-                  href="[https://linktr.ee/moorentpm](https://linktr.ee/moorentpm)"
+                  href="https://linktr.ee/moorentpm"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group bg-white rounded-xl sm:rounded-2xl p-6 sm:p-8 shadow-lg hover-lift border border-gray-100 transition-all duration-300 hover:border-pink-200 text-primary touch-manipulation min-h-[200px] sm:min-h-[240px] flex flex-col"
@@ -428,8 +430,9 @@ export default function Home() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div className="md:col-span-2">
               <div className="flex items-center space-x-3 mb-6">
+                {/* --- MODIFICA: Ripristinato link Imgur --- */}
                 <img 
-                  src="[https://i.imgur.com/aazwI7x.png](https://i.imgur.com/aazwI7x.png)" 
+                  src="https://i.imgur.com/aazwI7x.png"
                   alt="MoorentPM Logo" 
                   className="h-12 w-auto"
                   data-testid="img-footer-logo"
