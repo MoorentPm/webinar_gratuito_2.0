@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Webinar Premium - Trasforma il Tuo Immobile | MoorentPM</title>
+    <meta name="description" content="Scopri le strategie premium per massimizzare i rendimenti degli affitti brevi nel Triveneto. Webinar esclusivo per proprietari immobiliari.">
+    <meta name="robots" content="index, follow">
+    <meta property="og:title" content="Webinar Premium - Trasforma il Tuo Immobile">
+    <meta property="og:description" content="Strategie premium per massimizzare i rendimenti degli affitti brevi nel Triveneto">
+    <meta property="og:type" content="website">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        background: '#1a1616',
+                        foreground: '#ffffff',
+                        accent: '#d6c4bf',
+                        primary: '#1a1616',
+                        muted: '#374151'
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        };
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .glass-effect {
+            background: rgba(26, 22, 22, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+        
+        .hero-dark-bg {
+            background: linear-gradient(135deg, #1a1616 0%, #2d2a2a 100%);
+        }
+        
+        .animate-fade-in {
+            animation: fadeIn 1s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .hover-lift {
+            transition: transform 0.3s ease;
+        }
+        
+        .hover-lift:hover {
+            transform: translateY(-5px);
+        }
+        
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 0.8s ease;
+        }
+        
+        .scroll-reveal.revealed {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .video-container {
+            position: relative;
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .video-container video {
+            width: 100%;
+            height: auto;
+            background: #000;
+        }
+        
+        .video-banner-glass {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        
+        .waves {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 120px;
+            background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1200 120'%3E%3Cpath d='M0,120L48,110C96,100,192,80,288,70C384,60,480,60,576,65C672,70,768,80,864,75C960,70,1056,50,1152,45C1248,40,1344,50,1392,55L1440,60L1440,120L1392,120C1344,120,1248,120,1152,120C1056,120,960,120,864,120C768,120,672,120,576,120C480,120,384,120,288,120C192,120,96,120,48,120L0,120Z' fill='%23d6c4bf' fill-opacity='0.1'/%3E%3C/svg%3E") no-repeat center bottom;
+            background-size: cover;
+        }
+
+        .btn-primary {
+            background: linear-gradient(135deg, #d6c4bf 0%, #b8a79a 100%);
+            color: #1a1616;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #e8ddd6 0%, #d6c4bf 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(214, 196, 191, 0.3);
+        }
+
+        /* Mobile Menu Animation */
+        .mobile-menu-enter {
+            opacity: 0;
+            transform: translateY(-10px);
+        }
+        
+        .mobile-menu-enter-active {
+            opacity: 1;
+            transform: translateY(0);
+            transition: all 0.3s ease;
+        }
+
+        /* Router states */
+        .route-container {
+            min-height: 100vh;
+        }
+        
+        .route-hidden {
+            display: none;
+        }
+        
+        .route-active {
+            display: block;
+        }
+    </style>
+</head>
+<body class="bg-background font-sans text-foreground antialiased overflow-x-hidden">
+    <!-- Router Container -->
+    <div id="app">
+        
+        <!-- Home Route (Active by default) -->
+        <div id="route-home" class="route-container route-active">
+            
+            <!-- Navigation -->
+            <nav class="fixed left-0 right-0 z-50 glass-effect border-b border-white/10 transition-all duration-500 top-0 opacity-100">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="flex items-center justify-between h-16">
+                        <div class="flex items-center">
+                            <!-- MoorentPM Logo placeholder -->
+                            <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=126&h=48" 
+                                 alt="MoorentPM Logo" 
+                                 class="h-12 w-auto" />
+                        </div>
+                        <div class="hidden sm:flex items-center space-x-4 md:space-x-8">
+                            <a href="#webinar" class="text-gray-300 hover:text-white transition-colors text-sm md:text-base">
+                                Webinar
+                            </a>
+                            <a href="#newsletter" class="text-gray-300 hover:text-white transition-colors text-sm md:text-base">
+                                Newsletter
+                            </a>
+                            <a href="#contatti" class="text-gray-300 hover:text-white transition-colors text-sm md:text-base">
+                                Contatti
+                            </a>
+                            <button onclick="showAdminLogin()" class="text-gray-300 hover:text-white transition-colors text-sm md:text-base">
+                                Admin
+                            </button>
+                        </div>
+                        <button id="mobile-menu-toggle" class="sm:hidden p-2 text-gray-300 hover:text-white transition-colors" aria-label="Toggle menu">
+                            <i class="fas fa-bars w-6 h-6"></i>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Mobile Menu -->
+                <div id="mobile-menu" class="sm:hidden absolute top-16 left-0 right-0 glass-effect border-b border-white/10 z-40 hidden">
+                    <div class="px-4 py-6 space-y-4">
+                        <a href="#webinar" class="block text-gray-300 hover:text-white transition-colors text-lg font-medium" onclick="closeMobileMenu()">
+                            Webinar
+                        </a>
+                        <a href="#newsletter" class="block text-gray-300 hover:text-white transition-colors text-lg font-medium" onclick="closeMobileMenu()">
+                            Newsletter
+                        </a>
+                        <a href="#contatti" class="block text-gray-300 hover:text-white transition-colors text-lg font-medium" onclick="closeMobileMenu()">
+                            Contatti
+                        </a>
+                        <button onclick="showAdminLogin(); closeMobileMenu();" class="block text-gray-300 hover:text-white transition-colors text-lg font-medium text-left">
+                            Admin
+                        </button>
+                    </div>
+                </div>
+            </nav>
+
+            <!-- Hero Section -->
+            <section class="relative min-h-screen flex items-center justify-center pt-16 px-4 sm:px-6 lg:px-8 hero-dark-bg">
+                <!-- Luxury real estate background with low opacity -->
+                <div class="absolute inset-0 z-0">
+                    <img src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2075&h=1384"
+                         alt="Luxury real estate property with modern architecture"
+                         class="w-full h-full object-cover opacity-5" />
+                </div>
+                <div class="relative z-10 max-w-4xl mx-auto text-center">
+                    <div class="space-y-8 animate-fade-in">
+                        <h1 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-light leading-tight text-white">
+                            Trasforma il Tuo Immobile in un
+                            <span class="block font-semibold">Asset Redditizio</span>
+                        </h1>
+                        <p class="text-lg sm:text-xl md:text-2xl text-gray-300 font-light max-w-3xl mx-auto leading-relaxed px-4">
+                            Scopri le strategie premium per massimizzare i rendimenti degli affitti brevi nel Triveneto.
+                            <span class="text-white font-medium">20 minuti di contenuto esclusivo</span> per proprietari immobiliari di alto valore.
+                        </p>
+                        <div class="flex flex-col sm:flex-row items-center justify-center gap-4 pt-8">
+                            <div class="flex items-center space-x-3 text-gray-300">
+                                <i class="fas fa-play w-6 h-6"></i>
+                                <span class="font-medium">Webinar completo disponibile ora</span>
+                            </div>
+                            <div class="hidden sm:block w-px h-6 bg-gray-300 opacity-30"></div>
+                            <div class="flex items-center space-x-3 text-gray-300">
+                                <i class="fas fa-crown w-6 h-6 text-accent"></i>
+                                <span class="font-medium">Strategie premium esclusive</span>
+                            </div>
+                        </div>
+                        <a href="#webinar" class="inline-flex items-center justify-center px-8 py-4 bg-transparent border-2 border-white text-white font-medium rounded-full hover:bg-white hover:text-black transition-all duration-300 hover-lift">
+                            <i class="fas fa-arrow-down w-4 h-4 mr-2"></i>
+                            Guarda il Webinar
+                        </a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Waves Background Container -->
+            <div class="relative hero-dark-bg text-white">
+                <div class="waves"></div>
+                <div class="relative z-10">
+                    
+                    <!-- Video Section -->
+                    <section id="webinar" class="py-20 px-4 sm:px-6 lg:px-8 scroll-reveal">
+                        <div class="max-w-6xl mx-auto">
+                            <div class="text-center mb-16">
+                                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-light mb-6">
+                                    Il Tuo Immobile, Il Tuo <span class="font-semibold">Successo</span>
+                                </h2>
+                                <p class="text-xl text-gray-300 font-light max-w-3xl mx-auto">
+                                    Un webinar completo che ti guiderà attraverso le strategie più efficaci per trasformare la tua proprietà in una fonte di reddito costante e redditizia.
+                                </p>
+                            </div>
+                            <div class="relative hover-lift">
+                                <div class="video-container">
+                                    <!-- Modern living room interior for webinar thumbnail -->
+                                    <video id="main-video" controls poster="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1280&h=720" class="rounded-2xl shadow-2xl w-full">
+                                        <!-- TODO: Add actual webinar video source -->
+                                        <source src="#" type="video/mp4" data-implementation="Replace with actual webinar video file" />
+                                        Il tuo browser non supporta il tag video.
+                                    </video>
+                                </div>
+                                <div id="video-banner" class="absolute -bottom-12 sm:-bottom-8 left-0 right-0 mx-4 transition-all duration-500">
+                                    <div class="video-banner-glass rounded-xl sm:rounded-2xl p-4 sm:p-6 border border-gray-100">
+                                        <div class="flex flex-col gap-2">
+                                            <div class="flex items-center space-x-3">
+                                                <div class="w-10 h-10 bg-accent rounded-full flex items-center justify-center flex-shrink-0">
+                                                    <i class="fas fa-play w-5 h-5 text-primary"></i>
+                                                </div>
+                                                <div class="flex-1 min-w-0">
+                                                    <h3 class="text-white font-semibold text-sm sm:text-base truncate">
+                                                        Webinar Premium: Strategie Immobiliari
+                                                    </h3>
+                                                    <p class="text-gray-300 text-xs sm:text-sm">
+                                                        Durata: 20 minuti • Contenuto esclusivo
+                                                    </p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Benefits Section -->
+                    <section class="py-20 px-4 sm:px-6 lg:px-8 scroll-reveal">
+                        <div class="max-w-6xl mx-auto">
+                            <div class="text-center mb-16">
+                                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-light mb-6">
+                                    Cosa <span class="font-semibold">Scoprirai</span>
+                                </h2>
+                                <p class="text-xl text-gray-300 font-light">
+                                    Contenuti esclusivi che trasformeranno il tuo approccio agli investimenti immobiliari
+                                </p>
+                            </div>
+                            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                                <div class="glass-effect rounded-2xl p-8 hover-lift border border-white/10">
+                                    <div class="w-12 h-12 bg-accent rounded-xl flex items-center justify-center mb-6">
+                                        <i class="fas fa-chart-line w-6 h-6 text-primary"></i>
+                                    </div>
+                                    <h3 class="text-xl font-semibold mb-4">Analisi dei Mercati</h3>
+                                    <p class="text-gray-300 leading-relaxed">
+                                        Scopri i mercati più redditizi del Triveneto e come identificare le opportunità migliori per il tuo investimento.
+                                    </p>
+                                </div>
+                                <div class="glass-effect rounded-2xl p-8 hover-lift border border-white/10">
+                                    <div class="w-12 h-12 bg-accent rounded-xl flex items-center justify-center mb-6">
+                                        <i class="fas fa-calculator w-6 h-6 text-primary"></i>
+                                    </div>
+                                    <h3 class="text-xl font-semibold mb-4">Calcoli di Redditività</h3>
+                                    <p class="text-gray-300 leading-relaxed">
+                                        Metodi avanzati per calcolare ROI, occupancy rate e pricing dinamico per massimizzare i profitti.
+                                    </p>
+                                </div>
+                                <div class="glass-effect rounded-2xl p-8 hover-lift border border-white/10">
+                                    <div class="w-12 h-12 bg-accent rounded-xl flex items-center justify-center mb-6">
+                                        <i class="fas fa-building w-6 h-6 text-primary"></i>
+                                    </div>
+                                    <h3 class="text-xl font-semibold mb-4">Gestione Proprietà</h3>
+                                    <p class="text-gray-300 leading-relaxed">
+                                        Strategie professionali per l'ottimizzazione degli spazi e la gestione efficiente delle prenotazioni.
+                                    </p>
+                                </div>
+                                <div class="glass-effect rounded-2xl p-8 hover-lift border border-white/10">
+                                    <div class="w-12 h-12 bg-accent rounded-xl flex items-center justify-center mb-6">
+                                        <i class="fas fa-file-text w-6 h-6 text-primary"></i>
+                                    </div>
+                                    <h3 class="text-xl font-semibold mb-4">Normative e Fiscalità</h3>
+                                    <p class="text-gray-300 leading-relaxed">
+                                        Guida completa alle normative regionali e agli aspetti fiscali degli affitti brevi.
+                                    </p>
+                                </div>
+                                <div class="glass-effect rounded-2xl p-8 hover-lift border border-white/10">
+                                    <div class="w-12 h-12 bg-accent rounded-xl flex items-center justify-center mb-6">
+                                        <i class="fas fa-users w-6 h-6 text-primary"></i>
+                                    </div>
+                                    <h3 class="text-xl font-semibold mb-4">Customer Experience</h3>
+                                    <p class="text-gray-300 leading-relaxed">
+                                        Tecniche per migliorare l'esperienza degli ospiti e aumentare le recensioni positive.
+                                    </p>
+                                </div>
+                                <div class="glass-effect rounded-2xl p-8 hover-lift border border-white/10">
+                                    <div class="w-12 h-12 bg-accent rounded-xl flex items-center justify-center mb-6">
+                                        <i class="fas fa-download w-6 h-6 text-primary"></i>
+                                    </div>
+                                    <h3 class="text-xl font-semibold mb-4">Risorse Esclusive</h3>
+                                    <p class="text-gray-300 leading-relaxed">
+                                        Template, checklist e strumenti pratici per implementare immediatamente le strategie apprese.
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Newsletter Section -->
+                    <section id="newsletter" class="py-20 px-4 sm:px-6 lg:px-8 scroll-reveal">
+                        <div class="max-w-4xl mx-auto text-center">
+                            <div class="glass-effect rounded-3xl p-8 lg:p-12 border border-white/10">
+                                <div class="mb-8">
+                                    <i class="fas fa-envelope w-12 h-12 text-accent mx-auto mb-6"></i>
+                                    <h2 class="text-3xl sm:text-4xl font-light mb-4">
+                                        Ricevi <span class="font-semibold">Contenuti Esclusivi</span>
+                                    </h2>
+                                    <p class="text-xl text-gray-300 font-light">
+                                        Iscriviti alla newsletter per ricevere strategie avanzate, analisi di mercato e opportunità di investimento nel Triveneto.
+                                    </p>
+                                </div>
+                                <form id="newsletter-form" class="max-w-md mx-auto" data-implementation="Connect to email service provider">
+                                    <div class="space-y-4">
+                                        <input type="email" placeholder="Il tuo indirizzo email" required
+                                               class="w-full px-6 py-4 bg-white/10 border border-white/20 rounded-full text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent" />
+                                        <button type="submit" class="w-full btn-primary px-8 py-4 rounded-full font-medium hover-lift">
+                                            <i class="fas fa-paper-plane w-4 h-4 mr-2"></i>
+                                            Iscriviti Gratuitamente
+                                        </button>
+                                    </div>
+                                    <p class="text-sm text-gray-400 mt-4">
+                                        <i class="fas fa-lock w-3 h-3 mr-1"></i>
+                                        I tuoi dati sono protetti e non verranno mai condivisi con terze parti.
+                                    </p>
+                                </form>
+                                <div id="newsletter-success" class="hidden">
+                                    <div class="text-center py-8">
+                                        <i class="fas fa-check-circle w-12 h-12 text-green-400 mx-auto mb-4"></i>
+                                        <h3 class="text-xl font-semibold mb-2">Iscrizione Completata!</h3>
+                                        <p class="text-gray-300">Riceverai presto i nostri contenuti esclusivi.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Contact Section -->
+                    <section id="contatti" class="py-20 px-4 sm:px-6 lg:px-8 scroll-reveal">
+                        <div class="max-w-6xl mx-auto">
+                            <div class="text-center mb-16">
+                                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-light mb-6">
+                                    <span class="font-semibold">Contattaci</span>
+                                </h2>
+                                <p class="text-xl text-gray-300 font-light">
+                                    Hai domande o vuoi una consulenza personalizzata? Siamo qui per aiutarti.
+                                </p>
+                            </div>
+                            <div class="grid lg:grid-cols-2 gap-12">
+                                <div class="space-y-8">
+                                    <div class="glass-effect rounded-2xl p-8 border border-white/10">
+                                        <h3 class="text-2xl font-semibold mb-6">Informazioni di Contatto</h3>
+                                        <div class="space-y-6">
+                                            <div class="flex items-center space-x-4">
+                                                <div class="w-10 h-10 bg-accent rounded-full flex items-center justify-center">
+                                                    <i class="fas fa-envelope w-5 h-5 text-primary"></i>
+                                                </div>
+                                                <div>
+                                                    <p class="font-medium">Email</p>
+                                                    <p class="text-gray-300">info@moorentpm.com</p>
+                                                </div>
+                                            </div>
+                                            <div class="flex items-center space-x-4">
+                                                <div class="w-10 h-10 bg-accent rounded-full flex items-center justify-center">
+                                                    <i class="fas fa-phone w-5 h-5 text-primary"></i>
+                                                </div>
+                                                <div>
+                                                    <p class="font-medium">Telefono</p>
+                                                    <p class="text-gray-300">+39 123 456 7890</p>
+                                                </div>
+                                            </div>
+                                            <div class="flex items-center space-x-4">
+                                                <div class="w-10 h-10 bg-accent rounded-full flex items-center justify-center">
+                                                    <i class="fab fa-whatsapp w-5 h-5 text-primary"></i>
+                                                </div>
+                                                <div>
+                                                    <p class="font-medium">WhatsApp</p>
+                                                    <p class="text-gray-300">+39 123 456 7890</p>
+                                                </div>
+                                            </div>
+                                            <div class="flex items-center space-x-4">
+                                                <div class="w-10 h-10 bg-accent rounded-full flex items-center justify-center">
+                                                    <i class="fas fa-map-marker-alt w-5 h-5 text-primary"></i>
+                                                </div>
+                                                <div>
+                                                    <p class="font-medium">Ufficio</p>
+                                                    <p class="text-gray-300">Triveneto, Italia</p>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="glass-effect rounded-2xl p-8 border border-white/10">
+                                    <h3 class="text-2xl font-semibold mb-6">Invia un Messaggio</h3>
+                                    <form id="contact-form" class="space-y-6" data-implementation="Connect to contact form handler">
+                                        <div>
+                                            <input type="text" placeholder="Nome e Cognome" required
+                                                   class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent" />
+                                        </div>
+                                        <div>
+                                            <input type="email" placeholder="Email" required
+                                                   class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent" />
+                                        </div>
+                                        <div>
+                                            <input type="tel" placeholder="Telefono (opzionale)"
+                                                   class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent" />
+                                        </div>
+                                        <div>
+                                            <textarea placeholder="Il tuo messaggio..." rows="4" required
+                                                      class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent resize-vertical"></textarea>
+                                        </div>
+                                        <button type="submit" class="w-full btn-primary px-6 py-3 rounded-lg font-medium hover-lift">
+                                            <i class="fas fa-paper-plane w-4 h-4 mr-2"></i>
+                                            Invia Messaggio
+                                        </button>
+                                    </form>
+                                    <div id="contact-success" class="hidden">
+                                        <div class="text-center py-8">
+                                            <i class="fas fa-check-circle w-12 h-12 text-green-400 mx-auto mb-4"></i>
+                                            <h3 class="text-xl font-semibold mb-2">Messaggio Inviato!</h3>
+                                            <p class="text-gray-300">Ti risponderemo al più presto.</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Footer -->
+                    <footer class="py-12 px-4 sm:px-6 lg:px-8 border-t border-white/10">
+                        <div class="max-w-6xl mx-auto text-center">
+                            <div class="mb-8">
+                                <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=126&h=48"
+                                     alt="MoorentPM Logo" 
+                                     class="h-12 w-auto mx-auto mb-4" />
+                                <p class="text-gray-300 max-w-2xl mx-auto">
+                                    Trasformiamo proprietà immobiliari in asset redditizi attraverso strategie premium di gestione affitti brevi nel Triveneto.
+                                </p>
+                            </div>
+                            <div class="flex flex-col sm:flex-row items-center justify-center space-y-4 sm:space-y-0 sm:space-x-8">
+                                <a href="#webinar" class="text-gray-300 hover:text-white transition-colors">
+                                    Webinar
+                                </a>
+                                <a href="#newsletter" class="text-gray-300 hover:text-white transition-colors">
+                                    Newsletter
+                                </a>
+                                <a href="#contatti" class="text-gray-300 hover:text-white transition-colors">
+                                    Contatti
+                                </a>
+                                <a href="javascript:void(0)" class="text-gray-300 hover:text-white transition-colors" onclick="alert('Privacy Policy - TODO: Implement privacy policy page')">
+                                    Privacy Policy
+                                </a>
+                            </div>
+                            <div class="mt-8 pt-8 border-t border-white/10">
+                                <p class="text-gray-400 text-sm">
+                                    © 2024 MoorentPM. Tutti i diritti riservati.
+                                </p>
+                            </div>
+                        </div>
+                    </footer>
+                </div>
+            </div>
+        </div>
+
+        <!-- Admin Login Route -->
+        <div id="route-admin-login" class="route-container route-hidden">
+            <div class="min-h-screen flex items-center justify-center hero-dark-bg px-4">
+                <div class="max-w-md w-full">
+                    <div class="glass-effect rounded-2xl p-8 border border-white/10">
+                        <div class="text-center mb-8">
+                            <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=126&h=48"
+                                 alt="MoorentPM Logo" 
+                                 class="h-12 w-auto mx-auto mb-6" />
+                            <h2 class="text-2xl font-semibold text-white">Accesso Amministratore</h2>
+                            <p class="text-gray-300 mt-2">Inserisci le tue credenziali per accedere al pannello amministrativo</p>
+                        </div>
+                        <form id="admin-login-form" class="space-y-6" data-implementation="Connect to authentication system">
+                            <div>
+                                <label for="admin-email" class="block text-sm font-medium text-gray-300 mb-2">Email</label>
+                                <input type="email" id="admin-email" required
+                                       class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
+                                       placeholder="admin@moorentpm.com" />
+                            </div>
+                            <div>
+                                <label for="admin-password" class="block text-sm font-medium text-gray-300 mb-2">Password</label>
+                                <input type="password" id="admin-password" required
+                                       class="w-full px-4 py-3 bg-white/10 border border-white/20 rounded-lg text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-accent focus:border-transparent"
+                                       placeholder="••••••••" />
+                            </div>
+                            <button type="submit" class="w-full btn-primary px-6 py-3 rounded-lg font-medium hover-lift">
+                                <i class="fas fa-sign-in-alt w-4 h-4 mr-2"></i>
+                                Accedi
+                            </button>
+                        </form>
+                        <div class="mt-6 text-center">
+                            <button onclick="showHome()" class="text-accent hover:text-white transition-colors text-sm">
+                                ← Torna alla Home
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Admin Dashboard Route -->
+        <div id="route-admin-dashboard" class="route-container route-hidden">
+            <div class="min-h-screen hero-dark-bg">
+                <!-- Dashboard Navigation -->
+                <nav class="glass-effect border-b border-white/10">
+                    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                        <div class="flex items-center justify-between h-16">
+                            <div class="flex items-center">
+                                <img src="https://images.unsplash.com/photo-1560472354-b33ff0c44a43?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=126&h=48"
+                                     alt="MoorentPM Logo" 
+                                     class="h-10 w-auto mr-4" />
+                                <h1 class="text-xl font-semibold text-white">Pannello Amministrativo</h1>
+                            </div>
+                            <div class="flex items-center space-x-4">
+                                <span class="text-gray-300">Benvenuto, Admin</span>
+                                <button onclick="showHome()" class="text-accent hover:text-white transition-colors">
+                                    <i class="fas fa-sign-out-alt w-5 h-5"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </nav>
+
+                <!-- Dashboard Content -->
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                        <!-- Stats Cards -->
+                        <div class="lg:col-span-3">
+                            <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+                                <div class="glass-effect rounded-xl p-6 border border-white/10">
+                                    <div class="flex items-center">
+                                        <div class="flex-shrink-0">
+                                            <i class="fas fa-users w-8 h-8 text-accent"></i>
+                                        </div>
+                                        <div class="ml-4">
+                                            <p class="text-sm font-medium text-gray-300">Iscritti Newsletter</p>
+                                            <p class="text-2xl font-semibold text-white" data-bind="stats.newsletter">1,247</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="glass-effect rounded-xl p-6 border border-white/10">
+                                    <div class="flex items-center">
+                                        <div class="flex-shrink-0">
+                                            <i class="fas fa-play w-8 h-8 text-accent"></i>
+                                        </div>
+                                        <div class="ml-4">
+                                            <p class="text-sm font-medium text-gray-300">Visualizzazioni Video</p>
+                                            <p class="text-2xl font-semibold text-white" data-bind="stats.videoViews">3,892</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="glass-effect rounded-xl p-6 border border-white/10">
+                                    <div class="flex items-center">
+                                        <div class="flex-shrink-0">
+                                            <i class="fas fa-envelope w-8 h-8 text-accent"></i>
+                                        </div>
+                                        <div class="ml-4">
+                                            <p class="text-sm font-medium text-gray-300">Messaggi</p>
+                                            <p class="text-2xl font-semibold text-white" data-bind="stats.messages">89</p>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="glass-effect rounded-xl p-6 border border-white/10">
+                                    <div class="flex items-center">
+                                        <div class="flex-shrink-0">
+                                            <i class="fas fa-chart-line w-8 h-8 text-accent"></i>
+                                        </div>
+                                        <div class="ml-4">
+                                            <p class="text-sm font-medium text-gray-300">Conversioni</p>
+                                            <p class="text-2xl font-semibold text-white" data-bind="stats.conversions">24.5%</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Recent Messages -->
+                        <div class="lg:col-span-2">
+                            <div class="glass-effect rounded-xl p-6 border border-white/10">
+                                <h3 class="text-lg font-semibold text-white mb-6">Messaggi Recenti</h3>
+                                <div class="space-y-4" data-implementation="Load from contact form submissions">
+                                    <!-- @MAP: recentMessages.map(message => ( -->
+                                    <div class="bg-white/5 rounded-lg p-4 border border-white/5">
+                                        <div class="flex items-start justify-between">
+                                            <div class="flex-1">
+                                                <p class="text-white font-medium" data-bind="message.name">Mario Rossi</p>
+                                                <p class="text-gray-300 text-sm" data-bind="message.email">mario.rossi@email.com</p>
+                                                <p class="text-gray-300 mt-2 text-sm" data-bind="message.content">Interessato alle strategie per affitti brevi a Venezia...</p>
+                                            </div>
+                                            <span class="text-xs text-gray-400" data-bind="message.date">2h fa</span>
+                                        </div>
+                                    </div>
+                                    <!-- @END_MAP )) -->
+                                    <div class="bg-white/5 rounded-lg p-4 border border-white/5">
+                                        <div class="flex items-start justify-between">
+                                            <div class="flex-1">
+                                                <p class="text-white font-medium">Giulia Bianchi</p>
+                                                <p class="text-gray-300 text-sm">giulia.bianchi@email.com</p>
+                                                <p class="text-gray-300 mt-2 text-sm">Vorrei una consulenza per il mio immobile a Verona...</p>
+                                            </div>
+                                            <span class="text-xs text-gray-400">5h fa</span>
+                                        </div>
+                                    </div>
+                                    <div class="bg-white/5 rounded-lg p-4 border border-white/5">
+                                        <div class="flex items-start justify-between">
+                                            <div class="flex-1">
+                                                <p class="text-white font-medium">Andrea Ferrari</p>
+                                                <p class="text-gray-300 text-sm">andrea.ferrari@email.com</p>
+                                                <p class="text-gray-300 mt-2 text-sm">Complimenti per il webinar, molto interessante...</p>
+                                            </div>
+                                            <span class="text-xs text-gray-400">1g fa</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Quick Actions -->
+                        <div class="lg:col-span-1">
+                            <div class="glass-effect rounded-xl p-6 border border-white/10">
+                                <h3 class="text-lg font-semibold text-white mb-6">Azioni Rapide</h3>
+                                <div class="space-y-4">
+                                    <button class="w-full btn-primary px-4 py-3 rounded-lg font-medium hover-lift text-sm" data-implementation="Export newsletter subscribers">
+                                        <i class="fas fa-download w-4 h-4 mr-2"></i>
+                                        Esporta Iscritti
+                                    </button>
+                                    <button class="w-full bg-white/10 hover:bg-white/20 text-white px-4 py-3 rounded-lg font-medium transition-all duration-300 hover-lift text-sm" data-implementation="View video analytics">
+                                        <i class="fas fa-chart-bar w-4 h-4 mr-2"></i>
+                                        Analytics Video
+                                    </button>
+                                    <button class="w-full bg-white/10 hover:bg-white/20 text-white px-4 py-3 rounded-lg font-medium transition-all duration-300 hover-lift text-sm" data-implementation="Manage email campaigns">
+                                        <i class="fas fa-paper-plane w-4 h-4 mr-2"></i>
+                                        Invia Newsletter
+                                    </button>
+                                    <button class="w-full bg-white/10 hover:bg-white/20 text-white px-4 py-3 rounded-lg font-medium transition-all duration-300 hover-lift text-sm" data-implementation="Update webinar content">
+                                        <i class="fas fa-video w-4 h-4 mr-2"></i>
+                                        Gestisci Webinar
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 404 Not Found Route -->
+        <div id="route-404" class="route-container route-hidden">
+            <div class="min-h-screen flex items-center justify-center hero-dark-bg px-4">
+                <div class="text-center">
+                    <i class="fas fa-exclamation-triangle w-20 h-20 text-accent mx-auto mb-8"></i>
+                    <h1 class="text-6xl font-bold text-white mb-4">404</h1>
+                    <h2 class="text-2xl font-semibold text-white mb-4">Pagina Non Trovata</h2>
+                    <p class="text-gray-300 mb-8 max-w-md mx-auto">
+                        La pagina che stai cercando non esiste o è stata spostata.
+                    </p>
+                    <button onclick="showHome()" class="btn-primary px-8 py-3 rounded-full font-medium hover-lift">
+                        <i class="fas fa-home w-4 h-4 mr-2"></i>
+                        Torna alla Home
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        (function() {
+            // Router functionality
+            let currentRoute = 'home';
+            
+            function showRoute(routeName) {
+                // Hide all routes
+                document.querySelectorAll('.route-container').forEach(route => {
+                    route.classList.add('route-hidden');
+                    route.classList.remove('route-active');
+                });
+                
+                // Show selected route
+                const targetRoute = document.getElementById(`route-${routeName}`);
+                if (targetRoute) {
+                    targetRoute.classList.remove('route-hidden');
+                    targetRoute.classList.add('route-active');
+                    currentRoute = routeName;
+                    
+                    // Update URL hash
+                    if (routeName !== 'home') {
+                        window.location.hash = routeName;
+                    } else {
+                        window.location.hash = '';
+                    }
+                } else {
+                    show404();
+                }
+            }
+            
+            function show404() {
+                showRoute('404');
+            }
+            
+            // Global route functions
+            window.showHome = () => showRoute('home');
+            window.showAdminLogin = () => showRoute('admin-login');
+            window.showAdminDashboard = () => showRoute('admin-dashboard');
+            window.show404 = show404;
+            
+            // Handle browser navigation
+            window.addEventListener('hashchange', function() {
+                const hash = window.location.hash.slice(1);
+                if (hash) {
+                    const validRoutes = ['home', 'admin-login', 'admin-dashboard'];
+                    if (validRoutes.includes(hash)) {
+                        showRoute(hash);
+                    } else {
+                        show404();
+                    }
+                } else {
+                    showRoute('home');
+                }
+            });
+            
+            // Initialize router on page load
+            window.addEventListener('load', function() {
+                const hash = window.location.hash.slice(1);
+                if (hash) {
+                    showRoute(hash);
+                } else {
+                    showRoute('home');
+                }
+            });
+            
+            // Mobile menu functionality
+            const mobileMenuToggle = document.getElementById('mobile-menu-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+            let mobileMenuOpen = false;
+            
+            function toggleMobileMenu() {
+                mobileMenuOpen = !mobileMenuOpen;
+                if (mobileMenuOpen) {
+                    mobileMenu.classList.remove('hidden');
+                    mobileMenuToggle.innerHTML = '<i class="fas fa-times w-6 h-6"></i>';
+                } else {
+                    mobileMenu.classList.add('hidden');
+                    mobileMenuToggle.innerHTML = '<i class="fas fa-bars w-6 h-6"></i>';
+                }
+            }
+            
+            window.closeMobileMenu = function() {
+                mobileMenuOpen = false;
+                mobileMenu.classList.add('hidden');
+                mobileMenuToggle.innerHTML = '<i class="fas fa-bars w-6 h-6"></i>';
+            };
+            
+            mobileMenuToggle.addEventListener('click', toggleMobileMenu);
+            
+            // Close mobile menu on escape key
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'Escape' && mobileMenuOpen) {
+                    closeMobileMenu();
+                }
+            });
+            
+            // Close mobile menu when clicking outside
+            document.addEventListener('click', function(e) {
+                if (mobileMenuOpen && !mobileMenu.contains(e.target) && !mobileMenuToggle.contains(e.target)) {
+                    closeMobileMenu();
+                }
+            });
+            
+            // Scroll reveal animation
+            const observerOptions = {
+                threshold: 0.1,
+                rootMargin: '0px 0px -100px 0px'
+            };
+            
+            const observer = new IntersectionObserver(function(entries) {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('revealed');
+                    }
+                });
+            }, observerOptions);
+            
+            // Observe all scroll-reveal elements
+            document.querySelectorAll('.scroll-reveal').forEach(el => {
+                observer.observe(el);
+            });
+            
+            // Video functionality
+            const video = document.getElementById('main-video');
+            const videoBanner = document.getElementById('video-banner');
+            let isVideoPlaying = false;
+            
+            if (video && videoBanner) {
+                video.addEventListener('play', function() {
+                    isVideoPlaying = true;
+                    videoBanner.style.opacity = '0';
+                    videoBanner.style.transform = 'translateY(16px)';
+                    videoBanner.style.pointerEvents = 'none';
+                });
+                
+                video.addEventListener('pause', function() {
+                    isVideoPlaying = false;
+                    videoBanner.style.opacity = '1';
+                    videoBanner.style.transform = 'translateY(0)';
+                    videoBanner.style.pointerEvents = 'auto';
+                });
+                
+                video.addEventListener('ended', function() {
+                    isVideoPlaying = false;
+                    videoBanner.style.opacity = '1';
+                    videoBanner.style.transform = 'translateY(0)';
+                    videoBanner.style.pointerEvents = 'auto';
+                });
+            }
+            
+            // Form handlers
+            const newsletterForm = document.getElementById('newsletter-form');
+            const newsletterSuccess = document.getElementById('newsletter-success');
+            
+            if (newsletterForm) {
+                newsletterForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    // TODO: Implement newsletter signup API call
+                    
+                    // Show success message
+                    newsletterForm.style.display = 'none';
+                    newsletterSuccess.classList.remove('hidden');
+                    
+                    // Reset after 5 seconds
+                    setTimeout(() => {
+                        newsletterForm.style.display = 'block';
+                        newsletterSuccess.classList.add('hidden');
+                        newsletterForm.reset();
+                    }, 5000);
+                });
+            }
+            
+            const contactForm = document.getElementById('contact-form');
+            const contactSuccess = document.getElementById('contact-success');
+            
+            if (contactForm) {
+                contactForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    // TODO: Implement contact form API call
+                    
+                    // Show success message
+                    contactForm.style.display = 'none';
+                    contactSuccess.classList.remove('hidden');
+                    
+                    // Reset after 5 seconds
+                    setTimeout(() => {
+                        contactForm.style.display = 'block';
+                        contactSuccess.classList.add('hidden');
+                        contactForm.reset();
+                    }, 5000);
+                });
+            }
+            
+            const adminLoginForm = document.getElementById('admin-login-form');
+            
+            if (adminLoginForm) {
+                adminLoginForm.addEventListener('submit', function(e) {
+                    e.preventDefault();
+                    // TODO: Implement admin authentication
+                    
+                    const email = document.getElementById('admin-email').value;
+                    const password = document.getElementById('admin-password').value;
+                    
+                    // Mock authentication - replace with real authentication
+                    if (email && password) {
+                        showRoute('admin-dashboard');
+                    } else {
+                        alert('Credenziali non valide');
+                    }
+                });
+            }
+            
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+                anchor.addEventListener('click', function (e) {
+                    e.preventDefault();
+                    const target = document.querySelector(this.getAttribute('href'));
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
+                });
+            });
+            
+        })();
+    </script>
+</body>
+</html>
