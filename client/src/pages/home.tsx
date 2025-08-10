@@ -33,6 +33,14 @@ export default function Home() {
   const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
+    document.body.classList.add('dark');
+    return () => {
+      document.body.classList.remove('dark');
+    };
+  }, []);
+
+
+  useEffect(() => {
     observerRef.current = new IntersectionObserver(
       (entries) => {
         entries.forEach((entry) => {
@@ -58,6 +66,8 @@ export default function Home() {
   useEffect(() => {
     const videoElement = videoRef.current;
     if (!videoElement) return;
+
+    videoElement.playbackRate = 1.25;
 
     const handlePlay = () => setIsVideoPlaying(true);
     const handlePauseOrEnd = () => setIsVideoPlaying(false);
@@ -222,7 +232,7 @@ export default function Home() {
       </section>
 
       {/* Contenitore per il resto della pagina (CON ONDE) */}
-      <div className="relative hero-dark-bg text-white">
+      <div className="relative text-white">
         <WavesBackground />
         <div className="relative z-10">
           {/* Video Section */}
@@ -236,22 +246,24 @@ export default function Home() {
                   Un webinar completo che ti guiderà attraverso le strategie più efficaci per trasformare la tua proprietà in una fonte di reddito costante e redditizia.
                 </p>
               </div>
-              <div className="relative hover-lift">
-                <div className="video-container px-2 sm:px-0">
+              <div className="flex flex-col items-center gap-4 px-2 sm:px-0">
+                {/* --- MODIFICA CHIAVE 1: Aggiunta classe "aspect-video" per forzare il formato 16:9 --- */}
+                <div className="w-full aspect-video rounded-xl sm:rounded-2xl shadow-2xl overflow-hidden hover-lift">
                   <video
                     ref={videoRef}
                     id="main-video"
                     controls
-                    poster="https://placehold.co/1280x720/1a1616/d6c4bf?text=Webinar+Premium"
-                    className="rounded-xl sm:rounded-2xl shadow-2xl w-full"
+                    poster="/images/copertina-video.jpg"
+                    // --- MODIFICA CHIAVE 2: Aggiunte classi per riempire il contenitore ---
+                    className="w-full h-full object-cover"
                     data-testid="video-webinar"
                   >
                     <source src="videos/webinar.mp4" type="video/mp4" />
                     Il tuo browser non supporta il tag video.
                   </video>
                 </div>
-                <div className={`absolute -bottom-16 sm:-bottom-12 lg:-bottom-8 left-0 right-0 mx-2 sm:mx-4 transition-all duration-500 ${
-                  isVideoPlaying ? 'opacity-0 translate-y-4 pointer-events-none' : 'opacity-100 translate-y-0'
+                <div className={`w-full transition-all duration-500 ${
+                  isVideoPlaying ? 'opacity-0 -translate-y-4 pointer-events-none' : 'opacity-100 translate-y-0'
                 }`} data-testid="video-banner">
                   <div className="video-banner-glass rounded-xl sm:rounded-2xl p-3 sm:p-4 lg:p-6 border border-gray-100">
                     <div className="flex flex-col gap-2 sm:gap-3">
@@ -260,11 +272,11 @@ export default function Home() {
                           <Play className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
                         </div>
                         <div className="flex-1 min-w-0">
-                          <h3 className="font-semibold text-sm sm:text-base text-primary">Webinar Premium</h3>
-                          <p className="text-secondary text-xs sm:text-sm">Durata: 20 minuti • Contenuto esclusivo</p>
+                          <h3 className="font-semibold text-sm sm:text-base text-white">Webinar Premium</h3>
+                          <p className="text-gray-300 text-xs sm:text-sm">Durata: 20 minuti • Contenuto esclusivo</p>
                         </div>
                       </div>
-                      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 text-xs sm:text-sm text-secondary pl-11 sm:pl-13 lg:pl-0 pt-1 sm:pt-2">
+                      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 text-xs sm:text-sm text-gray-300 pl-11 sm:pl-13 lg:pl-0 pt-1 sm:pt-2">
                         <div className="flex items-center space-x-2">
                           <Users className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
                           <span>Proprietari HNWI</span>
@@ -321,7 +333,7 @@ export default function Home() {
                     Accedi al nostro strumento online per definire il prezzo di partenza ideale per il tuo annuncio.
                   </p>
                   <a
-                    href="https://www.airbnb.it/host/homes"
+                    href="https://moorentpm.github.io/calcolatore-prezzi-airbnb/"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center justify-center mt-auto px-4 sm:px-6 py-2 sm:py-3 bg-white text-black font-semibold rounded-full hover:bg-gray-200 transition-colors duration-300 text-sm sm:text-base touch-manipulation"
@@ -370,11 +382,11 @@ export default function Home() {
                     <div className="relative">
                         <Input
                         placeholder="La tua email"
-                        className="w-full px-4 sm:px-6 py-3 sm:py-4 bg-white rounded-full text-base sm:text-lg font-medium placeholder:text-secondary border-2 border-transparent focus:border-accent focus:ring-4 focus:ring-accent/10 transition-all text-black touch-manipulation"
+                        className="w-full px-4 sm:px-6 py-3 sm:py-4 bg-white rounded-full text-base sm:text-lg font-medium placeholder:text-gray-500 border-2 border-transparent focus:border-accent focus:ring-4 focus:ring-accent/10 transition-all text-black touch-manipulation"
                         data-testid="input-newsletter-email"
                         />
                         <div className="absolute inset-y-0 right-0 flex items-center pr-4 sm:pr-6">
-                        <Inbox className="w-4 h-4 sm:w-5 sm:h-5 text-secondary" />
+                        <Inbox className="w-4 h-4 sm:w-5 sm:h-5 text-gray-400" />
                         </div>
                     </div>
                     <Button
@@ -389,17 +401,17 @@ export default function Home() {
                     </Button>
                 </form>
 
-                <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 text-xs sm:text-sm text-gray-300">
+                <div className="mt-6 sm:mt-8 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 text-xs sm:text-sm text-gray-200">
                   <div className="flex items-center space-x-2">
                     <CheckCircle className="w-4 h-4 text-accent flex-shrink-0" />
                     <span>Contenuti esclusivi</span>
                   </div>
-                  <div className="hidden sm:block w-px h-4 bg-gray-300 opacity-30"></div>
+                  <div className="hidden sm:block w-px h-4 bg-gray-200 opacity-30"></div>
                   <div className="flex items-center space-x-2">
                     <ChartLine className="w-4 h-4 text-accent flex-shrink-0" />
                     <span>Insights di mercato</span>
                   </div>
-                  <div className="hidden sm:block w-px h-4 bg-gray-300 opacity-30"></div>
+                  <div className="hidden sm:block w-px h-4 bg-gray-200 opacity-30"></div>
                   <div className="flex items-center space-x-2">
                     <Building className="w-4 h-4 text-accent flex-shrink-0" />
                     <span>Case study premium</span>
@@ -431,8 +443,8 @@ export default function Home() {
                   <div className="w-12 h-12 sm:w-16 sm:h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 group-hover:bg-green-500 transition-colors duration-300">
                     <SiWhatsapp className="w-6 h-6 sm:w-8 sm:h-8 text-green-600 group-hover:text-white transition-colors duration-300" />
                   </div>
-                  <h3 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3">WhatsApp</h3>
-                  <p className="text-secondary mb-3 sm:mb-4 flex-grow text-sm sm:text-base">Contattaci direttamente su WhatsApp per una risposta immediata</p>
+                  <h3 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3 text-gray-900">WhatsApp</h3>
+                  <p className="text-gray-600 mb-3 sm:mb-4 flex-grow text-sm sm:text-base">Contattaci direttamente su WhatsApp per una risposta immediata</p>
                   <span className="text-green-600 font-medium group-hover:text-green-700 transition-colors text-sm sm:text-base">Scrivici ora →</span>
                 </a>
                 <a
@@ -443,8 +455,8 @@ export default function Home() {
                   <div className="w-12 h-12 sm:w-16 sm:h-16 bg-blue-100 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 group-hover:bg-blue-500 transition-colors duration-300">
                     <Phone className="w-6 h-6 sm:w-8 sm:h-8 text-blue-600 group-hover:text-white transition-colors duration-300" />
                   </div>
-                  <h3 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3">Chiamaci Direttamente</h3>
-                  <p className="text-secondary mb-3 sm:mb-4 flex-grow text-sm sm:text-base">Parla direttamente con i nostri consulenti per una consulenza immediata</p>
+                  <h3 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3 text-gray-900">Chiamaci Direttamente</h3>
+                  <p className="text-gray-600 mb-3 sm:mb-4 flex-grow text-sm sm:text-base">Parla direttamente con i nostri consulenti per una consulenza immediata</p>
                   <span className="text-blue-600 font-medium group-hover:text-blue-700 transition-colors text-sm sm:text-base">Chiama ora →</span>
                 </a>
                 <a
@@ -457,20 +469,20 @@ export default function Home() {
                   <div className="w-12 h-12 sm:w-16 sm:h-16 bg-pink-100 rounded-full flex items-center justify-center mx-auto mb-4 sm:mb-6 group-hover:bg-pink-300 transition-colors duration-300">
                     <ExternalLink className="w-6 h-6 sm:w-8 sm:h-8 text-pink-400 group-hover:text-white transition-colors duration-300" />
                   </div>
-                  <h3 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3">Link Tree</h3>
-                  <p className="text-secondary mb-3 sm:mb-4 flex-grow text-sm sm:text-base">Accedi a tutti i nostri canali social e di contatto in un unico posto</p>
+                  <h3 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3 text-gray-900">Link Tree</h3>
+                  <p className="text-gray-600 mb-3 sm:mb-4 flex-grow text-sm sm:text-base">Accedi a tutti i nostri canali social e di contatto in un unico posto</p>
                   <span className="text-pink-400 font-medium group-hover:text-pink-500 transition-colors text-sm sm:text-base">Visita ora →</span>
                 </a>
               </div>
             </div>
           </section>
-        </div>
-      </div>
+        </div> {/* Chiusura del div z-10 */}
+      </div> {/* Chiusura del div relative per le onde */}
 
       {/* Footer */}
-      <footer className="bg-primary text-white py-16 px-4 sm:px-6 lg:px-8" data-testid="footer">
-        <div className="max-w-6xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+      <footer className="bg-background">
+        <div className="max-w-7xl mx-auto py-12 px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div className="md:col-span-2">
               <div className="flex items-center space-x-3 mb-6">
                 <img 
@@ -480,45 +492,47 @@ export default function Home() {
                   data-testid="img-footer-logo"
                 />
               </div>
-              <p className="text-gray-300 mb-6 max-w-md leading-relaxed" data-testid="text-footer-description">
+              <p className="text-gray-400 mb-6 max-w-md leading-relaxed" data-testid="text-footer-description">
                 Ogni immobile ha una storia da raccontare, un potenziale inespresso che attende di essere svelato. Noi siamo i custodi di queste storie, gli architetti che trasformano spazi in esperienze memorabili e investimenti in successi tangibili.
               </p>
             </div>
             <div>
-              <h4 className="font-semibold mb-4">Servizi</h4>
-              <ul className="space-y-2 text-gray-300">
+              <h4 className="font-semibold mb-4 text-white">Servizi</h4>
+              <ul className="space-y-2 text-gray-400">
                 <li>Gestione Online</li>
                 <li>Gestione Completa</li>
                 <li>Subaffitto</li>
               </ul>
             </div>
             <div>
-              <h4 className="font-semibold mb-4">Contatti</h4>
-              <ul className="space-y-2 text-gray-300">
+              <h4 className="font-semibold mb-4 text-white">Contatti</h4>
+              <ul className="space-y-2 text-gray-400">
                 <li className="flex items-center space-x-2">
-                  <Phone className="w-4 h-4 text-accent" />
+                  <Phone className="w-4 h-4 text-gray-400" />
                   <span>+39 353 483 0386</span>
                 </li>
                 <li className="flex items-center space-x-2">
-                  <Mail className="w-4 h-4 text-accent" />
+                  <Mail className="w-4 h-4 text-gray-400" />
                   <span>hello@moorentpm.it</span>
                 </li>
                 <li className="flex items-center space-x-2">
-                  <MapPin className="w-4 h-4 text-accent" />
+                  <MapPin className="w-4 h-4 text-gray-400" />
                   <span>Triveneto, Italia</span>
                 </li>
               </ul>
             </div>
           </div>
-          <div className="border-t border-gray-700 pt-8 flex flex-col sm:flex-row items-center justify-between">
-            <p className="text-gray-400 text-sm" data-testid="text-footer-copyright">© 2024 MoorentPM. Tutti i diritti riservati.</p>
-            <div className="flex space-x-6 mt-4 sm:mt-0">
-              <span className="text-gray-400 text-sm">Privacy Policy</span>
-              <span className="text-gray-400 text-sm">Termini di Servizio</span>
+        </div>
+        <div className="border-t border-gray-700">
+            <div className="max-w-7xl mx-auto py-8 px-4 sm:px-6 lg:px-8 flex flex-col sm:flex-row items-center justify-between">
+                <p className="text-gray-500 text-sm" data-testid="text-footer-copyright">© 2024 MoorentPM. Tutti i diritti riservati.</p>
+                <div className="flex space-x-6 mt-4 sm:mt-0">
+                <span className="text-gray-500 text-sm">Privacy Policy</span>
+                <span className="text-gray-500 text-sm">Termini di Servizio</span>
+                </div>
             </div>
-          </div>
         </div>
       </footer>
-    </div>
+    </div> // Chiusura del div principale
   );
 }

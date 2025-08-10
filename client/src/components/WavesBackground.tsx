@@ -10,16 +10,16 @@ const WavesBackground: React.FC = () => {
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
-    // Funzione per ridimensionare il canvas in base alla finestra del browser
     const resizeCanvas = () => {
       canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight; // *** CORREZIONE CHIAVE: altezza della finestra, non di tutta la pagina
+      canvas.height = window.innerHeight;
     };
 
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
     const lineColor = '#d6c4bf';
+    const backgroundColor = '#1a1616'; // Colore di sfondo scuro
 
     class WaveLine {
       y: number;
@@ -85,9 +85,6 @@ const WavesBackground: React.FC = () => {
 
     const waveGroups: WaveLine[] = [];
     
-    // La creazione dei gruppi ora userà la corretta altezza del canvas (quella della finestra)
-    // per posizionare le onde in modo concentrato.
-    
     // Gruppo 1
     for (let i = 0; i < 15; i++) {
         waveGroups.push(new WaveLine({
@@ -130,7 +127,10 @@ const WavesBackground: React.FC = () => {
     let animationFrameId: number;
     const animate = () => {
       if (!ctx || !canvas) return;
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      
+      // MODIFICA: Disegna il colore di sfondo prima di disegnare le onde
+      ctx.fillStyle = backgroundColor;
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
       
       waveGroups.forEach(wave => {
         wave.update();
@@ -150,11 +150,11 @@ const WavesBackground: React.FC = () => {
 
   // Stile per posizionare il canvas come sfondo fisso
   const canvasStyle: React.CSSProperties = {
-    position: 'fixed', // *** CORREZIONE CHIAVE: fisso, non scorre con la pagina
+    position: 'fixed',
     top: 0,
     left: 0,
-    zIndex: -1,
-    pointerEvents: 'none', // Impedisce al canvas di intercettare i click del mouse
+    zIndex: -1, // Messo dietro a tutto il resto
+    pointerEvents: 'none',
   };
 
   return <canvas id="wavesBg" ref={canvasRef} style={canvasStyle} />;
