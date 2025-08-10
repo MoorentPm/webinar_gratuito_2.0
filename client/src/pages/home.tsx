@@ -258,7 +258,7 @@ export default function Home() {
                     className="w-full h-full object-cover"
                     data-testid="video-webinar"
                   >
-                    <source src="videos/webinar.mp4" type="video/mp4" />
+                    <source src="" type="video/mp4" />
                     Il tuo browser non supporta il tag video.
                   </video>
                 </div>
