@@ -228,7 +228,7 @@ export default function Home() {
               <div className="w-full aspect-video rounded-xl sm:rounded-2xl shadow-2xl overflow-hidden hover-lift">
                 <iframe
                   className="w-full h-full"
-                  src="INCOLLA_QUI_IL_TUO_LINK_DI_YOUTUBE_EMBED"
+                  src="https://www.youtube.com/watch?v=V7qJSDNYrq4"
                   title="Webinar Premium MoorentPM"
                   frameBorder="0"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
