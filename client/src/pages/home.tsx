@@ -28,9 +28,7 @@ import WavesBackground from "@/components/WavesBackground";
 
 export default function Home() {
   const observerRef = useRef<IntersectionObserver | null>(null);
-  const [isVideoPlaying, setIsVideoPlaying] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const videoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     document.body.classList.add('dark');
@@ -38,7 +36,6 @@ export default function Home() {
       document.body.classList.remove('dark');
     };
   }, []);
-
 
   useEffect(() => {
     observerRef.current = new IntersectionObserver(
@@ -60,26 +57,6 @@ export default function Home() {
 
     return () => {
       observerRef.current?.disconnect();
-    };
-  }, []);
-
-  useEffect(() => {
-    const videoElement = videoRef.current;
-    if (!videoElement) return;
-
-    videoElement.playbackRate = 1.25;
-
-    const handlePlay = () => setIsVideoPlaying(true);
-    const handlePauseOrEnd = () => setIsVideoPlaying(false);
-
-    videoElement.addEventListener('play', handlePlay);
-    videoElement.addEventListener('pause', handlePauseOrEnd);
-    videoElement.addEventListener('ended', handlePauseOrEnd);
-
-    return () => {
-      videoElement.removeEventListener('play', handlePlay);
-      videoElement.removeEventListener('pause', handlePauseOrEnd);
-      videoElement.removeEventListener('ended', handlePauseOrEnd);
     };
   }, []);
 
@@ -124,7 +101,7 @@ export default function Home() {
           <div className="flex items-center justify-between h-16">
             <div className="flex items-center">
               <img 
-                src="https://i.imgur.com/aazwI7x.png" 
+                src="[https://i.imgur.com/aazwI7x.png](https://i.imgur.com/aazwI7x.png)" 
                 alt="MoorentPM Logo" 
                 className="h-12 w-auto"
                 data-testid="img-logo"
@@ -188,7 +165,7 @@ export default function Home() {
       <section className="relative min-h-screen flex items-center justify-center pt-16 px-4 sm:px-6 lg:px-8 hero-dark-bg" data-testid="section-hero">
         <div className="absolute inset-0 z-0">
           <img
-            src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2075&h=1384"
+            src="[https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2075&h=1384](https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2075&h=1384)"
             alt="Luxury real estate property with modern architecture"
             className="w-full h-full object-cover opacity-5"
             data-testid="img-hero-background"
@@ -246,49 +223,15 @@ export default function Home() {
                   Un webinar completo che ti guiderà attraverso le strategie più efficaci per trasformare la tua proprietà in una fonte di reddito costante e redditizia.
                 </p>
               </div>
-              <div className="flex flex-col items-center gap-4 px-2 sm:px-0">
-                {/* --- MODIFICA CHIAVE 1: Aggiunta classe "aspect-video" per forzare il formato 16:9 --- */}
-                <div className="w-full aspect-video rounded-xl sm:rounded-2xl shadow-2xl overflow-hidden hover-lift">
-                  <video
-                    ref={videoRef}
-                    id="main-video"
-                    controls
-                    poster="/images/copertina-video.jpg"
-                    // --- MODIFICA CHIAVE 2: Aggiunte classi per riempire il contenitore ---
-                    className="w-full h-full object-cover"
-                    data-testid="video-webinar"
-                  >
-                    <source src="" type="video/mp4" />
-                    Il tuo browser non supporta il tag video.
-                  </video>
-                </div>
-                <div className={`w-full transition-all duration-500 ${
-                  isVideoPlaying ? 'opacity-0 -translate-y-4 pointer-events-none' : 'opacity-100 translate-y-0'
-                }`} data-testid="video-banner">
-                  <div className="video-banner-glass rounded-xl sm:rounded-2xl p-3 sm:p-4 lg:p-6 border border-gray-100">
-                    <div className="flex flex-col gap-2 sm:gap-3">
-                      <div className="flex items-start sm:items-center space-x-3">
-                        <div className="w-8 h-8 sm:w-10 sm:h-10 bg-accent rounded-full flex items-center justify-center flex-shrink-0">
-                          <Play className="w-4 h-4 sm:w-5 sm:h-5 text-primary" />
-                        </div>
-                        <div className="flex-1 min-w-0">
-                          <h3 className="font-semibold text-sm sm:text-base text-white">Webinar Premium</h3>
-                          <p className="text-gray-300 text-xs sm:text-sm">Durata: 20 minuti • Contenuto esclusivo</p>
-                        </div>
-                      </div>
-                      <div className="flex flex-col sm:flex-row items-start sm:items-center gap-2 sm:gap-4 text-xs sm:text-sm text-gray-300 pl-11 sm:pl-13 lg:pl-0 pt-1 sm:pt-2">
-                        <div className="flex items-center space-x-2">
-                          <Users className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
-                          <span>Proprietari HNWI</span>
-                        </div>
-                        <div className="flex items-center space-x-2">
-                          <MapPin className="w-3 h-3 sm:w-4 sm:h-4 flex-shrink-0" />
-                          <span>Triveneto</span>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+              <div className="w-full aspect-video rounded-xl sm:rounded-2xl shadow-2xl overflow-hidden hover-lift">
+                <iframe
+                  className="w-full h-full"
+                  src="INCOLLA_QUI_IL_TUO_LINK_DI_YOUTUBE_EMBED"
+                  title="Webinar Premium MoorentPM"
+                  frameBorder="0"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                ></iframe>
               </div>
             </div>
           </section>
@@ -333,7 +276,7 @@ export default function Home() {
                     Accedi al nostro strumento online per definire il prezzo di partenza ideale per il tuo annuncio.
                   </p>
                   <a
-                    href="https://moorentpm.github.io/calcolatore-prezzi-airbnb/"
+                    href="[https://moorentpm.github.io/calcolatore-prezzi-airbnb/](https://moorentpm.github.io/calcolatore-prezzi-airbnb/)"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="inline-flex items-center justify-center mt-auto px-4 sm:px-6 py-2 sm:py-3 bg-white text-black font-semibold rounded-full hover:bg-gray-200 transition-colors duration-300 text-sm sm:text-base touch-manipulation"
@@ -434,7 +377,7 @@ export default function Home() {
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-6 max-w-4xl mx-auto">
                 <a
-                  href="https://wa.me/393534830386?text=Ciao!%20Ho%20visto%20il%20vostro%20webinar%20e%20vorrei%20maggiori%20informazioni%20sui%20vostri%20servizi"
+                  href="[https://wa.me/393534830386?text=Ciao!%20Ho%20visto%20il%20vostro%20webinar%20e%20vorrei%20maggiori%20informazioni%20sui%20vostri%20servizi](https://wa.me/393534830386?text=Ciao!%20Ho%20visto%20il%20vostro%20webinar%20e%20vorrei%20maggiori%20informazioni%20sui%20vostri%20servizi)"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group bg-white rounded-xl sm:rounded-2xl p-6 sm:p-8 shadow-lg hover-lift border border-gray-100 transition-all duration-300 hover:border-green-200 text-primary touch-manipulation min-h-[200px] sm:min-h-[240px] flex flex-col"
@@ -460,7 +403,7 @@ export default function Home() {
                   <span className="text-blue-600 font-medium group-hover:text-blue-700 transition-colors text-sm sm:text-base">Chiama ora →</span>
                 </a>
                 <a
-                  href="https://linktr.ee/moorentpm"
+                  href="[https://linktr.ee/moorentpm](https://linktr.ee/moorentpm)"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="group bg-white rounded-xl sm:rounded-2xl p-6 sm:p-8 shadow-lg hover-lift border border-gray-100 transition-all duration-300 hover:border-pink-200 text-primary touch-manipulation min-h-[200px] sm:min-h-[240px] flex flex-col"
@@ -486,7 +429,7 @@ export default function Home() {
             <div className="md:col-span-2">
               <div className="flex items-center space-x-3 mb-6">
                 <img 
-                  src="https://i.imgur.com/aazwI7x.png" 
+                  src="[https://i.imgur.com/aazwI7x.png](https://i.imgur.com/aazwI7x.png)" 
                   alt="MoorentPM Logo" 
                   className="h-12 w-auto"
                   data-testid="img-footer-logo"
