@@ -12,14 +12,15 @@ const WavesBackground: React.FC = () => {
 
     const resizeCanvas = () => {
       canvas.width = window.innerWidth;
-      // Imposta l'altezza del canvas per coprire l'intera altezza del body
-      // per assicurarsi che lo sfondo copra tutta la pagina, anche dopo lo scroll.
-      canvas.height = document.body.scrollHeight;
+      // Utilizzo della logica di ridimensionamento fornita
+      canvas.height = canvas.parentElement?.scrollHeight || window.innerHeight;
     };
     
-    // Usiamo ResizeObserver per adattare il canvas se la dimensione del body cambia (es. se si apre un accordion)
+    // Utilizzo del ResizeObserver come nel codice fornito
     const resizeObserver = new ResizeObserver(resizeCanvas);
-    resizeObserver.observe(document.body);
+    if(canvas.parentElement) {
+      resizeObserver.observe(canvas.parentElement);
+    }
 
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
@@ -49,7 +50,7 @@ const WavesBackground: React.FC = () => {
         this.speed = options.speed || (0.002 + Math.random() * 0.008);
         this.opacity = options.opacity || (0.1 + Math.random() * 0.3);
         this.segments = [];
-        this.segmentLength = 2; // Lunghezza dei segmenti di linea per un'onda più fluida
+        this.segmentLength = 2;
 
         for (let x = 0; x < canvas.width + this.segmentLength; x += this.segmentLength) {
           this.segments.push({
@@ -81,7 +82,7 @@ const WavesBackground: React.FC = () => {
       }
     }
 
-    // Creiamo 3 gruppi di onde per un effetto più denso e complesso
+    // Logica originale con 3 gruppi di onde
     const waveGroups: WaveLine[] = [];
     // Gruppo 1
     for (let i = 0; i < 15; i++) {
@@ -140,8 +141,7 @@ const WavesBackground: React.FC = () => {
     };
   }, []);
 
-  // Aggiungo un po' di stile direttamente qui per assicurarmi che il canvas
-  // sia posizionato correttamente dietro a tutto il resto.
+  // Stile per posizionare il canvas come sfondo
   const canvasStyle: React.CSSProperties = {
     position: 'absolute',
     top: 0,
