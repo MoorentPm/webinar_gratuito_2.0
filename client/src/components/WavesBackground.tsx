@@ -12,17 +12,19 @@ const WavesBackground: React.FC = () => {
 
     const resizeCanvas = () => {
       canvas.width = window.innerWidth;
-      canvas.height = canvas.parentElement?.scrollHeight || window.innerHeight;
+      // Imposta l'altezza del canvas per coprire l'intera altezza del body
+      // per assicurarsi che lo sfondo copra tutta la pagina, anche dopo lo scroll.
+      canvas.height = document.body.scrollHeight;
     };
     
+    // Usiamo ResizeObserver per adattare il canvas se la dimensione del body cambia (es. se si apre un accordion)
     const resizeObserver = new ResizeObserver(resizeCanvas);
-    if(canvas.parentElement) {
-      resizeObserver.observe(canvas.parentElement);
-    }
+    resizeObserver.observe(document.body);
 
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
+    // Colore delle linee per lo sfondo scuro
     const lineColor = '#d6c4bf';
 
     class WaveLine {
@@ -38,7 +40,7 @@ const WavesBackground: React.FC = () => {
       segmentLength: number;
 
       constructor(options: Partial<WaveLine>) {
-        this.y = options.y || Math.random() * (canvas?.height || window.innerHeight);
+        this.y = options.y || Math.random() * canvas.height;
         this.amplitude = options.amplitude || (30 + Math.random() * 80);
         this.wavelength = options.wavelength || (100 + Math.random() * 300);
         this.frequency = Math.PI * 2 / this.wavelength;
@@ -47,9 +49,9 @@ const WavesBackground: React.FC = () => {
         this.speed = options.speed || (0.002 + Math.random() * 0.008);
         this.opacity = options.opacity || (0.1 + Math.random() * 0.3);
         this.segments = [];
-        this.segmentLength = 2;
+        this.segmentLength = 2; // Lunghezza dei segmenti di linea per un'onda più fluida
 
-        for (let x = 0; x < (canvas?.width || window.innerWidth) + this.segmentLength; x += this.segmentLength) {
+        for (let x = 0; x < canvas.width + this.segmentLength; x += this.segmentLength) {
           this.segments.push({
             x: x,
             y: this.y + Math.sin(this.frequency * x + this.phase) * this.amplitude
@@ -75,51 +77,81 @@ const WavesBackground: React.FC = () => {
           ctx.lineTo(this.segments[i].x, this.segments[i].y);
         }
         ctx.stroke();
+        ctx.globalAlpha = 1;
       }
     }
 
-    const waves: WaveLine[] = [];
-    const numWaves = 15;
-
-    for (let i = 0; i < numWaves; i++) {
-      waves.push(new WaveLine({
-        y: Math.random() * canvas.height,
-        amplitude: 20 + Math.random() * 60,
-        wavelength: 200 + Math.random() * 400,
-        speed: 0.001 + Math.random() * 0.005,
-        opacity: 0.05 + Math.random() * 0.15,
-        lineWidth: 0.5 + Math.random() * 1
-      }));
+    // Creiamo 3 gruppi di onde per un effetto più denso e complesso
+    const waveGroups: WaveLine[] = [];
+    // Gruppo 1
+    for (let i = 0; i < 15; i++) {
+        waveGroups.push(new WaveLine({
+            y: canvas.height * 0.3 + i * 10,
+            amplitude: 40 + i * 2,
+            wavelength: 1200 + i * 10,
+            phase: i * 0.2,
+            lineWidth: 0.4,
+            speed: 0.002,
+            opacity: 0.15
+        }));
+    }
+    // Gruppo 2
+    for (let i = 0; i < 20; i++) {
+        waveGroups.push(new WaveLine({
+            y: canvas.height * 0.5 + i * 8,
+            amplitude: 35 - i * 0.5,
+            wavelength: 800 + i * 50,
+            phase: i * 0.1 + Math.PI,
+            lineWidth: 0.5,
+            speed: 0.003,
+            opacity: 0.25
+        }));
+    }
+    // Gruppo 3
+    for (let i = 0; i < 15; i++) {
+        waveGroups.push(new WaveLine({
+            y: canvas.height * 0.7 + i * 12,
+            amplitude: 30 + i * 1.5,
+            wavelength: 1000 - i * 20,
+            phase: i * 0.15 + Math.PI / 2,
+            lineWidth: 0.4,
+            speed: 0.0015,
+            opacity: 0.2
+        }));
     }
 
-    function animate() {
+    let animationFrameId: number;
+    const animate = () => {
       if (!ctx || !canvas) return;
-      
       ctx.clearRect(0, 0, canvas.width, canvas.height);
-      
-      waves.forEach(wave => {
+      waveGroups.forEach(wave => {
         wave.update();
         wave.draw();
       });
-      
-      requestAnimationFrame(animate);
-    }
-
+      animationFrameId = requestAnimationFrame(animate);
+    };
     animate();
 
+    // Funzione di pulizia per quando il componente viene smontato
     return () => {
       window.removeEventListener('resize', resizeCanvas);
       resizeObserver.disconnect();
+      cancelAnimationFrame(animationFrameId);
     };
   }, []);
 
-  return (
-    <canvas
-      ref={canvasRef}
-      className="absolute inset-0 pointer-events-none"
-      style={{ zIndex: 1 }}
-    />
-  );
+  // Aggiungo un po' di stile direttamente qui per assicurarmi che il canvas
+  // sia posizionato correttamente dietro a tutto il resto.
+  const canvasStyle: React.CSSProperties = {
+    position: 'absolute',
+    top: 0,
+    left: 0,
+    zIndex: -1,
+    width: '100%',
+    height: '100%'
+  };
+
+  return <canvas id="wavesBg" ref={canvasRef} style={canvasStyle} />;
 };
 
 export default WavesBackground;
