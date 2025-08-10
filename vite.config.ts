@@ -4,6 +4,9 @@ import path from "path";
 import runtimeErrorOverlay from "@replit/vite-plugin-runtime-error-modal";
 
 export default defineConfig({
+  // Aggiunto per GitHub Pages. Sostituisci 'webinar_gratuito_2.0' 
+  // se il nome della tua repository è diverso.
+  base: "/webinar_gratuito_2.0/", 
   plugins: [
     react(),
     runtimeErrorOverlay(),
@@ -25,7 +28,8 @@ export default defineConfig({
   },
   root: path.resolve(import.meta.dirname, "client"),
   build: {
-    outDir: path.resolve(import.meta.dirname, "dist/public"),
+    // Modificato per puntare alla cartella 'dist' nella root del progetto
+    outDir: path.resolve(import.meta.dirname, "dist"),
     emptyOutDir: true,
   },
   server: {
