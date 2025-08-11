@@ -20,10 +20,10 @@ const WavesBackground: React.FC = () => {
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
-    // Colore delle linee (rosa/beige pallido) - stesso del codice HTML
-    const lineColor = '#d6c4bf';
+    // Colore delle linee - cambiato a bianco per migliore visibilità
+    const lineColor = '#ffffff';
 
-    // Classe per creare le linee ondulate - identica al codice HTML
+    // Classe per creare le linee ondulate - identica al codice HTML ma con parametri ottimizzati
     class WaveLine {
       x: number;
       y: number;
@@ -52,9 +52,9 @@ const WavesBackground: React.FC = () => {
         this.wavelength = options.wavelength || (100 + Math.random() * 300);
         this.frequency = Math.PI * 2 / this.wavelength;
         this.phase = options.phase || Math.random() * Math.PI * 2;
-        this.lineWidth = options.lineWidth || (0.2 + Math.random() * 0.6);
+        this.lineWidth = options.lineWidth || (0.8 + Math.random() * 0.8); // Aumentato lo spessore
         this.speed = options.speed || (0.002 + Math.random() * 0.008);
-        this.opacity = options.opacity || (0.1 + Math.random() * 0.3);
+        this.opacity = options.opacity || (0.3 + Math.random() * 0.4); // Aumentata l'opacità
         this.segments = [];
         this.segmentLength = 2;
 
@@ -96,7 +96,7 @@ const WavesBackground: React.FC = () => {
       }
     }
 
-    // Crea gruppi di linee ondulate - identici al codice HTML
+    // Crea gruppi di linee ondulate - con parametri ottimizzati per visibilità
     const waveGroups: WaveLine[] = [];
 
     // Primo gruppo - parte alta del canvas
@@ -106,9 +106,9 @@ const WavesBackground: React.FC = () => {
         amplitude: 40 + i * 2,
         wavelength: 1200 + i * 10,
         phase: i * 0.2,
-        lineWidth: 0.4,
+        lineWidth: 1.2, // Aumentato per visibilità
         speed: 0.002,
-        opacity: 0.15
+        opacity: 0.4 // Aumentata per visibilità
       }));
     }
 
@@ -119,9 +119,9 @@ const WavesBackground: React.FC = () => {
         amplitude: 35 - i * 0.5,
         wavelength: 800 + i * 50,
         phase: i * 0.1 + Math.PI,
-        lineWidth: 0.5,
+        lineWidth: 1.5, // Aumentato per visibilità
         speed: 0.003,
-        opacity: 0.25
+        opacity: 0.5 // Aumentata per visibilità
       }));
     }
 
@@ -132,9 +132,9 @@ const WavesBackground: React.FC = () => {
         amplitude: 30 + i * 1.5,
         wavelength: 1000 - i * 20,
         phase: i * 0.15 + Math.PI / 2,
-        lineWidth: 0.4,
+        lineWidth: 1.0, // Aumentato per visibilità
         speed: 0.0015,
-        opacity: 0.2
+        opacity: 0.45 // Aumentata per visibilità
       }));
     }
 
