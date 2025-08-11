@@ -1,18 +1,24 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useState } from 'react';
 
 const WavesBackground: React.FC = () => {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const [isInitialized, setIsInitialized] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
+    console.log('🚀 WavesBackground useEffect iniziato');
+    
     const canvas = canvasRef.current;
     if (!canvas) {
       console.log('❌ Canvas non trovato');
+      setError('Canvas non trovato');
       return;
     }
 
     const ctx = canvas.getContext('2d');
     if (!ctx) {
       console.log('❌ Context 2D non disponibile');
+      setError('Context 2D non disponibile');
       return;
     }
 
@@ -30,12 +36,11 @@ const WavesBackground: React.FC = () => {
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
-    // Colore delle linee - cambiato a bianco per migliore visibilità
+    // Colore delle linee - bianco per massima visibilità
     const lineColor = '#ffffff';
 
-    // Classe per creare le linee ondulate - identica al codice HTML ma con parametri ottimizzati
+    // Classe semplificata per le linee ondulate
     class WaveLine {
-      x: number;
       y: number;
       amplitude: number;
       wavelength: number;
@@ -44,47 +49,20 @@ const WavesBackground: React.FC = () => {
       lineWidth: number;
       speed: number;
       opacity: number;
-      segments: { x: number; y: number }[];
-      segmentLength: number;
 
-      constructor(options: {
-        y?: number;
-        amplitude?: number;
-        wavelength?: number;
-        phase?: number;
-        lineWidth?: number;
-        speed?: number;
-        opacity?: number;
-      }) {
-        this.x = 0;
-        this.y = options.y || Math.random() * (canvas?.height || 0);
-        this.amplitude = options.amplitude || (30 + Math.random() * 80);
-        this.wavelength = options.wavelength || (100 + Math.random() * 300);
+      constructor(y: number) {
+        this.y = y;
+        this.amplitude = 30 + Math.random() * 50;
+        this.wavelength = 200 + Math.random() * 400;
         this.frequency = Math.PI * 2 / this.wavelength;
-        this.phase = options.phase || Math.random() * Math.PI * 2;
-        this.lineWidth = options.lineWidth || (1.5 + Math.random() * 1.0); // Aumentato ulteriormente
-        this.speed = options.speed || (0.002 + Math.random() * 0.008);
-        this.opacity = options.opacity || (0.6 + Math.random() * 0.3); // Aumentata ulteriormente
-        this.segments = [];
-        this.segmentLength = 2;
-
-        // Crea i punti della linea
-        if (canvas) {
-          for (let x = 0; x < canvas.width + this.segmentLength; x += this.segmentLength) {
-            this.segments.push({
-              x: x,
-              y: this.y + Math.sin(this.frequency * x + this.phase) * this.amplitude
-            });
-          }
-        }
+        this.phase = Math.random() * Math.PI * 2;
+        this.lineWidth = 2.0; // Spessore fisso per visibilità
+        this.speed = 0.002;
+        this.opacity = 0.8; // Opacità alta per visibilità
       }
 
       update() {
         this.phase += this.speed;
-
-        for (let i = 0; i < this.segments.length; i++) {
-          this.segments[i].y = this.y + Math.sin(this.frequency * this.segments[i].x + this.phase) * this.amplitude;
-        }
       }
 
       draw() {
@@ -95,10 +73,14 @@ const WavesBackground: React.FC = () => {
         ctx.lineWidth = this.lineWidth;
         ctx.globalAlpha = this.opacity;
 
-        ctx.moveTo(this.segments[0].x, this.segments[0].y);
-
-        for (let i = 1; i < this.segments.length; i++) {
-          ctx.lineTo(this.segments[i].x, this.segments[i].y);
+        // Disegna una singola onda
+        for (let x = 0; x < canvas.width; x += 2) {
+          const y = this.y + Math.sin(this.frequency * x + this.phase) * this.amplitude;
+          if (x === 0) {
+            ctx.moveTo(x, y);
+          } else {
+            ctx.lineTo(x, y);
+          }
         }
 
         ctx.stroke();
@@ -106,58 +88,25 @@ const WavesBackground: React.FC = () => {
       }
     }
 
-    // Crea gruppi di linee ondulate - con parametri ottimizzati per visibilità
-    const waveGroups: WaveLine[] = [];
+    // Crea poche onde semplici
+    const waves = [
+      new WaveLine(canvas.height * 0.3),
+      new WaveLine(canvas.height * 0.5),
+      new WaveLine(canvas.height * 0.7),
+    ];
 
-    // Primo gruppo - parte alta del canvas
-    for (let i = 0; i < 15; i++) {
-      waveGroups.push(new WaveLine({
-        y: (canvas.height * 0.3) + i * 10,
-        amplitude: 40 + i * 2,
-        wavelength: 1200 + i * 10,
-        phase: i * 0.2,
-        lineWidth: 2.0, // Aumentato ulteriormente per visibilità
-        speed: 0.002,
-        opacity: 0.8 // Aumentata ulteriormente per visibilità
-      }));
-    }
+    console.log('🌊 Onde create:', waves.length);
 
-    // Secondo gruppo - parte centrale del canvas
-    for (let i = 0; i < 20; i++) {
-      waveGroups.push(new WaveLine({
-        y: (canvas.height * 0.5) + i * 8,
-        amplitude: 35 - i * 0.5,
-        wavelength: 800 + i * 50,
-        phase: i * 0.1 + Math.PI,
-        lineWidth: 2.5, // Aumentato ulteriormente per visibilità
-        speed: 0.003,
-        opacity: 0.9 // Aumentata ulteriormente per visibilità
-      }));
-    }
-
-    // Terzo gruppo - parte bassa del canvas
-    for (let i = 0; i < 15; i++) {
-      waveGroups.push(new WaveLine({
-        y: (canvas.height * 0.7) + i * 12,
-        amplitude: 30 + i * 1.5,
-        wavelength: 1000 - i * 20,
-        phase: i * 0.15 + Math.PI / 2,
-        lineWidth: 1.8, // Aumentato ulteriormente per visibilità
-        speed: 0.0015,
-        opacity: 0.85 // Aumentata ulteriormente per visibilità
-      }));
-    }
-
-    console.log('🌊 Onde create:', waveGroups.length);
-
-    // Funzione di animazione
+    // Funzione di animazione semplificata
     function animate() {
       if (!ctx || !canvas) return;
       
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      // Pulisci il canvas
+      ctx.fillStyle = '#1a1616';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-      // Aggiorna e disegna tutte le linee ondulate
-      waveGroups.forEach(wave => {
+      // Aggiorna e disegna tutte le onde
+      waves.forEach(wave => {
         wave.update();
         wave.draw();
       });
@@ -167,6 +116,7 @@ const WavesBackground: React.FC = () => {
 
     // Avvia l'animazione
     animate();
+    setIsInitialized(true);
     console.log('🎬 Animazione avviata');
 
     return () => {
@@ -175,41 +125,44 @@ const WavesBackground: React.FC = () => {
     };
   }, []);
 
+  // Fallback visibile se c'è un errore
+  if (error) {
+    return (
+      <div style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        backgroundColor: '#ff0000',
+        color: 'white',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        fontSize: '24px',
+        zIndex: -1,
+      }}>
+        ERRORE: {error}
+      </div>
+    );
+  }
+
   return (
-    <>
-      {/* Div noise come nel codice HTML originale */}
-      <div 
-        className="noise"
-        style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          backgroundImage: `url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E")`,
-          opacity: 0.015,
-          zIndex: -1,
-          pointerEvents: 'none',
-        }}
-      />
-      
-      {/* Canvas per le onde - con bordo rosso temporaneo per debug */}
-      <canvas 
-        id="wavesBg" 
-        ref={canvasRef} 
-        style={{
-          position: 'fixed',
-          top: 0,
-          left: 0,
-          width: '100%',
-          height: '100%',
-          zIndex: -1, // Importante: z-index negativo per essere sotto tutto
-          pointerEvents: 'none',
-          backgroundColor: '#1a1616', // Sfondo nero come nel codice HTML
-          border: '3px solid red', // Bordo rosso temporaneo per debug
-        }} 
-      />
-    </>
+    <canvas 
+      id="wavesBg" 
+      ref={canvasRef} 
+      style={{
+        position: 'fixed',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        zIndex: -1,
+        pointerEvents: 'none',
+        backgroundColor: '#1a1616',
+        border: '5px solid red', // Bordo rosso più spesso per debug
+      }} 
+    />
   );
 };
 
