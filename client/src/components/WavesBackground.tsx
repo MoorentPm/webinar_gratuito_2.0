@@ -5,20 +5,29 @@ const WavesBackground: React.FC = () => {
 
   useEffect(() => {
     const canvas = canvasRef.current;
-    if (!canvas) return;
+    if (!canvas) {
+      console.log('Canvas non trovato');
+      return;
+    }
 
     const ctx = canvas.getContext('2d');
-    if (!ctx) return;
+    if (!ctx) {
+      console.log('Context 2D non disponibile');
+      return;
+    }
+
+    console.log('WavesBackground inizializzato');
 
     const resizeCanvas = () => {
       canvas.width = window.innerWidth;
       canvas.height = window.innerHeight;
+      console.log('Canvas ridimensionato:', canvas.width, 'x', canvas.height);
     };
 
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
-    const lineColor = '#ffffff'; // Cambiato a bianco per migliore visibilità
+    const lineColor = '#ffffff'; // Bianco per massima visibilità
     const backgroundColor = '#1a1616'; // Colore di sfondo scuro
 
     // --- INIZIO CODICE CORRETTO ---
@@ -56,9 +65,9 @@ const WavesBackground: React.FC = () => {
         this.wavelength = options.wavelength || 100 + Math.random() * 300;
         this.frequency = (Math.PI * 2) / this.wavelength;
         this.phase = options.phase || Math.random() * Math.PI * 2;
-        this.lineWidth = options.lineWidth || 1.5 + Math.random() * 1.5; // Aumentato lo spessore
+        this.lineWidth = options.lineWidth || 3.0 + Math.random() * 2.0; // Aumentato ulteriormente
         this.speed = options.speed || 0.002 + Math.random() * 0.008;
-        this.opacity = options.opacity || 0.4 + Math.random() * 0.4; // Aumentata l'opacità
+        this.opacity = options.opacity || 0.8 + Math.random() * 0.2; // Aumentata ulteriormente
         this.segments = [];
         this.segmentLength = 2;
 
@@ -110,9 +119,9 @@ const WavesBackground: React.FC = () => {
           amplitude: 40 + i * 2,
           wavelength: 1200 + i * 10,
           phase: i * 0.2,
-          lineWidth: 1.8, // Aumentato lo spessore
+          lineWidth: 3.5, // Aumentato ulteriormente
           speed: 0.002,
-          opacity: 0.5, // Aumentata l'opacità
+          opacity: 0.9, // Aumentata ulteriormente
         })
       );
     }
@@ -125,9 +134,9 @@ const WavesBackground: React.FC = () => {
           amplitude: 35 - i * 0.5,
           wavelength: 800 + i * 50,
           phase: i * 0.1 + Math.PI,
-          lineWidth: 2.0, // Aumentato lo spessore
+          lineWidth: 4.0, // Aumentato ulteriormente
           speed: 0.003,
-          opacity: 0.6, // Aumentata l'opacità
+          opacity: 1.0, // Opacità massima
         })
       );
     }
@@ -140,13 +149,15 @@ const WavesBackground: React.FC = () => {
           amplitude: 30 + i * 1.5,
           wavelength: 1000 - i * 20,
           phase: i * 0.15 + Math.PI / 2,
-          lineWidth: 1.6, // Aumentato lo spessore
+          lineWidth: 3.2, // Aumentato ulteriormente
           speed: 0.0015,
-          opacity: 0.55, // Aumentata l'opacità
+          opacity: 0.95, // Aumentata ulteriormente
         })
       );
     }
     // --- FINE CODICE CORRETTO ---
+
+    console.log('Onde create:', waveGroups.length);
 
     let animationFrameId: number;
     const animate = () => {
@@ -164,10 +175,12 @@ const WavesBackground: React.FC = () => {
     };
 
     animate();
+    console.log('Animazione avviata');
 
     return () => {
       window.removeEventListener('resize', resizeCanvas);
       cancelAnimationFrame(animationFrameId);
+      console.log('WavesBackground cleanup');
     };
   }, []);
 
@@ -175,8 +188,10 @@ const WavesBackground: React.FC = () => {
     position: 'fixed',
     top: 0,
     left: 0,
-    zIndex: -1,
+    zIndex: 0, // Cambiato da -1 a 0
     pointerEvents: 'none',
+    // Aggiungo un bordo temporaneo per debug
+    border: '2px solid red',
   };
 
   return <canvas id="wavesBg" ref={canvasRef} style={canvasStyle} />;
