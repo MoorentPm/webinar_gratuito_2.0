@@ -18,7 +18,7 @@ const WavesBackground: React.FC = () => {
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
-    const lineColor = '#d6c4bf';
+    const lineColor = '#ffffff'; // Cambiato a bianco per migliore visibilità
     const backgroundColor = '#1a1616'; // Colore di sfondo scuro
 
     // --- INIZIO CODICE CORRETTO ---
@@ -56,9 +56,9 @@ const WavesBackground: React.FC = () => {
         this.wavelength = options.wavelength || 100 + Math.random() * 300;
         this.frequency = (Math.PI * 2) / this.wavelength;
         this.phase = options.phase || Math.random() * Math.PI * 2;
-        this.lineWidth = options.lineWidth || 0.2 + Math.random() * 0.6;
+        this.lineWidth = options.lineWidth || 1.5 + Math.random() * 1.5; // Aumentato lo spessore
         this.speed = options.speed || 0.002 + Math.random() * 0.008;
-        this.opacity = options.opacity || 0.1 + Math.random() * 0.3;
+        this.opacity = options.opacity || 0.4 + Math.random() * 0.4; // Aumentata l'opacità
         this.segments = [];
         this.segmentLength = 2;
 
@@ -110,9 +110,9 @@ const WavesBackground: React.FC = () => {
           amplitude: 40 + i * 2,
           wavelength: 1200 + i * 10,
           phase: i * 0.2,
-          lineWidth: 0.4,
+          lineWidth: 1.8, // Aumentato lo spessore
           speed: 0.002,
-          opacity: 0.15,
+          opacity: 0.5, // Aumentata l'opacità
         })
       );
     }
@@ -125,9 +125,9 @@ const WavesBackground: React.FC = () => {
           amplitude: 35 - i * 0.5,
           wavelength: 800 + i * 50,
           phase: i * 0.1 + Math.PI,
-          lineWidth: 0.5,
+          lineWidth: 2.0, // Aumentato lo spessore
           speed: 0.003,
-          opacity: 0.25,
+          opacity: 0.6, // Aumentata l'opacità
         })
       );
     }
@@ -140,9 +140,9 @@ const WavesBackground: React.FC = () => {
           amplitude: 30 + i * 1.5,
           wavelength: 1000 - i * 20,
           phase: i * 0.15 + Math.PI / 2,
-          lineWidth: 0.4,
+          lineWidth: 1.6, // Aumentato lo spessore
           speed: 0.0015,
-          opacity: 0.2,
+          opacity: 0.55, // Aumentata l'opacità
         })
       );
     }
