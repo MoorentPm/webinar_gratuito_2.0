@@ -113,55 +113,56 @@ const WavesBackground: React.FC = () => {
 
     // Calcolo altezza hero (circa 100vh - altezza schermo)
     const heroHeight = window.innerHeight;
-    const startY = heroHeight * 0.8; // Le onde iniziano dall'80% dell'altezza hero
+    const startY = heroHeight * 0.6; // Le onde iniziano dal 60% dell'altezza hero
+    const availableHeight = canvas.height - startY; // Altezza disponibile per le onde
 
-    // Gruppo 1 - onde più leggere, posizionate dopo la sezione hero
-    for (let i = 0; i < 15; i++) {
+    // Gruppo 1 - onde distribuite uniformemente nella parte superiore
+    for (let i = 0; i < 12; i++) {
       waveGroups.push(
         new WaveLine(canvas, ctx, { // Passa canvas e ctx
-          y: startY + i * 8, // Posizionate dopo la sezione hero
-          amplitude: 25 + i * 1.5, // Ampiezza ridotta
-          wavelength: 1200 + i * 10,
-          phase: i * 0.2,
-          lineWidth: 0.6, // Spessore molto leggero
-          speed: 0.002,
-          opacity: 0.12, // Opacità molto leggera
-        })
-      );
-    }
-
-    // Gruppo 2 - onde più leggere
-    for (let i = 0; i < 20; i++) {
-      waveGroups.push(
-        new WaveLine(canvas, ctx, { // Passa canvas e ctx
-          y: startY + 120 + i * 6, // Posizionate più in basso
-          amplitude: 20 - i * 0.3, // Ampiezza ridotta
-          wavelength: 800 + i * 50,
-          phase: i * 0.1 + Math.PI,
-          lineWidth: 0.7, // Spessore leggero
-          speed: 0.003,
-          opacity: 0.15, // Opacità leggera
-        })
-      );
-    }
-
-    // Gruppo 3 - onde più leggere
-    for (let i = 0; i < 15; i++) {
-      waveGroups.push(
-        new WaveLine(canvas, ctx, { // Passa canvas e ctx
-          y: startY + 240 + i * 10, // Posizionate ancora più in basso
-          amplitude: 18 + i * 1.2, // Ampiezza ridotta
-          wavelength: 1000 - i * 20,
-          phase: i * 0.15 + Math.PI / 2,
-          lineWidth: 0.5, // Spessore molto leggero
+          y: startY + (availableHeight * 0.1) + (i * availableHeight * 0.05), // Distribuite uniformemente
+          amplitude: 15 + i * 1.2, // Ampiezza molto ridotta
+          wavelength: 1000 + i * 50,
+          phase: i * 0.3,
+          lineWidth: 0.4, // Spessore molto sottile
           speed: 0.0015,
-          opacity: 0.1, // Opacità molto leggera
+          opacity: 0.08, // Opacità molto leggera
+        })
+      );
+    }
+
+    // Gruppo 2 - onde distribuite nella parte centrale
+    for (let i = 0; i < 15; i++) {
+      waveGroups.push(
+        new WaveLine(canvas, ctx, { // Passa canvas e ctx
+          y: startY + (availableHeight * 0.4) + (i * availableHeight * 0.03), // Distribuite nella parte centrale
+          amplitude: 12 - i * 0.2, // Ampiezza ancora più ridotta
+          wavelength: 800 + i * 40,
+          phase: i * 0.2 + Math.PI,
+          lineWidth: 0.3, // Spessore ultra sottile
+          speed: 0.002,
+          opacity: 0.06, // Opacità ultra leggera
+        })
+      );
+    }
+
+    // Gruppo 3 - onde distribuite nella parte inferiore
+    for (let i = 0; i < 10; i++) {
+      waveGroups.push(
+        new WaveLine(canvas, ctx, { // Passa canvas e ctx
+          y: startY + (availableHeight * 0.7) + (i * availableHeight * 0.04), // Distribuite nella parte inferiore
+          amplitude: 10 + i * 0.8, // Ampiezza minima
+          wavelength: 1200 - i * 30,
+          phase: i * 0.25 + Math.PI / 2,
+          lineWidth: 0.25, // Spessore minimo
+          speed: 0.001,
+          opacity: 0.05, // Opacità minima
         })
       );
     }
     // --- FINE CODICE CORRETTO ---
 
-    console.log('Onde create:', waveGroups.length, 'iniziando da Y:', startY);
+    console.log('Onde create:', waveGroups.length, 'iniziando da Y:', startY, 'altezza disponibile:', availableHeight);
 
     let animationFrameId: number;
     const animate = () => {
