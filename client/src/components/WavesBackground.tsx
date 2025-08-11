@@ -27,8 +27,8 @@ const WavesBackground: React.FC = () => {
     resizeCanvas();
     window.addEventListener('resize', resizeCanvas);
 
-    const lineColor = '#ffffff'; // Bianco per massima visibilità
-    const backgroundColor = '#1a1616'; // Colore di sfondo scuro
+    const lineColor = '#ffffff'; // Bianco per visibilità
+    const backgroundColor = 'transparent'; // Sfondo trasparente per non coprire la foto hero
 
     // --- INIZIO CODICE CORRETTO ---
     class WaveLine {
@@ -65,9 +65,9 @@ const WavesBackground: React.FC = () => {
         this.wavelength = options.wavelength || 100 + Math.random() * 300;
         this.frequency = (Math.PI * 2) / this.wavelength;
         this.phase = options.phase || Math.random() * Math.PI * 2;
-        this.lineWidth = options.lineWidth || 3.0 + Math.random() * 2.0; // Aumentato ulteriormente
+        this.lineWidth = options.lineWidth || 0.8 + Math.random() * 0.8; // Spessore leggero
         this.speed = options.speed || 0.002 + Math.random() * 0.008;
-        this.opacity = options.opacity || 0.8 + Math.random() * 0.2; // Aumentata ulteriormente
+        this.opacity = options.opacity || 0.15 + Math.random() * 0.15; // Opacità leggera
         this.segments = [];
         this.segmentLength = 2;
 
@@ -111,60 +111,65 @@ const WavesBackground: React.FC = () => {
 
     const waveGroups: WaveLine[] = [];
 
-    // Gruppo 1
+    // Calcolo altezza hero (circa 100vh - altezza schermo)
+    const heroHeight = window.innerHeight;
+    const startY = heroHeight * 0.8; // Le onde iniziano dall'80% dell'altezza hero
+
+    // Gruppo 1 - onde più leggere, posizionate dopo la sezione hero
     for (let i = 0; i < 15; i++) {
       waveGroups.push(
         new WaveLine(canvas, ctx, { // Passa canvas e ctx
-          y: canvas.height * 0.3 + i * 10,
-          amplitude: 40 + i * 2,
+          y: startY + i * 8, // Posizionate dopo la sezione hero
+          amplitude: 25 + i * 1.5, // Ampiezza ridotta
           wavelength: 1200 + i * 10,
           phase: i * 0.2,
-          lineWidth: 3.5, // Aumentato ulteriormente
+          lineWidth: 0.6, // Spessore molto leggero
           speed: 0.002,
-          opacity: 0.9, // Aumentata ulteriormente
+          opacity: 0.12, // Opacità molto leggera
         })
       );
     }
 
-    // Gruppo 2
+    // Gruppo 2 - onde più leggere
     for (let i = 0; i < 20; i++) {
       waveGroups.push(
         new WaveLine(canvas, ctx, { // Passa canvas e ctx
-          y: canvas.height * 0.5 + i * 8,
-          amplitude: 35 - i * 0.5,
+          y: startY + 120 + i * 6, // Posizionate più in basso
+          amplitude: 20 - i * 0.3, // Ampiezza ridotta
           wavelength: 800 + i * 50,
           phase: i * 0.1 + Math.PI,
-          lineWidth: 4.0, // Aumentato ulteriormente
+          lineWidth: 0.7, // Spessore leggero
           speed: 0.003,
-          opacity: 1.0, // Opacità massima
+          opacity: 0.15, // Opacità leggera
         })
       );
     }
 
-    // Gruppo 3
+    // Gruppo 3 - onde più leggere
     for (let i = 0; i < 15; i++) {
       waveGroups.push(
         new WaveLine(canvas, ctx, { // Passa canvas e ctx
-          y: canvas.height * 0.7 + i * 12,
-          amplitude: 30 + i * 1.5,
+          y: startY + 240 + i * 10, // Posizionate ancora più in basso
+          amplitude: 18 + i * 1.2, // Ampiezza ridotta
           wavelength: 1000 - i * 20,
           phase: i * 0.15 + Math.PI / 2,
-          lineWidth: 3.2, // Aumentato ulteriormente
+          lineWidth: 0.5, // Spessore molto leggero
           speed: 0.0015,
-          opacity: 0.95, // Aumentata ulteriormente
+          opacity: 0.1, // Opacità molto leggera
         })
       );
     }
     // --- FINE CODICE CORRETTO ---
 
-    console.log('Onde create:', waveGroups.length);
+    console.log('Onde create:', waveGroups.length, 'iniziando da Y:', startY);
 
     let animationFrameId: number;
     const animate = () => {
       if (!ctx || !canvas) return;
 
-      ctx.fillStyle = backgroundColor;
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      // Non riempiamo lo sfondo per non coprire la foto hero
+      // ctx.fillStyle = backgroundColor;
+      // ctx.fillRect(0, 0, canvas.width, canvas.height);
 
       waveGroups.forEach((wave) => {
         wave.update();
@@ -188,10 +193,9 @@ const WavesBackground: React.FC = () => {
     position: 'fixed',
     top: 0,
     left: 0,
-    zIndex: 0, // Cambiato da -1 a 0
+    zIndex: 0, // Mantenuto a 0 per essere sopra la foto hero
     pointerEvents: 'none',
-    // Aggiungo un bordo temporaneo per debug
-    border: '2px solid red',
+    // Rimosso il bordo di debug
   };
 
   return <canvas id="wavesBg" ref={canvasRef} style={canvasStyle} />;
