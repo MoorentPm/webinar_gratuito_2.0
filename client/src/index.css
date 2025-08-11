@@ -65,6 +65,10 @@
   --chart-5: hsl(340, 75%, 55%);
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 @layer base {
   * {
     @apply border-border;

@@ -199,7 +199,7 @@ export default function Home() {
                 </div>
                 <div className="hidden sm:block w-px h-6 bg-gray-300 opacity-30"></div>
                 <div className="flex items-center space-x-2 sm:space-x-3 text-gray-300 text-sm sm:text-base">
-                  <Crown className="w-5 h-5 sm:w-6 sm:h-6 text-accent flex-shrink-0" />
+                  <Crown className="w-5 h-5 sm:w-6 sm:h-6 text-white flex-shrink-0" />
                   <span className="font-medium">Strategie premium esclusive</span>
                 </div>
               </div>
