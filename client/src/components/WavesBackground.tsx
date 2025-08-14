@@ -61,7 +61,7 @@ const WavesBackground: React.FC = () => {
         speed?: number;
         opacity?: number;
       }) {
-        this.y = options.y || Math.random() * canvas.height;
+        this.y = options.y || Math.random() * (canvas?.height || 0);
         this.amplitude = options.amplitude || (30 + Math.random() * 80);
         this.wavelength = options.wavelength || (100 + Math.random() * 300);
         this.frequency = Math.PI * 2 / this.wavelength;
@@ -73,11 +73,13 @@ const WavesBackground: React.FC = () => {
         this.segmentLength = 2;
 
         // Crea i punti della linea - identico al codice HTML
-        for (let x = 0; x < canvas.width + this.segmentLength; x += this.segmentLength) {
-          this.segments.push({
-            x: x,
-            y: this.y + Math.sin(this.frequency * x + this.phase) * this.amplitude
-          });
+        if (canvas) {
+          for (let x = 0; x < canvas.width + this.segmentLength; x += this.segmentLength) {
+            this.segments.push({
+              x: x,
+              y: this.y + Math.sin(this.frequency * x + this.phase) * this.amplitude
+            });
+          }
         }
       }
 
@@ -114,7 +116,7 @@ const WavesBackground: React.FC = () => {
     // Primo gruppo - parte alta del canvas (dopo la hero section)
     for (let i = 0; i < 15; i++) {
       waveGroups.push(new WaveLine({
-        y: canvas.height * 0.3 + i * 10,
+        y: (canvas.height * 0.3) + i * 10,
         amplitude: 40 + i * 2,
         wavelength: 1200 + i * 10,
         phase: i * 0.2,
@@ -127,7 +129,7 @@ const WavesBackground: React.FC = () => {
     // Secondo gruppo - parte centrale del canvas
     for (let i = 0; i < 20; i++) {
       waveGroups.push(new WaveLine({
-        y: canvas.height * 0.5 + i * 8,
+        y: (canvas.height * 0.5) + i * 8,
         amplitude: 35 - i * 0.5,
         wavelength: 800 + i * 50,
         phase: i * 0.1 + Math.PI,
@@ -140,7 +142,7 @@ const WavesBackground: React.FC = () => {
     // Terzo gruppo - parte bassa del canvas
     for (let i = 0; i < 15; i++) {
       waveGroups.push(new WaveLine({
-        y: canvas.height * 0.7 + i * 12,
+        y: (canvas.height * 0.7) + i * 12,
         amplitude: 30 + i * 1.5,
         wavelength: 1000 - i * 20,
         phase: i * 0.15 + Math.PI / 2,

@@ -188,7 +188,7 @@ export default function Home() {
               <span className="block font-semibold mt-2">Asset Redditizio</span>
             </h1>
             <p className="text-base sm:text-lg md:text-xl lg:text-2xl text-gray-300 font-light max-w-3xl mx-auto leading-relaxed px-4" data-testid="text-hero-subtitle">
-              Scopri le strategie premium per massimizzare i rendimenti degli affitti brevi nel Triveneto.{" "}
+              Scopri le strategie premium per massimizzare i rendimenti degli affitti brevi nel Nord Italia.{" "}
               <span className="text-white font-medium block sm:inline mt-1 sm:mt-0">20 minuti di contenuto esclusivo</span> per proprietari immobiliari di alto valore.
             </p>
             <div className="flex flex-col items-center justify-center gap-3 sm:gap-4 pt-4 sm:pt-8 px-4">
@@ -351,7 +351,7 @@ export default function Home() {
                     Ricevi Strategie <span className="font-semibold">Esclusive</span> via Email
                   </h2>
                   <p className="text-base sm:text-lg lg:text-xl text-gray-300 font-light max-w-2xl mx-auto leading-relaxed px-2 sm:px-4" data-testid="text-newsletter-subtitle">
-                    Insights di mercato, case study premium e strategie avanzate per proprietari immobiliari che vogliono massimizzare i loro investimenti nel Triveneto.
+                    Insights di mercato, case study premium e strategie avanzate per proprietari immobiliari che vogliono massimizzare i loro investimenti nel Nord Italia.
                   </p>
                 </div>
                 <form className="max-w-md mx-auto space-y-4 sm:space-y-6" data-testid="form-newsletter">
@@ -493,7 +493,7 @@ export default function Home() {
                 </li>
                 <li className="flex items-center space-x-2">
                   <MapPin className="w-4 h-4 text-gray-400" />
-                  <span>Triveneto, Italia</span>
+                  <span>Nord Italia</span>
                 </li>
               </ul>
             </div>
